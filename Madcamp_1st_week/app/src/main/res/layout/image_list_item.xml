@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="@drawable/basic_card_view">
+
+    <ImageView
+        android:id="@+id/imageItem"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/test_image" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hello, World!"
+        android:textStyle="bold"
+        android:layout_alignLeft="@id/imageItem"
+        android:layout_alignTop="@id/imageItem"
+        android:layout_alignBottom="@id/imageItem"
+        android:layout_alignRight="@id/imageItem"
+        android:gravity="bottom|left"/>
+
+
+</RelativeLayout>
