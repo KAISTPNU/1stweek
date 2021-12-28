@@ -5,8 +5,10 @@
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.38433015246690083" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.5006738730756579" />
+        <entry key="app/src/main/res/layout/first_tap.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.22826086956521738" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.22826086956521738" />
+        <entry key="app/src/main/res/layout/item_recyclerview.xml" value="0.1" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.2875" />
         <entry key="app/src/main/res/menu/nav_bar_menu.xml" value="0.12407407407407407" />
       </map>
