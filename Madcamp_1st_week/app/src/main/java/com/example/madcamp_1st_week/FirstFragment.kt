@@ -14,6 +14,7 @@ import com.example.madcamp_1st_week.databinding.FragmentFirstBinding
 class FirstFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
+    private var _num: Int = 1
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -35,6 +36,7 @@ class FirstFragment : Fragment() {
         binding.buttonFirst.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
+        binding.buttonFirst.setText("e" + _num);
     }
 
     override fun onDestroyView() {
