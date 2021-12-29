@@ -9,18 +9,18 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 
-class RecyclerAdapter (private val context: Context): RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(){
+class DeveloperAdapter (private val context: Context): RecyclerView.Adapter<DeveloperAdapter.ViewHolder>(){
 
-    var datas = mutableListOf<FriendItem>()
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.ViewHolder {
+    var developers = mutableListOf<FriendItem>()
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeveloperAdapter.ViewHolder {
 //        val view = LayoutInflater.from(context).inflate(R.layout.item_recyclerview,parent,false)
         val view = LayoutInflater.from(context).inflate(R.layout.contact_item,parent,false)
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int = datas.size
+    override fun getItemCount(): Int = developers.size
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(datas[position])
+        holder.bind(developers[position])
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -28,11 +28,14 @@ class RecyclerAdapter (private val context: Context): RecyclerView.Adapter<Recyc
         private val txtName: TextView = itemView.findViewById(R.id.name)
         private val txtPhone: TextView = itemView.findViewById(R.id.phone)
         private val txtEmail: TextView = itemView.findViewById(R.id.email)
+        private val txtJob: TextView = itemView.findViewById(R.id.job)
+        private val txtCompany: TextView = itemView.findViewById(R.id.company)
 
         fun bind(item: FriendItem) {
             txtName.text = item.name
             txtPhone.text = item.phone
             txtEmail.text = item.email
+
         }
 
     }

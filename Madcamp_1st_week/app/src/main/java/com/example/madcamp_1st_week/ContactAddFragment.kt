@@ -35,10 +35,12 @@ class ContactAddFragment : Fragment() {
         var name = jsonObj.getString("name")
         var email = jsonObj.getString("email")
         var phone = jsonObj.getString("phone")
+        var job = jsonObj.getString("job")
 
         binding.nameInput.setText(name)
         binding.emailInput.setText(email)
         binding.phoneInput.setText(phone)
+        binding.jobInput.setText(job)
     }
 
     fun initAddButton() {
@@ -46,8 +48,9 @@ class ContactAddFragment : Fragment() {
             var name = binding.nameInput.text.toString()
             var email = binding.emailInput.text.toString()
             var phone = binding.phoneInput.text.toString()
+            var job = binding.jobInput.text.toString()
 
-            FirstFragment.nameList.add(FriendItem(name, phone, email))
+            FirstFragment.nameList.add(FriendItem(name, phone, email, job, "PROGRAMMING", "KAKAO"))
 
             activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.fragment, FirstFragment())
