@@ -26,11 +26,13 @@ class RecyclerAdapter (private val context: Context): RecyclerView.Adapter<Recyc
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private val txtName: TextView = itemView.findViewById(R.id.name)
-        private val txtMsg: TextView = itemView.findViewById(R.id.message)
+        private val txtPhone: TextView = itemView.findViewById(R.id.phone)
+        private val txtInfo: TextView = itemView.findViewById(R.id.info)
 
         fun bind(item: FriendItem) {
             txtName.text = item.name
-            txtMsg.text = item.message
+            txtPhone.text = item.phone
+            txtInfo.text = item.info
 
         }
 

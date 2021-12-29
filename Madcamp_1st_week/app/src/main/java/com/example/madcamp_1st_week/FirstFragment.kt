@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp_1st_week.databinding.FragmentFirstBinding
 
 /**
@@ -13,34 +15,34 @@ import com.example.madcamp_1st_week.databinding.FragmentFirstBinding
  */
 class FirstFragment : Fragment() {
 
-    private var _binding: FragmentFirstBinding? = null
-    private var _num: Int = 1
+    private lateinit var nameAdapter:RecyclerAdapter
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    val nameList = mutableListOf<FriendItem>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentFirstBinding.inflate(inflater, container, false)
-        return binding.root
+        val view = inflater.inflate(R.layout.fragment_first, null)
+        return view
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        nameAdapter = RecyclerAdapter(this.requireContext())
+        for (i: Int in 1..2) {
+            nameList.add(FriendItem("홍길동", "010-1234-5678", "동에 번쩍 서에 번쩍 나타난"))
         }
-        binding.buttonFirst.setText("e" + _num);
+
+        nameAdapter.datas = nameList
+        val nameRecyclerView = view.findViewById<RecyclerView>(R.id.infos)
+        nameRecyclerView.adapter = nameAdapter
+        nameRecyclerView.layoutManager = GridLayoutManager(activity, 3)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+
 }
