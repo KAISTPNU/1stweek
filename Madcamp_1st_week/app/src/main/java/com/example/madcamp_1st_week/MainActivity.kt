@@ -1,5 +1,7 @@
 package com.example.madcamp_1st_week
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import com.google.android.material.snackbar.Snackbar
@@ -10,10 +12,12 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import com.example.madcamp_1st_week.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.zxing.integration.android.IntentIntegrator
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
@@ -32,6 +36,17 @@ class MainActivity : AppCompatActivity() {
             .commit()
 
         initNavigationBar()
+        initAddButton()
+    }
+
+    fun initAddButton() {
+        binding.add.setOnClickListener{
+            val integrator = IntentIntegrator(this)
+            integrator.setBarcodeImageEnabled(false)
+            integrator.setBeepEnabled(false)
+            integrator.setPrompt("화면에 QR 코드를 인식시켜주세요")
+            integrator.initiateScan()
+        }
     }
 
 
@@ -51,15 +66,22 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 else -> {
-//                    val integrator = IntentIntegrator(this)
-//                    integrator.setBarcodeImageEnabled(false)
-//                    integrator.setBeepEnabled(false)
-//                    integrator.setPrompt("화면에 QR 코드를 인식시켜주세요")
-//                    integrator.initiateScan()
-//                    true
                     false
                 }
             }
+        }
+    }
+
+    @SuppressLint("MissingSuperCall")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+
+        if (result.contents == null) {
+            Toast.makeText(applicationContext, "스캔 실패. 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
+        }
+        else {
+            var obj: JSONObject = JSONObject(result.contents)
+            Log.d("Result:", obj.getString("name"))
         }
     }
 }
