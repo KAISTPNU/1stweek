@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -14,7 +13,8 @@ class RecyclerAdapter (private val context: Context): RecyclerView.Adapter<Recyc
 
     var datas = mutableListOf<FriendItem>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_recyclerview,parent,false)
+//        val view = LayoutInflater.from(context).inflate(R.layout.item_recyclerview,parent,false)
+        val view = LayoutInflater.from(context).inflate(R.layout.contact_item,parent,false)
         return ViewHolder(view)
     }
 
@@ -32,7 +32,8 @@ class RecyclerAdapter (private val context: Context): RecyclerView.Adapter<Recyc
         fun bind(item: FriendItem) {
             txtName.text = item.name
             txtPhone.text = item.phone
-            txtEmail.text = item.email
+            txtInfo.text = item.email
+
 
         }
 

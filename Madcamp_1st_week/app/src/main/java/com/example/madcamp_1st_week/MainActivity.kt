@@ -13,6 +13,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import com.example.madcamp_1st_week.FirstFragment.Companion.nameList
 import com.example.madcamp_1st_week.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
@@ -80,8 +81,15 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(applicationContext, "스캔 실패. 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
         }
         else {
-            var obj: JSONObject = JSONObject(result.contents)
-            Log.d("Result:", obj.getString("name"))
+            var bundle = Bundle()
+            bundle.putString("JSON", result.contents)
+
+            val contactAddFragment = ContactAddFragment()
+            contactAddFragment.setArguments(bundle)
+
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment, contactAddFragment)
+                .commitAllowingStateLoss()
         }
     }
 }
