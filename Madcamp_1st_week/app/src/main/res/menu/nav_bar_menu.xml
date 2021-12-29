@@ -9,6 +9,12 @@
         android:id="@+id/nav_second"
         android:enabled="true"
         android:icon="@android:drawable/btn_star"
-        android:title="1번화면"/>
+        android:title="2번화면"/>
+
+    <item
+        android:id="@+id/nav_third"
+        android:enabled="true"
+        android:icon="@android:drawable/btn_star"
+        android:title="3번화면"/>
 
 </menu>

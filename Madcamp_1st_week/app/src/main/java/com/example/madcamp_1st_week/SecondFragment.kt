@@ -24,9 +24,6 @@ class SecondFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
-
-//        val view = inflater.inflate(R.layout.fragment_second, null)
-//        return view
         return binding.root
     }
 
@@ -39,7 +36,6 @@ class SecondFragment : Fragment() {
         }
 
         imageAdapter.imageArrayList = imageList
-//        val imageRecyclerView = view.findViewById<RecyclerView>(R.id.imageList)
         binding.imageList.adapter = imageAdapter
         binding.imageList.layoutManager = GridLayoutManager(activity, 3)
 
