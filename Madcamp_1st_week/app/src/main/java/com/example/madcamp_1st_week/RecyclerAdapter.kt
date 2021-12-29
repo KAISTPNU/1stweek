@@ -32,9 +32,7 @@ class RecyclerAdapter (private val context: Context): RecyclerView.Adapter<Recyc
         fun bind(item: FriendItem) {
             txtName.text = item.name
             txtPhone.text = item.phone
-            txtInfo.text = item.email
-
-
+            txtEmail.text = item.email
         }
 
     }

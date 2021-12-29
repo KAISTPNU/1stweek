@@ -86,7 +86,7 @@
                 android:fontFamily="@font/uber_move_medium" />
 
             <TextView
-                android:id="@+id/info"
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Github.com"
