@@ -34,7 +34,7 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         nameAdapter = RecyclerAdapter(this.requireContext())
-        for (i: Int in 1..2) {
+        for (i: Int in 1..50) {
             nameList.add(FriendItem("홍길동", "010-1234-5678", "동에 번쩍 서에 번쩍 나타난"))
         }
 
