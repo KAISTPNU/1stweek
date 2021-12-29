@@ -15,8 +15,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
-
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
 
@@ -27,10 +25,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        // 새롭게 추가한 view binding
-        binding = ActivityMainBinding.inflate(getLayoutInflater())
-        setContentView(binding.getRoot())
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment, FirstFragment())
