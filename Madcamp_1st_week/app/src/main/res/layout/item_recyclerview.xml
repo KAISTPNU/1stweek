@@ -35,7 +35,7 @@
                 android:autoSizeMaxTextSize="17dp"
                 android:layout_below="@+id/name"/>
             <TextView
-                android:id="@+id/info"
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
