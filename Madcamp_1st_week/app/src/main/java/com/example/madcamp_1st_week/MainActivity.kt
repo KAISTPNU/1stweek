@@ -13,6 +13,7 @@ import android.view.MenuItem
 import com.example.madcamp_1st_week.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import com.google.zxing.integration.android.IntentIntegrator
 
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
@@ -49,7 +50,15 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                     true
                 }
-                else -> false
+                else -> {
+//                    val integrator = IntentIntegrator(this)
+//                    integrator.setBarcodeImageEnabled(false)
+//                    integrator.setBeepEnabled(false)
+//                    integrator.setPrompt("화면에 QR 코드를 인식시켜주세요")
+//                    integrator.initiateScan()
+//                    true
+                    false
+                }
             }
         }
     }

@@ -9,6 +9,35 @@
     android:orientation="vertical"
     android:layout_gravity="center">
 
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:id="@+id/recentImageListLayout"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintHeight_percent="0.4"-->
+<!--        app:layout_constraintWidth_percent="1.0">-->
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/recentImageList"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            android:padding="5dp"/>-->
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:id="@+id/imageListLayout"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintHeight_percent="0.6"-->
+<!--        app:layout_constraintWidth_percent="1.0"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/recentImageListLayout">-->
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/imageList"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            android:padding="5dp"/>-->
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/imageListLayout"
         android:layout_width="0dp"
