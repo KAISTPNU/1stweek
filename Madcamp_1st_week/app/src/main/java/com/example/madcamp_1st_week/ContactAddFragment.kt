@@ -5,12 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridLayout
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp_1st_week.databinding.FragmentAddContactBinding
 import org.json.JSONObject
 
@@ -50,8 +45,12 @@ class ContactAddFragment : Fragment() {
             var phone = binding.phoneInput.text.toString()
             var job = binding.jobInput.text.toString()
 
-            FirstFragment.nameList.add(FriendItem(name, phone, email, job, "PROGRAMMING", "KAKAO"))
-
+            if (job.uppercase().equals("DEVELOPER")) {
+                FirstFragment.developerList.add(FriendItem(name, phone, email, job, "PROGRAMMING", "KAKAO"))
+            }
+            else {
+                FirstFragment.designerList.add(FriendItem(name, phone, email, job, "PROGRAMMING", "KAKAO"))
+            }
             activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.fragment, FirstFragment())
                 ?.disallowAddToBackStack()

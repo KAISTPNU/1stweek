@@ -23,11 +23,11 @@ class FirstFragment : Fragment() {
     ): View? {
 
         for (i: Int in 1..5) {
-            Companion.nameList.add(FriendItem("홍길동", "010-1234-5678", "123", "DESIGNER", "PROGRAMMING", "KAKAO"))
+            Companion.developerList.add(FriendItem("홍길동", "010-1234-5678", "123", "DESIGNER", "PROGRAMMING", "KAKAO"))
         }
-//        for (i: Int in 1..5) {
-//            Companion.nameList.add(FriendItem("홍길동", "010-1234-5678", "123", "DESIGNER", "PROGRAMMING", "KAKAO"))
-//        }
+        for (i: Int in 1..5) {
+            Companion.designerList.add(FriendItem("고길동", "010-1234-5678", "123", "DESIGNER", "PROGRAMMING", "KAKAO"))
+        }
 
         val view = inflater.inflate(R.layout.fragment_first, null)
         return view
@@ -40,8 +40,8 @@ class FirstFragment : Fragment() {
         developerAdapter = DeveloperAdapter(this.requireContext())
         designerAdapter = DesignerAdapter(this.requireContext())
 
-        developerAdapter.developers = Companion.nameList.toList().filter{it.job.uppercase().equals("DEVELOPER")}.toMutableList()
-        designerAdapter.designers = Companion.nameList.toList().filter{it.job.uppercase().equals("DESIGNER")}.toMutableList()
+        developerAdapter.developers = Companion.developerList
+        designerAdapter.designers = Companion.designerList
 
         val developerView = view.findViewById<RecyclerView>(R.id.developers)
         val designerView = view.findViewById<RecyclerView>(R.id.designers)
@@ -53,7 +53,8 @@ class FirstFragment : Fragment() {
     }
 
     companion object {
-        val nameList = mutableListOf<FriendItem>()
+        val developerList = mutableListOf<FriendItem>()
+        val designerList = mutableListOf<FriendItem>()
     }
 
 

@@ -3,22 +3,10 @@ package com.example.madcamp_1st_week
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.Toast
-import com.example.madcamp_1st_week.FirstFragment.Companion.nameList
 import com.example.madcamp_1st_week.databinding.ActivityMainBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
 import com.google.zxing.integration.android.IntentIntegrator
-import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
