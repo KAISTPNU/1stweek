@@ -10,20 +10,21 @@
         android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Image Gallery Example"
-        android:textSize="25dp"
-        android:background="@color/baemin"
+        android:text="Test Title"
+        android:textSize="30dp"
+        android:background="@color/black"
         android:textColor="@color/white"
-        android:padding="5dp"
+        android:padding="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/uber_move_medium"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fragmentLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@+id/topBar"
-        app:layout_constraintHeight_percent="0.88"
+        app:layout_constraintHeight_percent="0.85"
         app:layout_constraintWidth_percent="1.0">
 
     <FrameLayout
@@ -39,17 +40,19 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@+id/fragmentLayout"
-        app:layout_constraintHeight_percent="0.12"
+        app:layout_constraintHeight_percent="0.15"
         app:layout_constraintWidth_percent="1.0"
-        android:background="@color/baemin">
+        android:background="@color/black">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/black"
+            android:layout_gravity="bottom|end"
             app:menu="@menu/nav_bar_menu"
-            android:background="@color/baemin"
-            android:layout_gravity="bottom|end" />
+            app:itemTextColor="@drawable/nav_bar_item_color"
+            app:itemIconTint="@drawable/nav_bar_item_color"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
