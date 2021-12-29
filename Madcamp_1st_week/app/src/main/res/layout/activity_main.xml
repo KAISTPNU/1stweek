@@ -23,13 +23,14 @@
             android:fontFamily="@font/uber_move_medium"/>
         <Button
             android:id="@+id/add"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
             android:backgroundTint="@color/lightnavy"
             android:text="+"
             android:textSize="20dp"
             android:textAlignment="center"
-            android:layout_marginRight="10dp"
+            android:layout_margin="15dp"
+            android:padding="5dp"
             app:layout_constraintRight_toRightOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
