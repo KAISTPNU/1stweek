@@ -5,14 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.GridLayout
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.madcamp_1st_week.databinding.FragmentSecondBinding
+import androidx.recyclerview.widget.RecyclerView
 
 class SecondFragment : Fragment() {
-
-    private var _binding: FragmentSecondBinding? = null
-    private val binding get() = _binding!!
     private lateinit var imageAdapter: ImageListAdapter
 
     val imageList = mutableListOf<ImageItem>()
@@ -21,32 +20,22 @@ class SecondFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        _binding = FragmentSecondBinding.inflate(inflater, container, false)
-        return binding.root
+        val view = inflater.inflate(R.layout.fragment_second, null)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        binding.buttonSecond.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
-        }
-
         imageAdapter = ImageListAdapter(this.requireContext())
-        for (i: Int in 1..10) {
+        for (i: Int in 1..50) {
             imageList.add(ImageItem(R.drawable.test_image, "123"))
         }
+
         imageAdapter.imageArrayList = imageList
-        binding.imageList.adapter = imageAdapter
-        binding.imageList.layoutManager = LinearLayoutManager(activity)
+        val imageRecyclerView = view.findViewById<RecyclerView>(R.id.imageList)
+        imageRecyclerView.adapter = imageAdapter
+        imageRecyclerView.layoutManager = GridLayoutManager(activity, 3)
 
-    }
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
