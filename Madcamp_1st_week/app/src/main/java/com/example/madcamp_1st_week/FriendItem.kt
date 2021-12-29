@@ -8,4 +8,5 @@ class FriendItem (var _name: String, var _phone: String, var _info: String)
 
     var info: String = _info
 
+
 }
