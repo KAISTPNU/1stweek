@@ -1,12 +1,12 @@
 package com.example.madcamp_1st_week
 
-class FriendItem (var _name: String, var _phone: String, var _info: String)
+class FriendItem (var _name: String, var _phone: String, var _email: String)
 {
     var name:String = _name
-
     var phone: String = _phone
-
-    var info: String = _info
-
+    var email: String = _email
 
 }
+
+
+// data class ->
