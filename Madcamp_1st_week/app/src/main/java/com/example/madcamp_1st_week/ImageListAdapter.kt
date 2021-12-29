@@ -32,8 +32,8 @@ class ImageListAdapter(private val context: Context):
         private val descriptionView: TextView = itemView.findViewById(R.id.description)
 
         fun bind(imageItem: ImageItem) {
-            imageView.setImageResource(imageItem.getResourceID())
-            descriptionView.setText(imageItem.getDescription())
+            imageView.setImageResource(imageItem.resourceID)
+            descriptionView.setText(imageItem.description)
         }
 
     }
