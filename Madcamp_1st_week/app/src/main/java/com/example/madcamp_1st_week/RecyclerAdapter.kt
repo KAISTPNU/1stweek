@@ -27,12 +27,12 @@ class RecyclerAdapter (private val context: Context): RecyclerView.Adapter<Recyc
 
         private val txtName: TextView = itemView.findViewById(R.id.name)
         private val txtPhone: TextView = itemView.findViewById(R.id.phone)
-        private val txtInfo: TextView = itemView.findViewById(R.id.info)
+        private val txtEmail: TextView = itemView.findViewById(R.id.email)
 
         fun bind(item: FriendItem) {
             txtName.text = item.name
             txtPhone.text = item.phone
-            txtInfo.text = item.info
+            txtEmail.text = item.email
 
         }
 
