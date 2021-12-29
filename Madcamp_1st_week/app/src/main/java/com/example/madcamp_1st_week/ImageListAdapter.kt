@@ -1,6 +1,8 @@
 package com.example.madcamp_1st_week
 
 import android.content.Context
+import android.text.Layout
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -10,25 +12,29 @@ import androidx.recyclerview.widget.RecyclerView
 class ImageListAdapter(private val context: Context):
     RecyclerView.Adapter<ImageListAdapter.ViewHolder>() {
 
-        private var imageArrayList = mutableListOf<ImageItem>()
-        inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
-            private val imageView: ImageView = itemView.findViewById(R.id.imageItem)
-            private val description: TextView = itemView.findViewById(R.id.description)
-
-
-        }
+    var imageArrayList = mutableListOf<ImageItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        TODO("Not yet implemented")
+        val view = LayoutInflater.from(context).inflate(R.layout.image_list_item, parent, false)
+        return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.bind(imageArrayList[position])
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return imageArrayList.size
     }
 
+    inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+        private val imageView: ImageView = itemView.findViewById(R.id.imageItem)
+        private val descriptionView: TextView = itemView.findViewById(R.id.description)
 
+        fun bind(imageItem: ImageItem) {
+            imageView.setImageResource(imageItem.getResourceID())
+            descriptionView.setText(imageItem.getDescription())
+        }
+
+    }
 }
