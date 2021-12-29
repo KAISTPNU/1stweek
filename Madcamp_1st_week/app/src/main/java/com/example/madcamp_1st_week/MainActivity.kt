@@ -9,7 +9,6 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
-import com.example.madcamp_1st_week.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment, FirstFragment())
+            .replace(R.id.fragment, SecondFragment())
             .commit()
     }
 }

@@ -10,9 +10,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.madcamp_1st_week.databinding.FragmentSecondBinding
 
 class SecondFragment : Fragment() {
     private lateinit var imageAdapter: ImageListAdapter
+    private var _binding:FragmentSecondBinding? = null
+    private val binding get() = _binding!!
 
     val imageList = mutableListOf<ImageItem>()
 
@@ -20,8 +23,11 @@ class SecondFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_second, null)
-        return view
+        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+
+//        val view = inflater.inflate(R.layout.fragment_second, null)
+//        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,9 +39,9 @@ class SecondFragment : Fragment() {
         }
 
         imageAdapter.imageArrayList = imageList
-        val imageRecyclerView = view.findViewById<RecyclerView>(R.id.imageList)
-        imageRecyclerView.adapter = imageAdapter
-        imageRecyclerView.layoutManager = GridLayoutManager(activity, 3)
+//        val imageRecyclerView = view.findViewById<RecyclerView>(R.id.imageList)
+        binding.imageList.adapter = imageAdapter
+        binding.imageList.layoutManager = GridLayoutManager(activity, 3)
 
     }
 }
