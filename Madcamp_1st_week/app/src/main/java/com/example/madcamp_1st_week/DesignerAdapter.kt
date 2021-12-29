@@ -28,16 +28,15 @@ class DesignerAdapter (private val context: Context): RecyclerView.Adapter<Desig
         private val txtName: TextView = itemView.findViewById(R.id.name)
         private val txtPhone: TextView = itemView.findViewById(R.id.phone)
         private val txtEmail: TextView = itemView.findViewById(R.id.email)
-        private val txtJob: TextView = itemView.findViewById(R.id.job)
+        private val txtDetailJob: TextView = itemView.findViewById(R.id.detailjob)
         private val txtCompany: TextView = itemView.findViewById(R.id.company)
 
         fun bind(item: FriendItem) {
             txtName.text = item.name
             txtPhone.text = item.phone
             txtEmail.text = item.email
-            txtJob.text = "Designer"
-
-            txtCompany.text = "KAKAO"
+            txtDetailJob.text = item.detailjob
+            txtCompany.text = item.company
 
         }
 

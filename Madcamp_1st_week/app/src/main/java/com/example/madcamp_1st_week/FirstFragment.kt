@@ -45,6 +45,7 @@ class FirstFragment : Fragment() {
 
         val developerView = view.findViewById<RecyclerView>(R.id.developers)
         val designerView = view.findViewById<RecyclerView>(R.id.designers)
+//        designerView.setBackgroundColor(this.requireContext().getResources().getColor(R.color.darknavy))
         developerView.adapter = developerAdapter
         designerView.adapter = designerAdapter
 //        developerView.layoutManager = GridLayoutManager(activity, 3)

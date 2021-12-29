@@ -7,8 +7,8 @@ class FriendItem (var _name: String, var _phone: String, var _email: String, var
     var phone: String = _phone
     var email: String = _email
     var job: String = _job
-    //var company: String = _company
-    //var detailjob: String? = _detailjob
+    var company: String = _company
+    var detailjob: String? = _detailjob
 
 }
 

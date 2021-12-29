@@ -44,12 +44,14 @@ class ContactAddFragment : Fragment() {
             var email = binding.emailInput.text.toString()
             var phone = binding.phoneInput.text.toString()
             var job = binding.jobInput.text.toString()
+            var detailjob = binding.detailJobInput.text.toString()
+            var company = binding.companyInput.text.toString()
 
             if (job.uppercase().equals("DEVELOPER")) {
-                FirstFragment.developerList.add(FriendItem(name, phone, email, job, "PROGRAMMING", "KAKAO"))
+                FirstFragment.developerList.add(FriendItem(name, phone, email, job, detailjob, company))
             }
             else {
-                FirstFragment.designerList.add(FriendItem(name, phone, email, job, "PROGRAMMING", "KAKAO"))
+                FirstFragment.designerList.add(FriendItem(name, phone, email, job, detailjob, company))
             }
             activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.fragment, FirstFragment())

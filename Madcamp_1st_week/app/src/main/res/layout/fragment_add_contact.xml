@@ -69,6 +69,28 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             tools:ignore="MissingConstraints" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/detailJobInput"
+            android:layout_width="250dp"
+            android:layout_height="70dp"
+            android:hint="DetailJob"
+            android:fontFamily="@font/uber_move_medium"
+            android:textColor="@color/darknavy"
+            android:inputType="text"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            tools:ignore="MissingConstraints" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/companyInput"
+            android:layout_width="250dp"
+            android:layout_height="70dp"
+            android:hint="Company"
+            android:fontFamily="@font/uber_move_medium"
+            android:textColor="@color/darknavy"
+            android:inputType="text"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            tools:ignore="MissingConstraints" />
         
         <Button
             android:id="@+id/contact_add_btn"
