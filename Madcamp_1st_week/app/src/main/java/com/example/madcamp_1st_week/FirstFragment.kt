@@ -5,11 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ImageView
+import android.widget.*
 import androidx.viewpager2.widget.ViewPager2
-import android.widget.Spinner;
+import androidx.appcompat.widget.AppCompatImageButton;
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -22,7 +20,7 @@ class FirstFragment : Fragment() {
     private lateinit var pmAdapter: PMAdapter
     private lateinit var etcAdapter: EtcAdapter
 
-
+    internal lateinit var deleteButton: ImageButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +30,7 @@ class FirstFragment : Fragment() {
         for (i: Int in 1..5) {
             Companion.developerList.add(FriendItem("홍길동", "010-1234-5678", "testemail123@naver.com", "DESIGNER", "PROGRAMMING", "KAKAO"))
         }
+        Companion.developerList.add(FriendItem("삭제 테스트", "010-1234-5678", "testemail123@naver.com", "DESIGNER", "PROGRAMMING", "KAKAO"))
         for (i: Int in 1..5) {
             Companion.designerList.add(FriendItem("고길동", "010-1234-5678", "jagosipda@kaist.ac.kr", "DESIGNER", "PROGRAMMING", "KAKAO"))
         }
@@ -82,11 +81,52 @@ class FirstFragment : Fragment() {
 
         spinner.setSelection(0)
 
+
         val image = view.findViewById<ImageView>(R.id.devImage)
         val viewpager = view.findViewById<ViewPager2>(R.id.viewpager)
 
+        deleteButton = view.findViewById(R.id.delete)
+
+        var index = viewpagerView.currentItem
+        deleteButton.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val jobCategory = spinner.selectedItemPosition
+                when(jobCategory) {
+                    0 -> {
+                        developerList.removeAt(index)
+                        viewpager.adapter=developerAdapter
+                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+                    }
+                    1 -> {
+                        designerList.removeAt(index)
+                        viewpager.adapter=designerAdapter
+                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+                    }
+                    2 -> {
+                        engineerList.removeAt(index)
+                        viewpager.adapter=engineerAdapter
+                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+                    }
+                    3 -> {
+                        pmList.removeAt(index)
+                        viewpager.adapter=pmAdapter
+                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+                    }
+                    4 -> {
+                        etcList.removeAt(index)
+                        viewpager.adapter=etcAdapter
+                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+                    }
+                }
+
+
+            }
+        })
+
+
         spinner.onItemSelectedListener = object:AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
                 when(position) {
                     //developer
                     0 -> {
@@ -126,6 +166,7 @@ class FirstFragment : Fragment() {
             }
 
         }
+
 
 
 //        developerView.layoutManager = GridLayoutManager(activity, 3)
