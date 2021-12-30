@@ -28,12 +28,11 @@ class SecondFragment : Fragment() {
 
         feedAdapter = FeedAdapter(this.requireContext())
         for (i: Int in 1..20) {
-            feedImageList.add(FeedItem(R.drawable.ic_launcher_background, "123"))
+            feedImageList.add(FeedItem(R.drawable.netherland, "123"))
         }
 
         feedAdapter.itemList = feedImageList
         binding.feedGalleryView.adapter = feedAdapter
-//        binding.feedGalleryView.layoutManager = GridLayoutManager(activity, 3)
 
     }
 }
