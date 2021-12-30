@@ -5,12 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridLayout
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp_1st_week.databinding.FragmentAddContactBinding
 import org.json.JSONObject
 
@@ -35,10 +30,12 @@ class ContactAddFragment : Fragment() {
         var name = jsonObj.getString("name")
         var email = jsonObj.getString("email")
         var phone = jsonObj.getString("phone")
+        var job = jsonObj.getString("job")
 
         binding.nameInput.setText(name)
         binding.emailInput.setText(email)
         binding.phoneInput.setText(phone)
+        binding.jobInput.setText(job)
     }
 
     fun initAddButton() {
@@ -46,9 +43,16 @@ class ContactAddFragment : Fragment() {
             var name = binding.nameInput.text.toString()
             var email = binding.emailInput.text.toString()
             var phone = binding.phoneInput.text.toString()
+            var job = binding.jobInput.text.toString()
+            var detailjob = binding.detailJobInput.text.toString()
+            var company = binding.companyInput.text.toString()
 
-            FirstFragment.nameList.add(FriendItem(name, phone, email))
-
+            if (job.uppercase().equals("DEVELOPER")) {
+                FirstFragment.developerList.add(FriendItem(name, phone, email, job, detailjob, company))
+            }
+            else {
+                FirstFragment.designerList.add(FriendItem(name, phone, email, job, detailjob, company))
+            }
             activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.fragment, FirstFragment())
                 ?.disallowAddToBackStack()
