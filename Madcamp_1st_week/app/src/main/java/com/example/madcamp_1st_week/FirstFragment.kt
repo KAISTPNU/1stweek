@@ -67,7 +67,7 @@ class FirstFragment : Fragment() {
         etcAdapter.etcs = Companion.etcList
 
         val viewpagerView = view.findViewById<ViewPager2>(R.id.viewpager)
-        
+
         val spinner = view.findViewById<Spinner>(R.id.dropbox)
         val sAdapter = ArrayAdapter.createFromResource(this.requireContext(), R.array.job, android.R.layout.simple_spinner_item)
         sAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
