@@ -67,13 +67,7 @@ class FirstFragment : Fragment() {
         etcAdapter.etcs = Companion.etcList
 
         val viewpagerView = view.findViewById<ViewPager2>(R.id.viewpager)
-
-//        val designerView = view.findViewById<ViewPager2>(R.id.viewpager)
-//        designerView.setBackgroundColor(this.requireContext().getResources().getColor(R.color.darknavy))
-
-        viewpagerView.adapter = developerAdapter
-//        designerView.adapter = designerAdapter
-        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+        
         val spinner = view.findViewById<Spinner>(R.id.dropbox)
         val sAdapter = ArrayAdapter.createFromResource(this.requireContext(), R.array.job, android.R.layout.simple_spinner_item)
         sAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -166,8 +160,6 @@ class FirstFragment : Fragment() {
             }
 
         }
-
-
 
 //        developerView.layoutManager = GridLayoutManager(activity, 3)
 //        developerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
