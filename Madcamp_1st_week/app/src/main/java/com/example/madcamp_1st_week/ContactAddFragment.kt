@@ -51,8 +51,17 @@ class ContactAddFragment : Fragment() {
             if (job.uppercase().equals("DEVELOPER")) {
                 FirstFragment.developerList.add(FriendItem(name, phone, email, job, detailjob, company))
             }
-            else {
+            else if (job.uppercase().equals("DESIGNER")) {
                 FirstFragment.designerList.add(FriendItem(name, phone, email, job, detailjob, company))
+            }
+            else if (job.uppercase().equals("ENGINEER")) {
+                FirstFragment.engineerList.add(FriendItem(name, phone, email, job, detailjob, company))
+            }
+            else if (job.uppercase().equals("PM")) {
+                FirstFragment.pmList.add(FriendItem(name, phone, email, job, detailjob, company))
+            }
+            else {
+                FirstFragment.etcList.add(FriendItem(name, phone, email, job, detailjob, company))
             }
             activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.fragment, FirstFragment())
