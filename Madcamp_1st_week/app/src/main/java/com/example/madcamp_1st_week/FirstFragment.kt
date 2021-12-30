@@ -35,6 +35,15 @@ class FirstFragment : Fragment() {
         for (i: Int in 1..5) {
             Companion.designerList.add(FriendItem("고길동", "010-1234-5678", "jagosipda@kaist.ac.kr", "DESIGNER", "PROGRAMMING", "KAKAO"))
         }
+        for (i: Int in 1..5) {
+            Companion.engineerList.add(FriendItem("주호민", "010-1234-5678", "jagosipda@kaist.ac.kr", "ENGINEER", "PROGRAMMING", "KAKAO"))
+        }
+        for (i: Int in 1..5) {
+            Companion.pmList.add(FriendItem("침착맨", "010-1234-5678", "jagosipda@kaist.ac.kr", "PM", "PROGRAMMING", "KAKAO"))
+        }
+        for (i: Int in 1..5) {
+            Companion.etcList.add(FriendItem("기안84", "010-1234-5678", "jagosipda@kaist.ac.kr", "WEBTOON 작가", "PROGRAMMING", "KAKAO"))
+        }
 
 
         val view = inflater.inflate(R.layout.fragment_first, null)
