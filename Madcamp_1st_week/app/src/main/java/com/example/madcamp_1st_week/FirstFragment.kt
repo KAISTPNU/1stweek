@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import android.widget.ImageView
 import androidx.viewpager2.widget.ViewPager2
 import android.widget.Spinner;
 
@@ -59,18 +58,66 @@ class FirstFragment : Fragment() {
         pmAdapter.pms = Companion.pmList
         etcAdapter.etcs = Companion.etcList
 
-        val developerView = view.findViewById<ViewPager2>(R.id.viewpager)
+        val viewpagerView = view.findViewById<ViewPager2>(R.id.viewpager)
 
 //        val designerView = view.findViewById<ViewPager2>(R.id.viewpager)
 //        designerView.setBackgroundColor(this.requireContext().getResources().getColor(R.color.darknavy))
 
-        developerView.adapter = developerAdapter
+        viewpagerView.adapter = developerAdapter
 //        designerView.adapter = designerAdapter
-        developerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
         val spinner = view.findViewById<Spinner>(R.id.dropbox)
         val sAdapter = ArrayAdapter.createFromResource(this.requireContext(), R.array.job, android.R.layout.simple_spinner_item)
         sAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = sAdapter
+
+        spinner.setSelection(0)
+
+        val image = view.findViewById<ImageView>(R.id.devImage)
+        val viewpager = view.findViewById<ViewPager2>(R.id.viewpager)
+
+        spinner.onItemSelectedListener = object:AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                when(position) {
+                    //developer
+                    0 -> {
+                        image.setImageResource(R.drawable.developer)
+                        viewpager.adapter=developerAdapter
+                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+                    }
+                    //designer
+                    1 -> {
+                        image.setImageResource(R.drawable.designer)
+                        viewpager.adapter=designerAdapter
+                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+                    }
+                    // engineer
+                    2 -> {
+                        image.setImageResource(R.drawable.engineer)
+                        viewpager.adapter=engineerAdapter
+                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+                    }
+                    //pm
+                    3 -> {
+                        image.setImageResource(R.drawable.pm)
+                        viewpager.adapter=pmAdapter
+                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+                    }
+                    //etc
+                    4 -> {
+                        image.setImageResource(R.drawable.etc)
+                        viewpager.adapter=etcAdapter
+                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+                    }
+                }
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
+
 
 //        developerView.layoutManager = GridLayoutManager(activity, 3)
 //        developerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
