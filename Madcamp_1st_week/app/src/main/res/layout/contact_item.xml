@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:layout_marginTop="30dp">
+    android:gravity="center">
     <androidx.cardview.widget.CardView
-        android:layout_width="220dp"
-        android:layout_height="290dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="300dp"
+        android:layout_height="400dp"
         card_view:cardCornerRadius="10dp"
         android:layout_margin="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintVertical_bias="0.8"
         android:elevation="20dp">
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,6 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Name"
+                android:paddingTop="15dp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/uber_move_medium"
                 android:textAlignment="center"/>
@@ -34,15 +40,17 @@
                 android:textColor="@color/graybrown"
                 android:fontFamily="@font/uber_move_medium"
                 android:textAlignment="center"
+                android:paddingTop="5dp"
                 android:textSize="11dp"/>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                card_view:cardCornerRadius="50dp">
+                card_view:cardCornerRadius="100dp">
                 <ImageView
+                    android:id="@+id/profile"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/test_image"/>
@@ -54,14 +62,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_gravity="center"
+                android:padding="15dp"
                 android:layout_marginTop="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Phone"
-                android:gravity="left"
                 app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0"
                 android:textSize="12dp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/uber_move_medium" />
@@ -70,9 +82,13 @@
                 android:id="@+id/phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="1"
                 android:text="010-1234-5678"
                 android:gravity="right"
-                app:layout_constraintRight_toRightOf="parent"
                 android:textSize="12dp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/uber_move_medium" />
@@ -83,15 +99,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:padding="15dp"
                 android:layout_marginTop="10dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Email"
                     android:textSize="12dp"
-                    app:layout_constraintLeft_toLeftOf="parent"
                     android:textColor="@color/black"
-                    android:layout_marginRight="30dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
                     android:fontFamily="@font/uber_move_medium" />
 
                 <TextView
@@ -99,7 +119,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Github.com"
+                    app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="1"
                     android:autoSizeTextType="uniform"
                     android:autoSizeMaxTextSize="12dp"
                     android:autoSizeMinTextSize="5dp"
@@ -112,6 +136,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:padding="15dp"
                 android:layout_marginTop="10dp">
                 <TextView
                     android:layout_width="wrap_content"
@@ -120,6 +145,10 @@
                     android:textSize="12dp"
                     android:textColor="@color/black"
                     app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
                     android:fontFamily="@font/uber_move_medium" />
                 <TextView
                     android:id="@+id/company"
@@ -127,11 +156,15 @@
                     android:layout_height="wrap_content"
                     android:text="KAKAO"
                     android:textSize="12dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="1"
                     android:textColor="@color/black"
                     android:fontFamily="@font/uber_move_medium"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
