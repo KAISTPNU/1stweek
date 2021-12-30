@@ -61,6 +61,7 @@
         app:layout_constraintWidth_percent="1.0"
         android:background="@color/black">
 
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navBar"
             android:layout_width="match_parent"
