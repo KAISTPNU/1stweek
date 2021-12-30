@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
+import androidx.fragment.app.findFragment
 
 class FeedAdapter(private val context: Context):
     BaseAdapter() {
@@ -30,7 +31,6 @@ class FeedAdapter(private val context: Context):
         val feedView: View = inflater.inflate(R.layout.feed_gallery_item, null)
         val feedGalleryImg = feedView.findViewById<ImageView>(R.id.feed_gallery_img)
         feedGalleryImg.setImageResource(feedItem.resourceID)
-
         return feedView
     }
 }

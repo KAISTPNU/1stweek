@@ -58,7 +58,6 @@ class FirstFragment : Fragment() {
         pmAdapter.pms = Companion.pmList
         etcAdapter.etcs = Companion.etcList
 
-
         val developerView = view.findViewById<ViewPager2>(R.id.viewpager)
 
 //        val designerView = view.findViewById<ViewPager2>(R.id.viewpager)
