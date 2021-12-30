@@ -23,5 +23,8 @@ class FeedDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val args = arguments
+        val resourceID = args?.getInt("img")!!
+        binding.feedDetailImg.setImageResource(resourceID)
     }
 }
