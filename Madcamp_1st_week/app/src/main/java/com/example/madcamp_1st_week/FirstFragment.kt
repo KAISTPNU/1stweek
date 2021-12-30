@@ -28,20 +28,20 @@ class FirstFragment : Fragment() {
     ): View? {
 
         for (i: Int in 1..5) {
-            Companion.developerList.add(FriendItem("홍길동", "010-1234-5678", "testemail123@naver.com", "DESIGNER", "PROGRAMMING", "KAKAO"))
-        }
-        Companion.developerList.add(FriendItem("삭제 테스트", "010-1234-5678", "testemail123@naver.com", "DESIGNER", "PROGRAMMING", "KAKAO"))
-        for (i: Int in 1..5) {
-            Companion.designerList.add(FriendItem("고길동", "010-1234-5678", "jagosipda@kaist.ac.kr", "DESIGNER", "PROGRAMMING", "KAKAO"))
+
+            Companion.developerList.add(FriendItem("홍길동" + i, "010-1234-5678", "testemail123@naver.com", "DESIGNER", "PROGRAMMING", "KAKAO"))
         }
         for (i: Int in 1..5) {
-            Companion.engineerList.add(FriendItem("주호민", "010-1234-5678", "jagosipda@kaist.ac.kr", "ENGINEER", "PROGRAMMING", "KAKAO"))
+            Companion.designerList.add(FriendItem("고길동" + i, "010-1234-5678", "jagosipda@kaist.ac.kr", "DESIGNER", "PROGRAMMING", "KAKAO"))
         }
         for (i: Int in 1..5) {
-            Companion.pmList.add(FriendItem("침착맨", "010-1234-5678", "jagosipda@kaist.ac.kr", "PM", "PROGRAMMING", "KAKAO"))
+            Companion.engineerList.add(FriendItem("주호민" + i, "010-1234-5678", "jagosipda@kaist.ac.kr", "ENGINEER", "PROGRAMMING", "KAKAO"))
         }
         for (i: Int in 1..5) {
-            Companion.etcList.add(FriendItem("기안84", "010-1234-5678", "jagosipda@kaist.ac.kr", "WEBTOON 작가", "PROGRAMMING", "KAKAO"))
+            Companion.pmList.add(FriendItem("침착맨" + i, "010-1234-5678", "jagosipda@kaist.ac.kr", "PM", "PROGRAMMING", "KAKAO"))
+        }
+        for (i: Int in 1..5) {
+            Companion.etcList.add(FriendItem("기안" + i, "010-1234-5678", "jagosipda@kaist.ac.kr", "WEBTOON 작가", "PROGRAMMING", "KAKAO"))
         }
 
 
@@ -81,34 +81,69 @@ class FirstFragment : Fragment() {
 
         deleteButton = view.findViewById(R.id.delete)
 
-        var index = viewpagerView.currentItem
+
         deleteButton.setOnClickListener(object: View.OnClickListener{
             override fun onClick(v: View?) {
                 val jobCategory = spinner.selectedItemPosition
                 when(jobCategory) {
                     0 -> {
+                        var index = viewpagerView.currentItem
                         developerList.removeAt(index)
                         viewpager.adapter=developerAdapter
+                        if (index > developerList.size) {
+                            viewpagerView.currentItem = developerList.size - 1
+                        }
+                        else {
+                            viewpagerView.currentItem = index
+                        }
                         viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
                     }
                     1 -> {
+                        var index = viewpagerView.currentItem
                         designerList.removeAt(index)
                         viewpager.adapter=designerAdapter
+                        if (index > developerList.size) {
+                            viewpagerView.currentItem = developerList.size - 1
+                        }
+                        else {
+                            viewpagerView.currentItem = index
+                        }
                         viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
                     }
                     2 -> {
+                        var index = viewpagerView.currentItem
                         engineerList.removeAt(index)
                         viewpager.adapter=engineerAdapter
+                        if (index > developerList.size) {
+                            viewpagerView.currentItem = developerList.size - 1
+                        }
+                        else {
+                            viewpagerView.currentItem = index
+                        }
                         viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
                     }
                     3 -> {
+                        var index = viewpagerView.currentItem
                         pmList.removeAt(index)
                         viewpager.adapter=pmAdapter
+                        if (index > developerList.size) {
+                            viewpagerView.currentItem = developerList.size - 1
+                        }
+                        else {
+                            viewpagerView.currentItem = index
+                        }
                         viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
                     }
                     4 -> {
+                        var index = viewpagerView.currentItem
                         etcList.removeAt(index)
                         viewpager.adapter=etcAdapter
+                        if (index > developerList.size) {
+                            viewpagerView.currentItem = developerList.size - 1
+                        }
+                        else {
+                            viewpagerView.currentItem = index
+                        }
                         viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
                     }
                 }
