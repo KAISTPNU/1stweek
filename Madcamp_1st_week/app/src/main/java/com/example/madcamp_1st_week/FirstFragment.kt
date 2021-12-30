@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -16,6 +17,9 @@ class FirstFragment : Fragment() {
     private lateinit var developerAdapter:DeveloperAdapter
     private lateinit var designerAdapter:DesignerAdapter
 
+    // 0 : Developer, 1 : Designer, 2 : Engineer, 3 : PM, 4 : ETC 라고 하자.
+    private var sideJob = 0
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,11 +27,12 @@ class FirstFragment : Fragment() {
     ): View? {
 
         for (i: Int in 1..5) {
-            Companion.developerList.add(FriendItem("홍길동", "010-1234-5678", "123", "DESIGNER", "PROGRAMMING", "KAKAO"))
+            Companion.developerList.add(FriendItem("홍길동", "010-1234-5678", "testemail123@naver.com", "DESIGNER", "PROGRAMMING", "KAKAO"))
         }
         for (i: Int in 1..5) {
-            Companion.designerList.add(FriendItem("고길동", "010-1234-5678", "123", "DESIGNER", "PROGRAMMING", "KAKAO"))
+            Companion.designerList.add(FriendItem("고길동", "010-1234-5678", "jagosipda@kaist.ac.kr", "DESIGNER", "PROGRAMMING", "KAKAO"))
         }
+
 
         val view = inflater.inflate(R.layout.fragment_first, null)
         return view
@@ -43,14 +48,17 @@ class FirstFragment : Fragment() {
         developerAdapter.developers = Companion.developerList
         designerAdapter.designers = Companion.designerList
 
-        val developerView = view.findViewById<RecyclerView>(R.id.developers)
-        val designerView = view.findViewById<RecyclerView>(R.id.designers)
-//        designerView.setBackgroundColor(this.requireContext().getResources().getColor(R.color.darknavy))
+
+        val developerView = view.findViewById<ViewPager2>(R.id.viewpager)
         developerView.adapter = developerAdapter
-        designerView.adapter = designerAdapter
+        developerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+//        val designerView = view.findViewById<RecyclerView>(R.id.designers)
+//        designerView.setBackgroundColor(this.requireContext().getResources().getColor(R.color.darknavy))
+
+//        designerView.adapter = designerAdapter
 //        developerView.layoutManager = GridLayoutManager(activity, 3)
-        developerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-        designerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+//        developerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+//        designerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
     }
 
     companion object {

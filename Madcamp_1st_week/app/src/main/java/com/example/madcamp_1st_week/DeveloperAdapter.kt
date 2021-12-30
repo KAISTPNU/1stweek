@@ -8,22 +8,21 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 
-
-class DeveloperAdapter (private val context: Context): RecyclerView.Adapter<DeveloperAdapter.ViewHolder>(){
+class DeveloperAdapter (private val context: Context): RecyclerView.Adapter<DeveloperAdapter.PagerViewHolder>(){
 
     var developers = mutableListOf<FriendItem>()
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeveloperAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeveloperAdapter.PagerViewHolder {
 //        val view = LayoutInflater.from(context).inflate(R.layout.item_recyclerview,parent,false)
         val view = LayoutInflater.from(context).inflate(R.layout.contact_item,parent,false)
-        return ViewHolder(view)
+        return PagerViewHolder(view)
     }
 
     override fun getItemCount(): Int = developers.size
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
         holder.bind(developers[position])
     }
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class PagerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private val txtName: TextView = itemView.findViewById(R.id.name)
         private val txtPhone: TextView = itemView.findViewById(R.id.phone)
