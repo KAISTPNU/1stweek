@@ -3,8 +3,10 @@ package com.example.madcamp_1st_week
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.madcamp_1st_week.databinding.FragmentSecondBinding
 
@@ -34,5 +36,13 @@ class SecondFragment : Fragment() {
         feedAdapter.itemList = feedImageList
         binding.feedGalleryView.adapter = feedAdapter
 
+        binding.feedGalleryView.onItemClickListener = object: AdapterView.OnItemClickListener {
+            override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedItem = parent?.getItemAtPosition(position)
+                activity?.supportFragmentManager?.beginTransaction()
+                    ?.replace(R.id.fragment, FeedDetailFragment())
+                    ?.commitAllowingStateLoss()
+            }
+        }
     }
 }

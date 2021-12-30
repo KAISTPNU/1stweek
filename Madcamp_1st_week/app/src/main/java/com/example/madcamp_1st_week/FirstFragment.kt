@@ -48,7 +48,6 @@ class FirstFragment : Fragment() {
         developerAdapter.developers = Companion.developerList
         designerAdapter.designers = Companion.designerList
 
-
         val developerView = view.findViewById<ViewPager2>(R.id.viewpager)
         developerView.adapter = developerAdapter
         developerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
