@@ -67,6 +67,7 @@
                 android:fontFamily="@font/uber_move_medium" />
 
             <TextView
+                android:id="@+id/phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="010-1234-5678"
