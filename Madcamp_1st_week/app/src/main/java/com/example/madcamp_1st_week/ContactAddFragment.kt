@@ -30,12 +30,13 @@ class ContactAddFragment : Fragment() {
         var name = jsonObj.getString("name")
         var email = jsonObj.getString("email")
         var phone = jsonObj.getString("phone")
-        var job = jsonObj.getString("job")
+//        var job = jsonObj.getString("job")
 
         binding.nameInput.setText(name)
         binding.emailInput.setText(email)
         binding.phoneInput.setText(phone)
-        binding.jobInput.setText(job)
+
+//        binding.jobInput.setText(job)
     }
 
     fun initAddButton() {
