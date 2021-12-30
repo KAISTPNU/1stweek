@@ -9,9 +9,9 @@
     <androidx.cardview.widget.CardView
         android:layout_width="220dp"
         android:layout_height="290dp"
-        android:backgroundTint="@color/darknavy"
         card_view:cardCornerRadius="10dp"
-        android:layout_margin="10dp">
+        android:layout_margin="10dp"
+        android:elevation="20dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Name"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:fontFamily="@font/uber_move_medium"
                 android:textAlignment="center"/>
             <TextView
@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Detail Job"
-                android:textColor="@color/otmeal"
+                android:textColor="@color/graybrown"
                 android:fontFamily="@font/uber_move_medium"
                 android:textAlignment="center"
                 android:textSize="11dp"/>
@@ -59,7 +59,7 @@
                 android:layout_height="match_parent"
                 android:text="Phone"
                 android:textSize="12dp"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:layout_marginRight="20dp"
                 android:fontFamily="@font/uber_move_medium" />
 
@@ -69,7 +69,7 @@
                 android:layout_height="match_parent"
                 android:text="010-1234-5678"
                 android:textSize="12dp"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:fontFamily="@font/uber_move_medium" />
         </LinearLayout>
 
@@ -84,8 +84,8 @@
                     android:layout_height="match_parent"
                     android:text="Email"
                     android:textSize="12dp"
-                    android:textColor="@color/white"
-                    android:layout_marginRight="60dp"
+                    android:textColor="@color/black"
+                    android:layout_marginRight="30dp"
                     android:fontFamily="@font/uber_move_medium" />
 
                 <TextView
@@ -97,7 +97,7 @@
                     android:autoSizeMaxTextSize="12dp"
                     android:autoSizeMinTextSize="5dp"
                     android:maxLines="1"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:fontFamily="@font/uber_move_medium" />
             </LinearLayout>
             <LinearLayout
@@ -111,7 +111,7 @@
                     android:layout_height="match_parent"
                     android:text="Company"
                     android:textSize="12dp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:layout_marginRight="60dp"
                     android:fontFamily="@font/uber_move_medium" />
                 <TextView
@@ -120,7 +120,7 @@
                     android:layout_height="match_parent"
                     android:text="KAKAO"
                     android:textSize="12dp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:fontFamily="@font/uber_move_medium"/>
             </LinearLayout>
         </LinearLayout>
