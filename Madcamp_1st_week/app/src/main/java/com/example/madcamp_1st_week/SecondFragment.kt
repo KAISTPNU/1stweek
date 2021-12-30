@@ -1,6 +1,7 @@
 package com.example.madcamp_1st_week
 
 import android.os.Bundle
+import android.renderscript.Sampler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -29,18 +30,36 @@ class SecondFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         feedAdapter = FeedAdapter(this.requireContext())
-        for (i: Int in 1..20) {
-            feedImageList.add(FeedItem(R.drawable.netherland, "123"))
-        }
+
+        feedImageList.add(FeedItem(R.drawable.test_1, "123"))
+        feedImageList.add(FeedItem(R.drawable.test_2, "123"))
+        feedImageList.add(FeedItem(R.drawable.test_3, "123"))
+        feedImageList.add(FeedItem(R.drawable.test_4, "123"))
+        feedImageList.add(FeedItem(R.drawable.test_5, "123"))
+        feedImageList.add(FeedItem(R.drawable.test_6, "123"))
+        feedImageList.add(FeedItem(R.drawable.test_7, "123"))
+        feedImageList.add(FeedItem(R.drawable.test_8, "123"))
+        feedImageList.add(FeedItem(R.drawable.test_9, "123"))
+        feedImageList.add(FeedItem(R.drawable.test_10, "123"))
+        feedImageList.add(FeedItem(R.drawable.test_11, "123"))
+        feedImageList.add(FeedItem(R.drawable.test_12, "123"))
+        feedImageList.add(FeedItem(R.drawable.test_13, "123"))
+        feedImageList.add(FeedItem(R.drawable.test_14, "123"))
+
 
         feedAdapter.itemList = feedImageList
         binding.feedGalleryView.adapter = feedAdapter
 
         binding.feedGalleryView.onItemClickListener = object: AdapterView.OnItemClickListener {
             override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedItem = parent?.getItemAtPosition(position)
+                val selectedItem: FeedItem = parent?.getItemAtPosition(position) as FeedItem
+
+                val feedDetailFragment = FeedDetailFragment()
+                var bundle = Bundle()
+                bundle.putInt("img", selectedItem.resourceID)
+                feedDetailFragment.setArguments(bundle)
                 activity?.supportFragmentManager?.beginTransaction()
-                    ?.replace(R.id.fragment, FeedDetailFragment())
+                    ?.replace(R.id.fragment, feedDetailFragment)
                     ?.commitAllowingStateLoss()
             }
         }
