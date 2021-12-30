@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="job">
-        <item>Designer</item>
         <item>Developer</item>
+        <item>Designer</item>
         <item>Engineer</item>
         <item>PM</item>
         <item>Etc</item>
