@@ -40,4 +40,5 @@ class DeveloperAdapter (private val context: Context): RecyclerView.Adapter<Deve
         }
 
     }
+
 }
