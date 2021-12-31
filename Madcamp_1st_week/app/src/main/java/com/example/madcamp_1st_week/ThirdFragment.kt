@@ -89,7 +89,7 @@ class ThirdFragment : Fragment() {
         //add text in center
         pieChart.setDrawCenterText(true);
         pieChart.centerText = "Project\nLanguage Ratio"
-        pieChart.setCenterTextSize(20f)
+        pieChart.setCenterTextSize(12f)
         pieChart.setCenterTextTypeface(resources.getFont(R.font.uber_move_medium))
 
         pieChart.invalidate()
