@@ -7,18 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.viewpager2.widget.ViewPager2
-import androidx.appcompat.widget.AppCompatImageButton;
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class FirstFragment : Fragment() {
 
-    private lateinit var developerAdapter:DeveloperAdapter
-    private lateinit var designerAdapter:DesignerAdapter
-    private lateinit var engineerAdapter: EngineerAdapter
-    private lateinit var pmAdapter: PMAdapter
-    private lateinit var etcAdapter: EtcAdapter
+    private lateinit var jobsAdapter:JobsAdapter
 
     internal lateinit var deleteButton: ImageButton
 
@@ -110,17 +105,13 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        developerAdapter = DeveloperAdapter(this.requireContext())
-        designerAdapter = DesignerAdapter(this.requireContext())
-        engineerAdapter = EngineerAdapter(this.requireContext())
-        pmAdapter = PMAdapter(this.requireContext())
-        etcAdapter = EtcAdapter(this.requireContext())
+        jobsAdapter = JobsAdapter(this.requireContext())
 
-        developerAdapter.developers = Companion.developerList
-        designerAdapter.designers = Companion.designerList
-        engineerAdapter.engineers = Companion.engineerList
-        pmAdapter.pms = Companion.pmList
-        etcAdapter.etcs = Companion.etcList
+        jobsAdapter.developers = Companion.developerList
+        jobsAdapter.designers = Companion.designerList
+        jobsAdapter.engineers = Companion.engineerList
+        jobsAdapter.pms = Companion.pmList
+        jobsAdapter.etcs = Companion.etcList
 
         val viewpagerView = view.findViewById<ViewPager2>(R.id.viewpager)
 
@@ -135,80 +126,6 @@ class FirstFragment : Fragment() {
         val image = view.findViewById<ImageView>(R.id.devImage)
         val viewpager = view.findViewById<ViewPager2>(R.id.viewpager)
 
-        deleteButton = view.findViewById(R.id.delete)
-
-
-        deleteButton.setOnClickListener(object: View.OnClickListener{
-            override fun onClick(v: View?) {
-                val jobCategory = spinner.selectedItemPosition
-                when(jobCategory) {
-                    0 -> {
-                        var index = viewpagerView.currentItem
-                        developerList.removeAt(index)
-                        viewpager.adapter=developerAdapter
-                        if (index > developerList.size) {
-                            viewpagerView.currentItem = developerList.size - 1
-                        }
-                        else {
-                            viewpagerView.currentItem = index
-                        }
-                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
-                    }
-                    1 -> {
-                        var index = viewpagerView.currentItem
-                        designerList.removeAt(index)
-                        viewpager.adapter=designerAdapter
-                        if (index > developerList.size) {
-                            viewpagerView.currentItem = developerList.size - 1
-                        }
-                        else {
-                            viewpagerView.currentItem = index
-                        }
-                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
-                    }
-                    2 -> {
-                        var index = viewpagerView.currentItem
-                        engineerList.removeAt(index)
-                        viewpager.adapter=engineerAdapter
-                        if (index > developerList.size) {
-                            viewpagerView.currentItem = developerList.size - 1
-                        }
-                        else {
-                            viewpagerView.currentItem = index
-                        }
-                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
-                    }
-                    3 -> {
-                        var index = viewpagerView.currentItem
-                        pmList.removeAt(index)
-                        viewpager.adapter=pmAdapter
-                        if (index > developerList.size) {
-                            viewpagerView.currentItem = developerList.size - 1
-                        }
-                        else {
-                            viewpagerView.currentItem = index
-                        }
-                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
-                    }
-                    4 -> {
-                        var index = viewpagerView.currentItem
-                        etcList.removeAt(index)
-                        viewpager.adapter=etcAdapter
-                        if (index > developerList.size) {
-                            viewpagerView.currentItem = developerList.size - 1
-                        }
-                        else {
-                            viewpagerView.currentItem = index
-                        }
-                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
-                    }
-                }
-
-
-            }
-        })
-
-
         spinner.onItemSelectedListener = object:AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
@@ -216,31 +133,36 @@ class FirstFragment : Fragment() {
                     //developer
                     0 -> {
                         image.setImageResource(R.drawable.developer)
-                        viewpager.adapter=developerAdapter
+                        jobsAdapter.job = 0
+                        viewpager.adapter=jobsAdapter
                         viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
                     }
                     //designer
                     1 -> {
                         image.setImageResource(R.drawable.designer)
-                        viewpager.adapter=designerAdapter
+                        jobsAdapter.job = 1
+                        viewpager.adapter=jobsAdapter
                         viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
                     }
                     // engineer
                     2 -> {
                         image.setImageResource(R.drawable.engineer)
-                        viewpager.adapter=engineerAdapter
+                        jobsAdapter.job = 2
+                        viewpager.adapter=jobsAdapter
                         viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
                     }
                     //pm
                     3 -> {
                         image.setImageResource(R.drawable.pm)
-                        viewpager.adapter=pmAdapter
+                        jobsAdapter.job = 3
+                        viewpager.adapter=jobsAdapter
                         viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
                     }
                     //etc
                     4 -> {
                         image.setImageResource(R.drawable.etc)
-                        viewpager.adapter=etcAdapter
+                        jobsAdapter.job = 4
+                        viewpager.adapter=jobsAdapter
                         viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
                     }
                 }
