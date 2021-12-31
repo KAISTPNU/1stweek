@@ -1,10 +1,13 @@
 package com.example.madcamp_1st_week
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 
 
@@ -31,6 +34,7 @@ class DesignerAdapter (private val context: Context): RecyclerView.Adapter<Desig
         private val txtDetailJob: TextView = itemView.findViewById(R.id.detailjob)
         private val txtCompany: TextView = itemView.findViewById(R.id.company)
 
+        @SuppressLint("ResourceAsColor")
         fun bind(item: FriendItem) {
             txtName.text = item.name
             txtPhone.text = item.phone
@@ -38,6 +42,12 @@ class DesignerAdapter (private val context: Context): RecyclerView.Adapter<Desig
             txtDetailJob.text = item.detailjob
             txtCompany.text = item.company
 
+            var profileCardBorder = itemView.findViewById<LinearLayout>(R.id.profile_card_border)
+            when(item.company.toString()) {
+                "SAMSUNG" -> profileCardBorder.setBackgroundColor(ContextCompat.getColor(context, R.color.samsung))
+                "KAKAO" -> profileCardBorder.setBackgroundColor(ContextCompat.getColor(context, R.color.kakao))
+                else -> profileCardBorder.setBackgroundColor(ContextCompat.getColor(context, R.color.darknavy))
+            }
         }
 
     }
