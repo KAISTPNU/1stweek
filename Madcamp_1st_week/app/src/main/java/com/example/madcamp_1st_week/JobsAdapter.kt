@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import android.content.DialogInterface
 import android.widget.Toast
+import androidx.fragment.app.findFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlin.system.exitProcess
 
 
@@ -51,6 +53,7 @@ class JobsAdapter (private val context: Context): RecyclerView.Adapter<JobsAdapt
         val layout = FirstFragment.viewpagerView
         var viewpagerView = layout.findViewById<ViewPager2>(R.id.viewpager)
         var index = viewpagerView.currentItem
+
         viewholder.unbind(index)
         notifyDataSetChanged()
     }
@@ -92,6 +95,13 @@ class JobsAdapter (private val context: Context): RecyclerView.Adapter<JobsAdapt
             txtEmail.text = item.email
             txtDetailJob.text = item.detailjob
             txtCompany.text = item.company
+
+            itemView.setOnClickListener(View.OnClickListener {
+                (context as MainActivity).supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment, SecondFragment())
+                    .commitAllowingStateLoss()
+                (context as MainActivity).findViewById<BottomNavigationView>(R.id.navBar).selectedItemId=R.id.nav_second
+            })
 
             val profileCardBorder = itemView.findViewById<LinearLayout>(R.id.profile_card_border)
             val deleteButton = itemView.findViewById<ImageButton>(R.id.delete)
