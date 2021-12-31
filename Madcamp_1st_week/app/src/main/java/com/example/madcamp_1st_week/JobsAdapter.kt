@@ -96,11 +96,22 @@ class JobsAdapter (private val context: Context): RecyclerView.Adapter<JobsAdapt
             txtDetailJob.text = item.detailjob
             txtCompany.text = item.company
 
-            var profileCardBorder = itemView.findViewById<LinearLayout>(R.id.profile_card_border)
+            val profileCardBorder = itemView.findViewById<LinearLayout>(R.id.profile_card_border)
+            val deleteButton = itemView.findViewById<ImageButton>(R.id.delete)
+
             when(item.company.toString()) {
-                "SAMSUNG" -> profileCardBorder.setBackgroundColor(ContextCompat.getColor(context, R.color.samsung))
-                "KAKAO" -> profileCardBorder.setBackgroundColor(ContextCompat.getColor(context, R.color.kakao))
-                else -> profileCardBorder.setBackgroundColor(ContextCompat.getColor(context, R.color.darknavy))
+                "SAMSUNG" -> {
+                    profileCardBorder.setBackgroundColor(ContextCompat.getColor(context, R.color.samsung))
+                    deleteButton.setColorFilter(ContextCompat.getColor(context, R.color.samsung))
+                }
+                "KAKAO" -> {
+                    profileCardBorder.setBackgroundColor(ContextCompat.getColor(context, R.color.kakao))
+                    deleteButton.setColorFilter(ContextCompat.getColor(context, R.color.kakao))
+                }
+                else -> {
+                    profileCardBorder.setBackgroundColor(ContextCompat.getColor(context, R.color.darknavy))
+                    deleteButton.setColorFilter(ContextCompat.getColor(context, R.color.darknavy))
+                }
             }
         }
 

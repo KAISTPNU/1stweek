@@ -33,9 +33,9 @@ class ThirdFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.foldingCell.setOnClickListener(View.OnClickListener { view->
-            binding.foldingCell.toggle(false)
-        })
+//        binding.foldingCell.setOnClickListener(View.OnClickListener { view->
+//            binding.foldingCell.toggle(false)
+//        })
         initPieChart(binding.pieChart1)
         setDataToPieChart(binding.pieChart1, 1400)
 
