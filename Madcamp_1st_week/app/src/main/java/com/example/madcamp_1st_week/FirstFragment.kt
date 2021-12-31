@@ -1,5 +1,6 @@
 package com.example.madcamp_1st_week
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -121,6 +122,8 @@ class FirstFragment : Fragment() {
 
         val image = view.findViewById<ImageView>(R.id.devImage)
         viewpagerView = view.findViewById<ViewPager2>(R.id.viewpager)
+
+
 
         spinner.onItemSelectedListener = object:AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
