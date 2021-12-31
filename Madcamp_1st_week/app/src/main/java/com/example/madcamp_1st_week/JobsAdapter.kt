@@ -1,6 +1,7 @@
 package com.example.madcamp_1st_week
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import android.content.DialogInterface
 import android.widget.Toast
-
+import kotlin.system.exitProcess
 
 
 class JobsAdapter (private val context: Context): RecyclerView.Adapter<JobsAdapter.ViewHolder>(){
@@ -24,38 +25,34 @@ class JobsAdapter (private val context: Context): RecyclerView.Adapter<JobsAdapt
     var pms = mutableListOf<FriendItem>()
     var etcs = mutableListOf<FriendItem>()
     var job: Int = 0
-
-    val positiveButtonClick = { dialogInterface: DialogInterface, i: Int ->
-        Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT)
-    }
-    val negativeButtonClick = { dialogInterface: DialogInterface, i: Int ->
-        Toast.makeText(context, "Cancel", Toast.LENGTH_SHORT)
-    }
+    private lateinit var deleteBtn : ImageButton
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JobsAdapter.ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.contact_item,parent,false)
-        var deleteButton = view.findViewById<ImageButton>(R.id.delete)
+        deleteBtn = view.findViewById<ImageButton>(R.id.delete)
 
-        var jobsAdapter = JobsAdapter(context)
         var viewholder = ViewHolder(view)
-        deleteButton.setOnClickListener(object: View.OnClickListener{
+        deleteBtn.setOnClickListener(object: View.OnClickListener{
             override fun onClick(v: View?) {
-//                val popup = AlertDialog.Builder(context)
-//                    .setTitle("Test")
-//                    .setMessage("Do you want to delete it?")
-//                    .setPositiveButton("Yes", positiveButtonClick)
-//                    .setNegativeButton("No", negativeButtonClick).show()
+                val popup = AlertDialog.Builder(context)
+                popup
+                    .setMessage("Do you want to delete it?")
+                    .setPositiveButton("Yes", DialogInterface.OnClickListener { dialogInterface, i -> Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show(); delete(viewholder)})
+                    .setNegativeButton("No", DialogInterface.OnClickListener { dialogInterface, i -> Toast.makeText(context, "Cancel", Toast.LENGTH_SHORT).show() })
+                popup.show()
 
-//                val layout = LayoutInflater.from(context).inflate(R.layout.fragment_first, parent, false)
-                val layout = FirstFragment.viewpagerView
-                var viewpagerView = layout.findViewById<ViewPager2>(R.id.viewpager)
-                var index = viewpagerView.currentItem
-                viewholder.unbind(index)
-                notifyDataSetChanged()
             }
         })
         return viewholder
+    }
+
+    fun delete(viewholder: ViewHolder) {
+        val layout = FirstFragment.viewpagerView
+        var viewpagerView = layout.findViewById<ViewPager2>(R.id.viewpager)
+        var index = viewpagerView.currentItem
+        viewholder.unbind(index)
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
