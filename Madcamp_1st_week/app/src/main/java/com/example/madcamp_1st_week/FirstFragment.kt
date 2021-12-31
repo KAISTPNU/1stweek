@@ -30,6 +30,33 @@ class FirstFragment : Fragment() {
                                 "PROGRAMMING",
                                 "SAMSUNG"))
         }
+        for (i: Int in 3..5) {
+            Companion.developerList
+                .add(FriendItem("홍길동" + i,
+                    "010-1234-5678",
+                    "testemail123@naver.com",
+                    "DEVELOPER",
+                    "PROGRAMMING",
+                    "NAVER"))
+        }
+        for (i: Int in 6..6) {
+            Companion.developerList
+                .add(FriendItem("홍길동" + i,
+                    "010-1234-5678",
+                    "testemail123@naver.com",
+                    "DEVELOPER",
+                    "PROGRAMMING",
+                    "APPLE"))
+        }
+        for (i: Int in 7..7) {
+            Companion.developerList
+                .add(FriendItem("홍길동" + i,
+                    "010-1234-5678",
+                    "testemail123@naver.com",
+                    "DEVELOPER",
+                    "PROGRAMMING",
+                    "FACEBOOK"))
+        }
         for (i: Int in 1..1) {
             Companion.developerList
                 .add(FriendItem("홍길동" + i,
