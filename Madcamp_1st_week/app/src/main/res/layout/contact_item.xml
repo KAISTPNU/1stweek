@@ -43,7 +43,6 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:background="@color/transparent"
-
                 android:layout_gravity="right"
                 android:src="@drawable/delete"/>
 
