@@ -5,11 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ImageView
+import android.widget.*
 import androidx.viewpager2.widget.ViewPager2
-import android.widget.Spinner;
+import androidx.appcompat.widget.AppCompatImageButton;
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -22,7 +20,7 @@ class FirstFragment : Fragment() {
     private lateinit var pmAdapter: PMAdapter
     private lateinit var etcAdapter: EtcAdapter
 
-
+    internal lateinit var deleteButton: ImageButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,19 +28,20 @@ class FirstFragment : Fragment() {
     ): View? {
 
         for (i: Int in 1..5) {
-            Companion.developerList.add(FriendItem("홍길동", "010-1234-5678", "testemail123@naver.com", "DESIGNER", "PROGRAMMING", "KAKAO"))
+
+            Companion.developerList.add(FriendItem("홍길동" + i, "010-1234-5678", "testemail123@naver.com", "DESIGNER", "PROGRAMMING", "KAKAO"))
         }
         for (i: Int in 1..5) {
-            Companion.designerList.add(FriendItem("고길동", "010-1234-5678", "jagosipda@kaist.ac.kr", "DESIGNER", "PROGRAMMING", "KAKAO"))
+            Companion.designerList.add(FriendItem("고길동" + i, "010-1234-5678", "jagosipda@kaist.ac.kr", "DESIGNER", "PROGRAMMING", "KAKAO"))
         }
         for (i: Int in 1..5) {
-            Companion.engineerList.add(FriendItem("주호민", "010-1234-5678", "jagosipda@kaist.ac.kr", "ENGINEER", "PROGRAMMING", "KAKAO"))
+            Companion.engineerList.add(FriendItem("주호민" + i, "010-1234-5678", "jagosipda@kaist.ac.kr", "ENGINEER", "PROGRAMMING", "KAKAO"))
         }
         for (i: Int in 1..5) {
-            Companion.pmList.add(FriendItem("침착맨", "010-1234-5678", "jagosipda@kaist.ac.kr", "PM", "PROGRAMMING", "KAKAO"))
+            Companion.pmList.add(FriendItem("침착맨" + i, "010-1234-5678", "jagosipda@kaist.ac.kr", "PM", "PROGRAMMING", "KAKAO"))
         }
         for (i: Int in 1..5) {
-            Companion.etcList.add(FriendItem("기안84", "010-1234-5678", "jagosipda@kaist.ac.kr", "WEBTOON 작가", "PROGRAMMING", "KAKAO"))
+            Companion.etcList.add(FriendItem("기안" + i, "010-1234-5678", "jagosipda@kaist.ac.kr", "WEBTOON 작가", "PROGRAMMING", "KAKAO"))
         }
 
 
@@ -69,12 +68,6 @@ class FirstFragment : Fragment() {
 
         val viewpagerView = view.findViewById<ViewPager2>(R.id.viewpager)
 
-//        val designerView = view.findViewById<ViewPager2>(R.id.viewpager)
-//        designerView.setBackgroundColor(this.requireContext().getResources().getColor(R.color.darknavy))
-
-        viewpagerView.adapter = developerAdapter
-//        designerView.adapter = designerAdapter
-        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
         val spinner = view.findViewById<Spinner>(R.id.dropbox)
         val sAdapter = ArrayAdapter.createFromResource(this.requireContext(), R.array.job, android.R.layout.simple_spinner_item)
         sAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -82,11 +75,87 @@ class FirstFragment : Fragment() {
 
         spinner.setSelection(0)
 
+
         val image = view.findViewById<ImageView>(R.id.devImage)
         val viewpager = view.findViewById<ViewPager2>(R.id.viewpager)
 
+        deleteButton = view.findViewById(R.id.delete)
+
+
+        deleteButton.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val jobCategory = spinner.selectedItemPosition
+                when(jobCategory) {
+                    0 -> {
+                        var index = viewpagerView.currentItem
+                        developerList.removeAt(index)
+                        viewpager.adapter=developerAdapter
+                        if (index > developerList.size) {
+                            viewpagerView.currentItem = developerList.size - 1
+                        }
+                        else {
+                            viewpagerView.currentItem = index
+                        }
+                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+                    }
+                    1 -> {
+                        var index = viewpagerView.currentItem
+                        designerList.removeAt(index)
+                        viewpager.adapter=designerAdapter
+                        if (index > developerList.size) {
+                            viewpagerView.currentItem = developerList.size - 1
+                        }
+                        else {
+                            viewpagerView.currentItem = index
+                        }
+                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+                    }
+                    2 -> {
+                        var index = viewpagerView.currentItem
+                        engineerList.removeAt(index)
+                        viewpager.adapter=engineerAdapter
+                        if (index > developerList.size) {
+                            viewpagerView.currentItem = developerList.size - 1
+                        }
+                        else {
+                            viewpagerView.currentItem = index
+                        }
+                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+                    }
+                    3 -> {
+                        var index = viewpagerView.currentItem
+                        pmList.removeAt(index)
+                        viewpager.adapter=pmAdapter
+                        if (index > developerList.size) {
+                            viewpagerView.currentItem = developerList.size - 1
+                        }
+                        else {
+                            viewpagerView.currentItem = index
+                        }
+                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+                    }
+                    4 -> {
+                        var index = viewpagerView.currentItem
+                        etcList.removeAt(index)
+                        viewpager.adapter=etcAdapter
+                        if (index > developerList.size) {
+                            viewpagerView.currentItem = developerList.size - 1
+                        }
+                        else {
+                            viewpagerView.currentItem = index
+                        }
+                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+                    }
+                }
+
+
+            }
+        })
+
+
         spinner.onItemSelectedListener = object:AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
                 when(position) {
                     //developer
                     0 -> {
@@ -126,7 +195,6 @@ class FirstFragment : Fragment() {
             }
 
         }
-
 
 //        developerView.layoutManager = GridLayoutManager(activity, 3)
 //        developerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
