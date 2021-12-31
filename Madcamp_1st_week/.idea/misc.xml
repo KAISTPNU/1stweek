@@ -10,8 +10,8 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.21851851851851853" />
         <entry key="app/src/main/res/drawable/nav_bar_item_color.xml" value="0.13541666666666666" />
         <entry key="app/src/main/res/font/font.xml" value="0.14947916666666666" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.13466065079807252" />
-        <entry key="app/src/main/res/layout/contact_item.xml" value="0.20224344643006367" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/contact_item.xml" value="0.2" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.1413373860182371" />
         <entry key="app/src/main/res/layout/feed_gallery_item.xml" value="0.20923913043478262" />
         <entry key="app/src/main/res/layout/feed_item.xml" value="0.22780797101449277" />
@@ -21,7 +21,8 @@
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.2" />
         <entry key="app/src/main/res/layout/image_list_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_recyclerview.xml" value="0.11354166666666667" />
-        <entry key="app/src/main/res/layout/project_item.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/project_item.xml" value="0.6334716459197787" />
+        <entry key="app/src/main/res/layout/project_item_title_left.xml" value="0.25" />
         <entry key="app/src/main/res/layout/recent_image_item.xml" value="0.12552083333333333" />
         <entry key="app/src/main/res/layout/recent_image_itme.xml" value="0.1" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.2875" />
