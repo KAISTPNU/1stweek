@@ -5,6 +5,11 @@
       <map>
         <entry key="app/src/main/res/drawable/basic_card_view.xml" value="0.2246153846153846" />
         <entry key="app/src/main/res/drawable/button_background.xml" value="0.13796296296296295" />
+        <entry key="app/src/main/res/drawable/card_view_border.xml" value="0.18802083333333333" />
+        <entry key="app/src/main/res/drawable/card_view_border_basic.xml" value="0.18333333333333332" />
+        <entry key="app/src/main/res/drawable/card_view_border_kakao.xml" value="0.18333333333333332" />
+        <entry key="app/src/main/res/drawable/card_view_border_samsung.xml" value="0.18333333333333332" />
+        <entry key="app/src/main/res/drawable/card_view_inner.xml" value="0.1765625" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.21851851851851853" />
         <entry key="app/src/main/res/drawable/nav_bar_item_color.xml" value="0.13541666666666666" />
         <entry key="app/src/main/res/font/font.xml" value="0.14947916666666666" />
@@ -20,6 +25,7 @@
         <entry key="app/src/main/res/layout/fragment_third.xml" value="0.16145833333333334" />
         <entry key="app/src/main/res/layout/image_list_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_recyclerview.xml" value="0.11354166666666667" />
+        <entry key="app/src/main/res/layout/project_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/recent_image_item.xml" value="0.12552083333333333" />
         <entry key="app/src/main/res/layout/recent_image_itme.xml" value="0.1" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.2875" />

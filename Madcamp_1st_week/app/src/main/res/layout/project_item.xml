@@ -13,8 +13,8 @@
             android:id="@+id/cell_content_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:background="@drawable/button_background">
+            android:background="@android:color/holo_green_dark"
+            android:visibility="gone">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
@@ -25,11 +25,11 @@
         <FrameLayout
             android:id="@+id/cell_title_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_background">
+            android:layout_height="wrap_content">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
+                android:background="@android:color/holo_blue_dark"
                 android:textSize="10dp"
                 android:text="123"/>
         </FrameLayout>

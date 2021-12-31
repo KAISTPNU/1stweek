@@ -54,6 +54,12 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                     true
                 }
+                R.id.nav_third -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment, ThirdFragment())
+                        .commit()
+                    true
+                }
                 else -> {
                     false
                 }
