@@ -66,13 +66,14 @@
         android:gravity="center"
         android:background="@color/lightgray"
         android:padding="10dp">
-        <GridView
-            android:id="@+id/feed_gallery_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:numColumns="3"
-            android:layout_gravity="center_vertical"
-            android:verticalSpacing="7dp"
-            android:horizontalSpacing="7dp"/>
+<!--        <GridView-->
+<!--            android:id="@+id/feed_gallery_view"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:numColumns="3"-->
+<!--            android:layout_gravity="center_vertical"-->
+<!--            android:verticalSpacing="7dp"-->
+<!--            android:horizontalSpacing="7dp"/>-->
+        <include layout="@layout/project_item"/>
     </LinearLayout>
 </LinearLayout>
