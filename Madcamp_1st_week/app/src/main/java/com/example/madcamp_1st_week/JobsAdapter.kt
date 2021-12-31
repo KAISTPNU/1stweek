@@ -52,58 +52,6 @@ class JobsAdapter (private val context: Context): RecyclerView.Adapter<JobsAdapt
                 var viewpagerView = layout.findViewById<ViewPager2>(R.id.viewpager)
                 var index = viewpagerView.currentItem
                 viewholder.unbind(index)
-                when(job) {
-                    0 -> {
-                        viewpagerView.adapter=jobsAdapter
-                        if (index > developers.size) {
-                            viewpagerView.currentItem = developers.size - 1
-                        }
-                        else {
-                            viewpagerView.currentItem = index
-                        }
-                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
-                    }
-                    1 -> {
-                        viewpagerView.adapter=jobsAdapter
-                        if (index > designers.size) {
-                            viewpagerView.currentItem = designers.size - 1
-                        }
-                        else {
-                            viewpagerView.currentItem = index
-                        }
-                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
-                    }
-                    2 -> {
-                        viewpagerView.adapter=jobsAdapter
-                        if (index > engineers.size) {
-                            viewpagerView.currentItem = engineers.size - 1
-                        }
-                        else {
-                            viewpagerView.currentItem = index
-                        }
-                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
-                    }
-                    3 -> {
-                        viewpagerView.adapter=jobsAdapter
-                        if (index > pms.size) {
-                            viewpagerView.currentItem = pms.size - 1
-                        }
-                        else {
-                            viewpagerView.currentItem = index
-                        }
-                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
-                    }
-                    4 -> {
-                        viewpagerView.adapter=jobsAdapter
-                        if (index > etcs.size) {
-                            viewpagerView.currentItem = etcs.size - 1
-                        }
-                        else {
-                            viewpagerView.currentItem = index
-                        }
-                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
-                    }
-                }
                 notifyDataSetChanged()
             }
         })
