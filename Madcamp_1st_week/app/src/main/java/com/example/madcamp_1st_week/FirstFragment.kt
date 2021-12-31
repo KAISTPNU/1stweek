@@ -27,21 +27,77 @@ class FirstFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        for (i: Int in 1..5) {
-
-            Companion.developerList.add(FriendItem("홍길동" + i, "010-1234-5678", "testemail123@naver.com", "DESIGNER", "PROGRAMMING", "KAKAO"))
+        for (i: Int in 1..1) {
+            Companion.developerList
+                .add(FriendItem("홍길동" + i,
+                                "010-1234-5678",
+                                "testemail123@naver.com",
+                                "DEVELOPER",
+                                "PROGRAMMING",
+                                "SAMSUNG"))
+        }
+        for (i: Int in 1..1) {
+            Companion.developerList
+                .add(FriendItem("홍길동" + i,
+                    "010-1234-5678",
+                    "testemail123@naver.com",
+                    "DEVELOPER",
+                    "PROGRAMMING",
+                    "KAKAO"))
+        }
+        for (i: Int in 1..2) {
+            Companion.developerList
+                .add(FriendItem("홍길동" + i,
+                    "010-1234-5678",
+                    "testemail123@naver.com",
+                    "DEVELOPER",
+                    "PROGRAMMING",
+                    "HYUNDAI"))
+        }
+        for (i: Int in 1..2) {
+            Companion.designerList
+                .add(FriendItem("김삼성" + i,
+                    "010-1234-5678",
+                    "testemail123@naver.com",
+                    "DEVELOPER",
+                    "PROGRAMMING",
+                    "SAMSUNG"))
         }
         for (i: Int in 1..5) {
-            Companion.designerList.add(FriendItem("고길동" + i, "010-1234-5678", "jagosipda@kaist.ac.kr", "DESIGNER", "PROGRAMMING", "KAKAO"))
+            Companion.designerList
+                .add(FriendItem("고길동" + i,
+                    "010-1234-5678",
+                    "testemail123@naver.com",
+                    "DESIGNER",
+                    "PROGRAMMING",
+                    "KAKAO"))
         }
         for (i: Int in 1..5) {
-            Companion.engineerList.add(FriendItem("주호민" + i, "010-1234-5678", "jagosipda@kaist.ac.kr", "ENGINEER", "PROGRAMMING", "KAKAO"))
+            Companion.engineerList
+                .add(FriendItem("침착맨" + i,
+                    "010-1234-5678",
+                    "testemail123@naver.com",
+                    "ENGINEER",
+                    "PROGRAMMING",
+                    "KAKAO"))
         }
         for (i: Int in 1..5) {
-            Companion.pmList.add(FriendItem("침착맨" + i, "010-1234-5678", "jagosipda@kaist.ac.kr", "PM", "PROGRAMMING", "KAKAO"))
+            Companion.pmList
+                .add(FriendItem("기안" + i,
+                    "010-1234-5678",
+                    "testemail123@naver.com",
+                    "PM",
+                    "PROGRAMMING",
+                    "KAKAO"))
         }
         for (i: Int in 1..5) {
-            Companion.etcList.add(FriendItem("기안" + i, "010-1234-5678", "jagosipda@kaist.ac.kr", "WEBTOON 작가", "PROGRAMMING", "KAKAO"))
+            Companion.etcList
+                .add(FriendItem("누구" + i,
+                    "010-1234-5678",
+                    "testemail123@naver.com",
+                    "ETC",
+                    "PROGRAMMING",
+                    "SAMSUNG"))
         }
 
 
