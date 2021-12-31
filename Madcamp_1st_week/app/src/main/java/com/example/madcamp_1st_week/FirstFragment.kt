@@ -15,8 +15,6 @@ class FirstFragment : Fragment() {
 
     private lateinit var jobsAdapter:JobsAdapter
 
-    internal lateinit var deleteButton: ImageButton
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -113,8 +111,6 @@ class FirstFragment : Fragment() {
         jobsAdapter.pms = Companion.pmList
         jobsAdapter.etcs = Companion.etcList
 
-        val viewpagerView = view.findViewById<ViewPager2>(R.id.viewpager)
-
         val spinner = view.findViewById<Spinner>(R.id.dropbox)
         val sAdapter = ArrayAdapter.createFromResource(this.requireContext(), R.array.job, android.R.layout.simple_spinner_item)
         sAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -124,7 +120,7 @@ class FirstFragment : Fragment() {
 
 
         val image = view.findViewById<ImageView>(R.id.devImage)
-        val viewpager = view.findViewById<ViewPager2>(R.id.viewpager)
+        viewpagerView = view.findViewById<ViewPager2>(R.id.viewpager)
 
         spinner.onItemSelectedListener = object:AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -134,35 +130,35 @@ class FirstFragment : Fragment() {
                     0 -> {
                         image.setImageResource(R.drawable.developer)
                         jobsAdapter.job = 0
-                        viewpager.adapter=jobsAdapter
+                        viewpagerView.adapter=jobsAdapter
                         viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
                     }
                     //designer
                     1 -> {
                         image.setImageResource(R.drawable.designer)
                         jobsAdapter.job = 1
-                        viewpager.adapter=jobsAdapter
+                        viewpagerView.adapter=jobsAdapter
                         viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
                     }
                     // engineer
                     2 -> {
                         image.setImageResource(R.drawable.engineer)
                         jobsAdapter.job = 2
-                        viewpager.adapter=jobsAdapter
+                        viewpagerView.adapter=jobsAdapter
                         viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
                     }
                     //pm
                     3 -> {
                         image.setImageResource(R.drawable.pm)
                         jobsAdapter.job = 3
-                        viewpager.adapter=jobsAdapter
+                        viewpagerView.adapter=jobsAdapter
                         viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
                     }
                     //etc
                     4 -> {
                         image.setImageResource(R.drawable.etc)
                         jobsAdapter.job = 4
-                        viewpager.adapter=jobsAdapter
+                        viewpagerView.adapter=jobsAdapter
                         viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
                     }
                 }
@@ -185,6 +181,7 @@ class FirstFragment : Fragment() {
         val engineerList = mutableListOf<FriendItem>()
         val pmList = mutableListOf<FriendItem>()
         val etcList = mutableListOf<FriendItem>()
+        lateinit var viewpagerView: ViewPager2
     }
 
 

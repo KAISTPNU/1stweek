@@ -2,7 +2,6 @@ package com.example.madcamp_1st_week
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +9,10 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import android.content.DialogInterface
+import android.widget.Toast
 
 
 
@@ -24,19 +24,31 @@ class JobsAdapter (private val context: Context): RecyclerView.Adapter<JobsAdapt
     var pms = mutableListOf<FriendItem>()
     var etcs = mutableListOf<FriendItem>()
     var job: Int = 0
-    private lateinit var mFm : FragmentManager
 
+    val positiveButtonClick = { dialogInterface: DialogInterface, i: Int ->
+        Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT)
+    }
+    val negativeButtonClick = { dialogInterface: DialogInterface, i: Int ->
+        Toast.makeText(context, "Cancel", Toast.LENGTH_SHORT)
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JobsAdapter.ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.contact_item,parent,false)
-        val layout = LayoutInflater.from(context).inflate(R.layout.fragment_first, parent, false)
         var deleteButton = view.findViewById<ImageButton>(R.id.delete)
 
         var jobsAdapter = JobsAdapter(context)
         var viewholder = ViewHolder(view)
         deleteButton.setOnClickListener(object: View.OnClickListener{
             override fun onClick(v: View?) {
+//                val popup = AlertDialog.Builder(context)
+//                    .setTitle("Test")
+//                    .setMessage("Do you want to delete it?")
+//                    .setPositiveButton("Yes", positiveButtonClick)
+//                    .setNegativeButton("No", negativeButtonClick).show()
+
+//                val layout = LayoutInflater.from(context).inflate(R.layout.fragment_first, parent, false)
+                val layout = FirstFragment.viewpagerView
                 var viewpagerView = layout.findViewById<ViewPager2>(R.id.viewpager)
                 var index = viewpagerView.currentItem
                 viewholder.unbind(index)
