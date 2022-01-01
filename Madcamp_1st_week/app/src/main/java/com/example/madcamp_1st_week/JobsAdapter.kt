@@ -115,6 +115,18 @@ class JobsAdapter (private val context: Context): RecyclerView.Adapter<JobsAdapt
                     profileCardBorder.setBackgroundColor(ContextCompat.getColor(context, R.color.kakao))
                     deleteButton.setColorFilter(ContextCompat.getColor(context, R.color.kakao))
                 }
+                "NAVER" -> {
+                    profileCardBorder.setBackgroundColor(ContextCompat.getColor(context, R.color.naver))
+                    deleteButton.setColorFilter(ContextCompat.getColor(context, R.color.naver))
+                }
+                "FACEBOOK" -> {
+                    profileCardBorder.setBackgroundColor(ContextCompat.getColor(context, R.color.facebook))
+                    deleteButton.setColorFilter(ContextCompat.getColor(context, R.color.facebook))
+                }
+                "APPLE" -> {
+                    profileCardBorder.setBackgroundColor(ContextCompat.getColor(context, R.color.apple))
+                    deleteButton.setColorFilter(ContextCompat.getColor(context, R.color.apple))
+                }
                 else -> {
                     profileCardBorder.setBackgroundColor(ContextCompat.getColor(context, R.color.darknavy))
                     deleteButton.setColorFilter(ContextCompat.getColor(context, R.color.darknavy))
