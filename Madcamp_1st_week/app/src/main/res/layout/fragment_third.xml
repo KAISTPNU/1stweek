@@ -6,30 +6,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:background="@color/white">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:padding="10dp">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Project\nOverview"
             android:fontFamily="@font/uber_move_medium"
             android:textSize="35dp"
-            android:textStyle="bold"/>
-
-<!--        <View-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="2dp"-->
-<!--            android:background="#c0c0c0"-->
-<!--            android:layout_marginTop="5dp"-->
-<!--            android:layout_marginBottom="5dp"/>-->
+            android:textStyle="bold"
+            android:padding="10dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="200dp"
             android:orientation="horizontal"
             android:layout_gravity="center_horizontal"
             android:gravity="center">
@@ -51,17 +46,27 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
-                <com.github.mikephil.charting.charts.PieChart
-                    android:id="@+id/pieChart2"
+<!--                <com.github.mikephil.charting.charts.PieChart-->
+<!--                    android:id="@+id/pieChart2"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_marginEnd="10dp"-->
+<!--                    android:layout_marginBottom="10dp" />-->
+                <com.github.mikephil.charting.charts.BarChart
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="10dp" />
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp" />
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:orientation="vertical"
         android:gravity="center"
         android:background="@color/lightgray"
@@ -74,6 +79,8 @@
 <!--            android:layout_gravity="center_vertical"-->
 <!--            android:verticalSpacing="7dp"-->
 <!--            android:horizontalSpacing="7dp"/>-->
-        <include layout="@layout/project_item"/>
+        <include
+            android:id="@+id/project_item"
+            layout="@layout/project_item"/>
     </LinearLayout>
 </LinearLayout>

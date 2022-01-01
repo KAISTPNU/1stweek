@@ -122,10 +122,8 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#c0c0c0"/>
+            <include
+                layout="@layout/horizontal_bar"/>
 
             <TextView
                 android:layout_marginTop="10dp"

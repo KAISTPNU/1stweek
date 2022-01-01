@@ -98,6 +98,7 @@ class JobsAdapter (private val context: Context): RecyclerView.Adapter<JobsAdapt
 
             itemView.setOnClickListener(View.OnClickListener {
                 (context as MainActivity).supportFragmentManager.beginTransaction()
+                    .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
                     .replace(R.id.fragment, SecondFragment())
                     .commitAllowingStateLoss()
                 (context as MainActivity).findViewById<BottomNavigationView>(R.id.navBar).selectedItemId=R.id.nav_second

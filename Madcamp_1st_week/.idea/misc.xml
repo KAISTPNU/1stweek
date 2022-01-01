@@ -23,10 +23,13 @@
         <entry key="app/src/main/res/layout/fragment_third.xml" value="0.15" />
         <entry key="app/src/main/res/layout/image_list_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_recyclerview.xml" value="0.11354166666666667" />
-        <entry key="app/src/main/res/layout/project_item.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/project_item.xml" value="0.3685185185185185" />
+        <entry key="app/src/main/res/layout/project_item_title.xml" value="0.18072916666666666" />
         <entry key="app/src/main/res/layout/project_item_title_left.xml" value="0.25" />
         <entry key="app/src/main/res/layout/recent_image_item.xml" value="0.12552083333333333" />
         <entry key="app/src/main/res/layout/recent_image_itme.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/verical_bar.xml" value="0.10280797101449275" />
+        <entry key="app/src/main/res/layout/vertical_bar.xml" value="0.17391304347826086" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.2875" />
         <entry key="app/src/main/res/menu/nav_bar_menu.xml" value="0.165" />
       </map>
