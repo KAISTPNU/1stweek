@@ -31,20 +31,22 @@ class SecondFragment : Fragment() {
 
         feedAdapter = FeedAdapter(this.requireContext())
 
-        feedImageList.add(FeedItem(R.drawable.test_1, "123"))
-        feedImageList.add(FeedItem(R.drawable.test_2, "123"))
-        feedImageList.add(FeedItem(R.drawable.test_3, "123"))
-        feedImageList.add(FeedItem(R.drawable.test_4, "123"))
-        feedImageList.add(FeedItem(R.drawable.test_5, "123"))
-        feedImageList.add(FeedItem(R.drawable.test_6, "123"))
-        feedImageList.add(FeedItem(R.drawable.test_7, "123"))
-        feedImageList.add(FeedItem(R.drawable.test_8, "123"))
-        feedImageList.add(FeedItem(R.drawable.test_9, "123"))
-        feedImageList.add(FeedItem(R.drawable.test_10, "123"))
-        feedImageList.add(FeedItem(R.drawable.test_11, "123"))
-        feedImageList.add(FeedItem(R.drawable.test_12, "123"))
-        feedImageList.add(FeedItem(R.drawable.test_13, "123"))
-        feedImageList.add(FeedItem(R.drawable.test_14, "123"))
+        for (i in 1..5) {
+            feedImageList.add(FeedItem(R.drawable.test_1, "123"))
+            feedImageList.add(FeedItem(R.drawable.test_2, "123"))
+            feedImageList.add(FeedItem(R.drawable.test_3, "123"))
+            feedImageList.add(FeedItem(R.drawable.test_4, "123"))
+            feedImageList.add(FeedItem(R.drawable.test_5, "123"))
+            feedImageList.add(FeedItem(R.drawable.test_6, "123"))
+            feedImageList.add(FeedItem(R.drawable.test_7, "123"))
+            feedImageList.add(FeedItem(R.drawable.test_8, "123"))
+            feedImageList.add(FeedItem(R.drawable.test_9, "123"))
+            feedImageList.add(FeedItem(R.drawable.test_10, "123"))
+            feedImageList.add(FeedItem(R.drawable.test_11, "123"))
+            feedImageList.add(FeedItem(R.drawable.test_12, "123"))
+            feedImageList.add(FeedItem(R.drawable.test_13, "123"))
+            feedImageList.add(FeedItem(R.drawable.test_14, "123"))
+        }
 
 
         feedAdapter.itemList = feedImageList

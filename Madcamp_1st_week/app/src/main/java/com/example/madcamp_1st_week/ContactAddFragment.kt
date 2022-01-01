@@ -63,6 +63,7 @@ class ContactAddFragment : Fragment() {
             else {
                 FirstFragment.etcList.add(FriendItem(name, phone, email, job, detailjob, company))
             }
+
             activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.fragment, FirstFragment())
                 ?.disallowAddToBackStack()

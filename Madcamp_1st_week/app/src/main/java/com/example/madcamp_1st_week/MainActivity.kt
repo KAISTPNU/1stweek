@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.example.madcamp_1st_week.databinding.ActivityMainBinding
 import com.google.zxing.integration.android.IntentIntegrator
 
@@ -41,23 +42,39 @@ class MainActivity : AppCompatActivity() {
 
     fun initNavigationBar() {
         binding.navBar.setOnItemSelectedListener { item->
+            var currentFragment: Fragment? = supportFragmentManager.findFragmentById(R.id.fragment)
             when(item.itemId) {
                 R.id.nav_first -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment, FirstFragment())
-                        .commit()
+                    if (currentFragment !is FirstFragment) {
+                        supportFragmentManager.beginTransaction()
+                            .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+                            .replace(R.id.fragment, FirstFragment())
+                            .commit()
+                    }
                     true
                 }
                 R.id.nav_second -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment, SecondFragment())
-                        .commit()
+                    if (currentFragment is FirstFragment) {
+                        supportFragmentManager.beginTransaction()
+                            .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
+                            .replace(R.id.fragment, SecondFragment())
+                            .commit()
+                    }
+                    else if (currentFragment is ThirdFragment){
+                        supportFragmentManager.beginTransaction()
+                            .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+                            .replace(R.id.fragment, SecondFragment())
+                            .commit()
+                    }
                     true
                 }
                 R.id.nav_third -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment, ThirdFragment())
-                        .commit()
+                    if (currentFragment !is ThirdFragment) {
+                        supportFragmentManager.beginTransaction()
+                            .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
+                            .replace(R.id.fragment, ThirdFragment())
+                            .commit()
+                    }
                     true
                 }
                 else -> {

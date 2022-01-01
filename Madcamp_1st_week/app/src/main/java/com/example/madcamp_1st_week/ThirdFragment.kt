@@ -1,5 +1,6 @@
 package com.example.madcamp_1st_week
 
+import android.animation.ObjectAnimator
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -28,19 +29,25 @@ class ThirdFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentThirdBinding.inflate(inflater, container, false)
+
+        binding.projectItem.foldingCell.setOnClickListener(View.OnClickListener { view->
+            binding.projectItem.foldingCell.toggle(false)
+        })
+        var progressBarAnimation = ObjectAnimator
+            .ofInt(binding.projectItem.projectItemTitle.projectProgress, "progress", 0, 77)
+        progressBarAnimation.setDuration(1000)
+        progressBarAnimation.start()
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        binding.foldingCell.setOnClickListener(View.OnClickListener { view->
-//            binding.foldingCell.toggle(false)
-//        })
         initPieChart(binding.pieChart1)
         setDataToPieChart(binding.pieChart1, 1400)
 
-        initPieChart(binding.pieChart2)
-        setDataToPieChart(binding.pieChart2, 1400)
+        //initPieChart(binding.pieChart2)
+        //setDataToPieChart(binding.pieChart2, 1400)
     }
 
     fun initPieChart(pieChart: PieChart) {
