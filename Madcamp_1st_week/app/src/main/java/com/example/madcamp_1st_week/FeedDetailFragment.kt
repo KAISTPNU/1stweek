@@ -24,7 +24,7 @@ class FeedDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val args = arguments
-        val resourceID = args?.getInt("img")!!
-        binding.feedDetailImg.setImageResource(resourceID)
+        val resourceID = args?.getInt("img")!! // 이전 fragment로부터 넘겨받은 resourceID 값을 변수에 저장
+        binding.feedDetailImg.setImageResource(resourceID) // 현재 fragment의 feedDetailImg의 Image Resource를 resourceID 값으로 저장
     }
 }

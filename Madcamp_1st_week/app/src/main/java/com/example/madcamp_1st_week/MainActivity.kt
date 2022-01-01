@@ -25,6 +25,12 @@ class MainActivity : AppCompatActivity() {
         initNavigationBar()
         initAddButton()
 
+        /*
+            애니메이션 실행을 위해선 setCustomAnimation() 함수 필요
+            setCustomAnimation(EnterAnimation, ExitAnimaion)으로 구성
+                -> EnterAnimation은 새로 실행되는 Fragment에 적용되는 Animation
+                -> ExitAnimation은 종료되는 Fragment에 적용되는 Animation
+         */
         supportFragmentManager.beginTransaction()
             .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
             .replace(R.id.fragment, FirstFragment())
@@ -45,6 +51,12 @@ class MainActivity : AppCompatActivity() {
     fun initNavigationBar() {
         binding.navBar.setOnItemSelectedListener { item->
             var currentFragment: Fragment? = supportFragmentManager.findFragmentById(R.id.fragment)
+
+            /*
+                아래의 when {} 내부에 있는 조건문들은
+                현재 Fragment가 어떤 것인지에 따라 적용해야하는 애니메이션이 다르기 때문에
+                그 부분을 처리하기 위한 조건문입니다
+             */
             when(item.itemId) {
                 R.id.nav_first -> {
                     if (currentFragment !is FirstFragment) {

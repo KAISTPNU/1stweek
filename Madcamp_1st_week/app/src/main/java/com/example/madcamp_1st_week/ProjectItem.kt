@@ -4,6 +4,10 @@ import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 import java.util.*
 
+/*
+    프로젝트 아이템의 data class
+    LocalDate는 날짜 타입의 클래스입니다
+ */
 data class ProjectItem (var title: String,
                         var language: String,
                         var leader: String,
