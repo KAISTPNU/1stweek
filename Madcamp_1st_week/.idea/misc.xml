@@ -10,7 +10,9 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.21851851851851853" />
         <entry key="app/src/main/res/drawable/nav_bar_item_color.xml" value="0.13541666666666666" />
         <entry key="app/src/main/res/drawable/project_item_title_right_background.xml" value="0.215625" />
+        <entry key="app/src/main/res/drawable/spinner_border.xml" value="0.1625" />
         <entry key="app/src/main/res/font/font.xml" value="0.14947916666666666" />
+        <entry key="app/src/main/res/layout/activity_loading.xml" value="0.17291666666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="app/src/main/res/layout/contact_item.xml" value="0.2" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.1413373860182371" />

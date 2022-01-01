@@ -40,8 +40,13 @@ class JobsAdapter (private val context: Context): RecyclerView.Adapter<JobsAdapt
                 val popup = AlertDialog.Builder(context)
                 popup
                     .setMessage("Do you want to delete it?")
-                    .setPositiveButton("Yes", DialogInterface.OnClickListener { dialogInterface, i -> Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show(); delete(viewholder)})
-                    .setNegativeButton("No", DialogInterface.OnClickListener { dialogInterface, i -> Toast.makeText(context, "Cancel", Toast.LENGTH_SHORT).show() })
+                    .setPositiveButton("Yes", DialogInterface.OnClickListener { dialogInterface, i ->
+                        Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show()
+                        delete(viewholder)
+                    })
+                    .setNegativeButton("No", DialogInterface.OnClickListener { dialogInterface, i ->
+                        //Toast.makeText(context, "Cancel", Toast.LENGTH_SHORT).show()
+                    })
                 popup.show()
 
             }
