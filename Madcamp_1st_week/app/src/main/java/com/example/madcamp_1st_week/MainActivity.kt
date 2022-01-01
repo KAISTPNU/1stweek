@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
 
     private val firstFragment by lazy {FirstFragment()}
     private val secondFragment by lazy {SecondFragment()}
+    private val thirdFragment by lazy {ThirdFragment()}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity() {
          */
         supportFragmentManager.beginTransaction()
             .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
-            .replace(R.id.fragment, FirstFragment())
+            .replace(R.id.fragment, firstFragment)
             .commit()
     }
 
@@ -62,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                     if (currentFragment !is FirstFragment) {
                         supportFragmentManager.beginTransaction()
                             .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
-                            .replace(R.id.fragment, FirstFragment())
+                            .replace(R.id.fragment, firstFragment)
                             .commit()
                     }
                     true
@@ -71,19 +72,19 @@ class MainActivity : AppCompatActivity() {
                     if (currentFragment is FirstFragment) {
                         supportFragmentManager.beginTransaction()
                             .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
-                            .replace(R.id.fragment, SecondFragment())
+                            .replace(R.id.fragment, secondFragment)
                             .commit()
                     }
                     else if (currentFragment is ThirdFragment){
                         supportFragmentManager.beginTransaction()
                             .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
-                            .replace(R.id.fragment, SecondFragment())
+                            .replace(R.id.fragment, secondFragment)
                             .commit()
                     }
                     else if (currentFragment is FeedDetailFragment){
                         supportFragmentManager.beginTransaction()
                             .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
-                            .replace(R.id.fragment, SecondFragment())
+                            .replace(R.id.fragment, secondFragment)
                             .commit()
                     }
                     true
@@ -92,7 +93,7 @@ class MainActivity : AppCompatActivity() {
                     if (currentFragment !is ThirdFragment) {
                         supportFragmentManager.beginTransaction()
                             .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
-                            .replace(R.id.fragment, ThirdFragment())
+                            .replace(R.id.fragment, thirdFragment)
                             .commit()
                     }
                     true
