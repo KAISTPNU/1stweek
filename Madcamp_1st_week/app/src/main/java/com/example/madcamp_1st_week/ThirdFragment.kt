@@ -19,24 +19,61 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import java.time.Duration
+import java.time.LocalDate
+import java.time.LocalDate.of
+import java.util.*
+import java.util.EnumSet.of
+import kotlin.collections.ArrayList
 
 class ThirdFragment : Fragment() {
     private var _binding: FragmentThirdBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var projectAdapter: ProjectAdapter
+    val projectList = mutableListOf<ProjectItem>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentThirdBinding.inflate(inflater, container, false)
+        projectAdapter = ProjectAdapter(this.requireContext())
 
-        binding.projectItem.foldingCell.setOnClickListener(View.OnClickListener { view->
-            binding.projectItem.foldingCell.toggle(false)
-        })
-        var progressBarAnimation = ObjectAnimator
-            .ofInt(binding.projectItem.projectItemTitle.projectProgress, "progress", 0, 77)
-        progressBarAnimation.setDuration(1000)
-        progressBarAnimation.start()
+        for (i in 1..2) {
+            projectList.add(ProjectItem("MadCamp 1st Week Proj.",
+                                    "Python",
+                                       "Juhyeon Lee",
+                                         78,
+                                        LocalDate.of(2021, 12, 28),
+                                        LocalDate.of(2022, 1, 4)))
+        }
+        for (i in 1..2) {
+            projectList.add(ProjectItem("MadCamp 1st Week Proj.",
+                "Kotlin",
+                "Junyoung Lee",
+                78,
+                LocalDate.of(2021, 12, 28),
+                LocalDate.of(2022, 1, 4)))
+        }
+        projectAdapter.itemList = projectList
+        binding.projectList.adapter = projectAdapter
+
+
+//        binding.projectItem.foldingCell.setOnClickListener(View.OnClickListener { view->
+//            binding.projectItem.foldingCell.toggle(false)
+//        })
+//        var progressBarAnimation = ObjectAnimator
+//            .ofInt(binding.projectItem.projectItemTitle.projectProgress, "progress", 0, 77)
+//        progressBarAnimation.setDuration(1000)
+//        progressBarAnimation.start()
+//
+//        var projectItem = ProjectItem("MadCamp 1st Week Proj.",
+//                                       "Juhyeon Lee",
+//                                         78,
+//                                        LocalDate.of(2021, 12, 28),
+//                                        LocalDate.of(2022, 1, 4))
+//        binding.projectItem.projectItemTitle.projectDDay.text = ("D - " + projectItem.d_day.toString())
+
 
         return binding.root
     }

@@ -18,8 +18,7 @@
             android:layout_height="wrap_content"
             android:text="Project\nOverview"
             android:fontFamily="@font/uber_move_medium"
-            android:textSize="35dp"
-            android:textStyle="bold"
+            android:textSize="30dp"
             android:padding="10dp"/>
 
         <LinearLayout
@@ -71,16 +70,15 @@
         android:gravity="center"
         android:background="@color/lightgray"
         android:padding="10dp">
-<!--        <GridView-->
-<!--            android:id="@+id/feed_gallery_view"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:numColumns="3"-->
-<!--            android:layout_gravity="center_vertical"-->
-<!--            android:verticalSpacing="7dp"-->
-<!--            android:horizontalSpacing="7dp"/>-->
-        <include
-            android:id="@+id/project_item"
-            layout="@layout/project_item"/>
+        <ListView
+            android:id="@+id/project_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:dividerHeight="10dp"
+            android:divider="@android:color/transparent"/>
+<!--        <include-->
+<!--            android:id="@+id/project_item"-->
+<!--            layout="@layout/project_item"/>-->
     </LinearLayout>
 </LinearLayout>
