@@ -77,8 +77,5 @@
             android:layout_gravity="center_vertical"
             android:dividerHeight="10dp"
             android:divider="@android:color/transparent"/>
-<!--        <include-->
-<!--            android:id="@+id/project_item"-->
-<!--            layout="@layout/project_item"/>-->
     </LinearLayout>
 </LinearLayout>

@@ -59,22 +59,6 @@ class ThirdFragment : Fragment() {
         binding.projectList.adapter = projectAdapter
 
 
-//        binding.projectItem.foldingCell.setOnClickListener(View.OnClickListener { view->
-//            binding.projectItem.foldingCell.toggle(false)
-//        })
-//        var progressBarAnimation = ObjectAnimator
-//            .ofInt(binding.projectItem.projectItemTitle.projectProgress, "progress", 0, 77)
-//        progressBarAnimation.setDuration(1000)
-//        progressBarAnimation.start()
-//
-//        var projectItem = ProjectItem("MadCamp 1st Week Proj.",
-//                                       "Juhyeon Lee",
-//                                         78,
-//                                        LocalDate.of(2021, 12, 28),
-//                                        LocalDate.of(2022, 1, 4))
-//        binding.projectItem.projectItemTitle.projectDDay.text = ("D - " + projectItem.d_day.toString())
-
-
         return binding.root
     }
 
