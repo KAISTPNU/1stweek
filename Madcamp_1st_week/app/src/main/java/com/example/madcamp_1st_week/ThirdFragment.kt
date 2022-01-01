@@ -58,14 +58,13 @@ class ThirdFragment : Fragment() {
         projectAdapter.itemList = projectList
         binding.projectList.adapter = projectAdapter
 
-
+        initPieChart(binding.pieChart1)
+        setDataToPieChart(binding.pieChart1, 1400)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initPieChart(binding.pieChart1)
-        setDataToPieChart(binding.pieChart1, 1400)
 
         //initPieChart(binding.pieChart2)
         //setDataToPieChart(binding.pieChart2, 1400)

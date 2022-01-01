@@ -8,11 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.viewpager2.widget.ViewPager2
+import com.example.madcamp_1st_week.databinding.FragmentFeedDetailBinding
+import com.example.madcamp_1st_week.databinding.FragmentFirstBinding
+import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
+
 class FirstFragment : Fragment() {
+    private var _binding: FragmentFirstBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var jobsAdapter:JobsAdapter
 
@@ -122,10 +125,8 @@ class FirstFragment : Fragment() {
         }
 
 
-        val view = inflater.inflate(R.layout.fragment_first, null)
-
-        return view
-
+        _binding = FragmentFirstBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -139,53 +140,51 @@ class FirstFragment : Fragment() {
         jobsAdapter.pms = Companion.pmList
         jobsAdapter.etcs = Companion.etcList
 
-        val spinner = view.findViewById<Spinner>(R.id.dropbox)
+//        val spinner = view.findViewById<Spinner>(R.id.dropbox)
         val sAdapter = ArrayAdapter.createFromResource(this.requireContext(), R.array.job, android.R.layout.simple_spinner_item)
         sAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter = sAdapter
+        binding.dropbox.adapter = sAdapter
 
-        spinner.setSelection(0)
+        binding.dropbox.setSelection(0)
 
 
-        val image = view.findViewById<ImageView>(R.id.devImage)
+//        val image = view.findViewById<ImageView>(R.id.devImage)
         viewpagerView = view.findViewById<ViewPager2>(R.id.viewpager)
 
-
-
-        spinner.onItemSelectedListener = object:AdapterView.OnItemSelectedListener{
+        binding.dropbox.onItemSelectedListener = object:AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 when(position) {
                     //developer
                     0 -> {
-                        image.setImageResource(R.drawable.developer)
+                        binding.devImage.setImageResource(R.drawable.developer)
                         jobsAdapter.job = 0
                         viewpagerView.adapter=jobsAdapter
                         viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
                     }
                     //designer
                     1 -> {
-                        image.setImageResource(R.drawable.designer)
+                        binding.devImage.setImageResource(R.drawable.designer)
                         jobsAdapter.job = 1
                         viewpagerView.adapter=jobsAdapter
                         viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
                     }
                     // engineer
                     2 -> {
-                        image.setImageResource(R.drawable.engineer)
+                        binding.devImage.setImageResource(R.drawable.engineer)
                         jobsAdapter.job = 2
                         viewpagerView.adapter=jobsAdapter
                         viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
                     }
                     //pm
                     3 -> {
-                        image.setImageResource(R.drawable.pm)
+                        binding.devImage.setImageResource(R.drawable.pm)
                         jobsAdapter.job = 3
                         viewpagerView.adapter=jobsAdapter
                         viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
                     }
                     //etc
                     4 -> {
-                        image.setImageResource(R.drawable.etc)
+                        binding.devImage.setImageResource(R.drawable.etc)
                         jobsAdapter.job = 4
                         viewpagerView.adapter=jobsAdapter
                         viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
