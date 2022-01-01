@@ -18,15 +18,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment, FirstFragment())
-            .commit()
-
         initNavigationBar()
         initAddButton()
+
+        supportFragmentManager.beginTransaction()
+            .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+            .replace(R.id.fragment, FirstFragment())
+            .commit()
     }
 
     fun initAddButton() {
@@ -63,6 +65,12 @@ class MainActivity : AppCompatActivity() {
                     else if (currentFragment is ThirdFragment){
                         supportFragmentManager.beginTransaction()
                             .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+                            .replace(R.id.fragment, SecondFragment())
+                            .commit()
+                    }
+                    else if (currentFragment is FeedDetailFragment){
+                        supportFragmentManager.beginTransaction()
+                            .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
                             .replace(R.id.fragment, SecondFragment())
                             .commit()
                     }

@@ -90,7 +90,7 @@ class ThirdFragment : Fragment() {
         pieChart.holeRadius = 80f
         pieChart.transparentCircleRadius = 61f
         pieChart.isDrawHoleEnabled = true
-        pieChart.setHoleColor(ContextCompat.getColor(requireContext(), R.color.lightgray))
+        pieChart.setHoleColor(ContextCompat.getColor(requireContext(), R.color.white))
 
 
         //add text in center

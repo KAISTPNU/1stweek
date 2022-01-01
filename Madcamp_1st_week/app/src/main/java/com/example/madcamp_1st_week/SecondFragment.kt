@@ -60,9 +60,10 @@ class SecondFragment : Fragment() {
                 var bundle = Bundle()
                 bundle.putInt("img", selectedItem.resourceID)
                 feedDetailFragment.setArguments(bundle)
-                activity?.supportFragmentManager?.beginTransaction()
-                    ?.replace(R.id.fragment, feedDetailFragment)
-                    ?.commitAllowingStateLoss()
+                activity!!.supportFragmentManager.beginTransaction()
+                    .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                    .replace(R.id.fragment, feedDetailFragment)
+                    .commitAllowingStateLoss()
             }
         }
     }
