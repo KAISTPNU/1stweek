@@ -30,13 +30,16 @@ class ContactAddFragment : Fragment() {
         var name = jsonObj.getString("name")
         var email = jsonObj.getString("email")
         var phone = jsonObj.getString("phone")
-//        var job = jsonObj.getString("job")
+        var job = jsonObj.getString("job")
+        var detailjob = jsonObj.getString("detailjob")
+        var company = jsonObj.getString("company")
 
         binding.nameInput.setText(name)
         binding.emailInput.setText(email)
         binding.phoneInput.setText(phone)
-
-//        binding.jobInput.setText(job)
+        binding.jobInput.setText(job)
+        binding.detailJobInput.setText(detailjob)
+        binding.companyInput.setText(company)
     }
 
     fun initAddButton() {
@@ -48,21 +51,38 @@ class ContactAddFragment : Fragment() {
             var detailjob = binding.detailJobInput.text.toString()
             var company = binding.companyInput.text.toString()
 
-            if (job.uppercase().equals("DEVELOPER")) {
-                FirstFragment.developerList.add(FriendItem(name, phone, email, job, detailjob, company))
+            when(job.uppercase()) {
+                "DEVELOPER" -> FirstFragment.developerList
+                    .add(JobItem(name, phone, email, job, detailjob, company))
+
+                "DESIGNER" -> FirstFragment.designerList
+                    .add(JobItem(name, phone, email, job, detailjob, company))
+
+                "ENGINEER" -> FirstFragment.engineerList
+                    .add(JobItem(name, phone, email, job, detailjob, company))
+
+                "PM" -> FirstFragment.pmList
+                    .add(JobItem(name, phone, email, job, detailjob, company))
+
+                else -> FirstFragment.etcList
+                        .add(JobItem(name, phone, email, job, detailjob, company))
             }
-            else if (job.uppercase().equals("DESIGNER")) {
-                FirstFragment.designerList.add(FriendItem(name, phone, email, job, detailjob, company))
-            }
-            else if (job.uppercase().equals("ENGINEER")) {
-                FirstFragment.engineerList.add(FriendItem(name, phone, email, job, detailjob, company))
-            }
-            else if (job.uppercase().equals("PM")) {
-                FirstFragment.pmList.add(FriendItem(name, phone, email, job, detailjob, company))
-            }
-            else {
-                FirstFragment.etcList.add(FriendItem(name, phone, email, job, detailjob, company))
-            }
+
+//            if (job.uppercase().equals("DEVELOPER")) {
+//                FirstFragment.developerList.add(JobItem(name, phone, email, job, detailjob, company))
+//            }
+//            else if (job.uppercase().equals("DESIGNER")) {
+//                FirstFragment.designerList.add(JobItem(name, phone, email, job, detailjob, company))
+//            }
+//            else if (job.uppercase().equals("ENGINEER")) {
+//                FirstFragment.engineerList.add(JobItem(name, phone, email, job, detailjob, company))
+//            }
+//            else if (job.uppercase().equals("PM")) {
+//                FirstFragment.pmList.add(JobItem(name, phone, email, job, detailjob, company))
+//            }
+//            else {
+//                FirstFragment.etcList.add(JobItem(name, phone, email, job, detailjob, company))
+//            }
 
             activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.fragment, FirstFragment())

@@ -2,5 +2,7 @@
   "name": "Lores Ipsum",
   "email": "gild@somwhere.com",
   "phone": "010-1234-5678",
-  "job": "DEVELOPER"
+  "job": "DEVELOPER",
+  "detailjob": "Freshmen",
+  "company": "Line"
 }

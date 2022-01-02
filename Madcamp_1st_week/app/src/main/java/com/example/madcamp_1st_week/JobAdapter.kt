@@ -14,26 +14,23 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import android.content.DialogInterface
 import android.widget.Toast
-import androidx.fragment.app.findFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlin.system.exitProcess
 
 
-class JobsAdapter (private val context: Context): RecyclerView.Adapter<JobsAdapter.ViewHolder>(){
+class JobAdapter (private val context: Context): RecyclerView.Adapter<JobAdapter.ViewHolder>(){
 
-    var designers = mutableListOf<FriendItem>()
-    var developers = mutableListOf<FriendItem>()
-    var engineers = mutableListOf<FriendItem>()
-    var pms = mutableListOf<FriendItem>()
-    var etcs = mutableListOf<FriendItem>()
+    var designers = mutableListOf<JobItem>()
+    var developers = mutableListOf<JobItem>()
+    var engineers = mutableListOf<JobItem>()
+    var pms = mutableListOf<JobItem>()
+    var etcs = mutableListOf<JobItem>()
+
     var job: Int = 0
     private lateinit var deleteBtn : ImageButton
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JobsAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JobAdapter.ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.contact_item,parent,false)
         deleteBtn = view.findViewById<ImageButton>(R.id.delete)
-
         var viewholder = ViewHolder(view)
         deleteBtn.setOnClickListener(object: View.OnClickListener{
             override fun onClick(v: View?) {
@@ -74,6 +71,7 @@ class JobsAdapter (private val context: Context): RecyclerView.Adapter<JobsAdapt
         }
         return count
     }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         when(job) {
             0 -> holder.bind(developers[position])
@@ -84,7 +82,6 @@ class JobsAdapter (private val context: Context): RecyclerView.Adapter<JobsAdapt
         }
     }
 
-
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private val txtName: TextView = itemView.findViewById(R.id.name)
@@ -94,7 +91,7 @@ class JobsAdapter (private val context: Context): RecyclerView.Adapter<JobsAdapt
         private val txtCompany: TextView = itemView.findViewById(R.id.company)
 
         @SuppressLint("ResourceAsColor")
-        fun bind(item: FriendItem) {
+        fun bind(item: JobItem) {
             txtName.text = item.name
             txtPhone.text = item.phone
             txtEmail.text = item.email

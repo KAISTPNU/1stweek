@@ -1,6 +1,6 @@
 package com.example.madcamp_1st_week
 
-class FriendItem (var _name: String, var _phone: String, var _email: String, var _job: String, var _detailjob: String?, var _company: String)
+class JobItem (var _name: String, var _phone: String, var _email: String, var _job: String, var _detailjob: String?, var _company: String)
 {
 
     var name:String = _name

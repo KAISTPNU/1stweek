@@ -1,6 +1,6 @@
 package com.example.madcamp_1st_week
 
-import android.content.Intent
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,16 +9,26 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
-import com.example.madcamp_1st_week.databinding.FragmentFeedDetailBinding
 import com.example.madcamp_1st_week.databinding.FragmentFirstBinding
-import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 
 
 class FirstFragment : Fragment() {
     private var _binding: FragmentFirstBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var jobsAdapter:JobsAdapter
+    private lateinit var jobsAdapter:JobAdapter
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        initSampleData()
+    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,16 +40,14 @@ class FirstFragment : Fragment() {
          */
         requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.lightgray)
 
-
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
-        initSampleData()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        jobsAdapter = JobsAdapter(this.requireContext())
+        jobsAdapter = JobAdapter(this.requireContext())
 
         jobsAdapter.developers = Companion.developerList
         jobsAdapter.designers = Companion.designerList
@@ -47,15 +55,12 @@ class FirstFragment : Fragment() {
         jobsAdapter.pms = Companion.pmList
         jobsAdapter.etcs = Companion.etcList
 
-//        val spinner = view.findViewById<Spinner>(R.id.dropbox)
         val sAdapter = ArrayAdapter.createFromResource(this.requireContext(), R.array.job, android.R.layout.simple_spinner_item)
         sAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.dropbox.adapter = sAdapter
 
         binding.dropbox.setSelection(0)
 
-
-//        val image = view.findViewById<ImageView>(R.id.devImage)
         viewpagerView = view.findViewById<ViewPager2>(R.id.viewpager)
 
         binding.dropbox.onItemSelectedListener = object:AdapterView.OnItemSelectedListener {
@@ -67,6 +72,7 @@ class FirstFragment : Fragment() {
                         jobsAdapter.job = 0
                         viewpagerView.adapter=jobsAdapter
                         viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+                        binding.dotsIndicator.setViewPager2(viewpagerView)
                     }
                     //designer
                     1 -> {
@@ -74,6 +80,7 @@ class FirstFragment : Fragment() {
                         jobsAdapter.job = 1
                         viewpagerView.adapter=jobsAdapter
                         viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+                        binding.dotsIndicator.setViewPager2(viewpagerView)
                     }
                     // engineer
                     2 -> {
@@ -81,6 +88,7 @@ class FirstFragment : Fragment() {
                         jobsAdapter.job = 2
                         viewpagerView.adapter=jobsAdapter
                         viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+                        binding.dotsIndicator.setViewPager2(viewpagerView)
                     }
                     //pm
                     3 -> {
@@ -88,6 +96,7 @@ class FirstFragment : Fragment() {
                         jobsAdapter.job = 3
                         viewpagerView.adapter=jobsAdapter
                         viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+                        binding.dotsIndicator.setViewPager2(viewpagerView)
                     }
                     //etc
                     4 -> {
@@ -95,6 +104,7 @@ class FirstFragment : Fragment() {
                         jobsAdapter.job = 4
                         viewpagerView.adapter=jobsAdapter
                         viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+                        binding.dotsIndicator.setViewPager2(viewpagerView)
                     }
                 }
             }
@@ -105,78 +115,28 @@ class FirstFragment : Fragment() {
 
         }
 
-//        developerView.layoutManager = GridLayoutManager(activity, 3)
-//        developerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-//        designerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
     }
 
     fun initSampleData() {
-        for (i: Int in 1..1) {
+        developerList.clear()
+        designerList.clear()
+        engineerList.clear()
+        pmList.clear()
+        etcList.clear()
+
+        for (i: Int in 1..5) {
             Companion.developerList
-                .add(FriendItem("홍길동" + i,
+                .add(JobItem("홍길동" + i,
                     "010-1234-5678",
                     "testemail123@naver.com",
                     "DEVELOPER",
                     "PROGRAMMING",
                     "SAMSUNG"))
         }
-        for (i: Int in 3..5) {
-            Companion.developerList
-                .add(FriendItem("홍길동" + i,
-                    "010-1234-5678",
-                    "testemail123@naver.com",
-                    "DEVELOPER",
-                    "PROGRAMMING",
-                    "NAVER"))
-        }
-        for (i: Int in 6..6) {
-            Companion.developerList
-                .add(FriendItem("홍길동" + i,
-                    "010-1234-5678",
-                    "testemail123@naver.com",
-                    "DEVELOPER",
-                    "PROGRAMMING",
-                    "APPLE"))
-        }
-        for (i: Int in 7..7) {
-            Companion.developerList
-                .add(FriendItem("홍길동" + i,
-                    "010-1234-5678",
-                    "testemail123@naver.com",
-                    "DEVELOPER",
-                    "PROGRAMMING",
-                    "FACEBOOK"))
-        }
-        for (i: Int in 1..1) {
-            Companion.developerList
-                .add(FriendItem("홍길동" + i,
-                    "010-1234-5678",
-                    "testemail123@naver.com",
-                    "DEVELOPER",
-                    "PROGRAMMING",
-                    "KAKAO"))
-        }
-        for (i: Int in 1..2) {
-            Companion.developerList
-                .add(FriendItem("홍길동" + i,
-                    "010-1234-5678",
-                    "testemail123@naver.com",
-                    "DEVELOPER",
-                    "PROGRAMMING",
-                    "HYUNDAI"))
-        }
-        for (i: Int in 1..2) {
-            Companion.designerList
-                .add(FriendItem("김삼성" + i,
-                    "010-1234-5678",
-                    "testemail123@naver.com",
-                    "DEVELOPER",
-                    "PROGRAMMING",
-                    "SAMSUNG"))
-        }
+
         for (i: Int in 1..5) {
             Companion.designerList
-                .add(FriendItem("고길동" + i,
+                .add(JobItem("고길동" + i,
                     "010-1234-5678",
                     "testemail123@naver.com",
                     "DESIGNER",
@@ -185,7 +145,7 @@ class FirstFragment : Fragment() {
         }
         for (i: Int in 1..5) {
             Companion.engineerList
-                .add(FriendItem("침착맨" + i,
+                .add(JobItem("침착맨" + i,
                     "010-1234-5678",
                     "testemail123@naver.com",
                     "ENGINEER",
@@ -194,7 +154,7 @@ class FirstFragment : Fragment() {
         }
         for (i: Int in 1..5) {
             Companion.pmList
-                .add(FriendItem("기안" + i,
+                .add(JobItem("기안" + i,
                     "010-1234-5678",
                     "testemail123@naver.com",
                     "PM",
@@ -203,7 +163,7 @@ class FirstFragment : Fragment() {
         }
         for (i: Int in 1..5) {
             Companion.etcList
-                .add(FriendItem("누구" + i,
+                .add(JobItem("누구" + i,
                     "010-1234-5678",
                     "testemail123@naver.com",
                     "ETC",
@@ -213,13 +173,11 @@ class FirstFragment : Fragment() {
     }
 
     companion object {
-        val developerList = mutableListOf<FriendItem>()
-        val designerList = mutableListOf<FriendItem>()
-        val engineerList = mutableListOf<FriendItem>()
-        val pmList = mutableListOf<FriendItem>()
-        val etcList = mutableListOf<FriendItem>()
+        val developerList = mutableListOf<JobItem>()
+        val designerList = mutableListOf<JobItem>()
+        val engineerList = mutableListOf<JobItem>()
+        val pmList = mutableListOf<JobItem>()
+        val etcList = mutableListOf<JobItem>()
         lateinit var viewpagerView: ViewPager2
     }
-
-
 }
