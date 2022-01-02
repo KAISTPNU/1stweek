@@ -29,6 +29,8 @@ class MainActivity : AppCompatActivity() {
 
         initNavigationBar()
         initMenuButton()
+        initAddButton()
+        initMyProfileButton()
 
         /*
             애니메이션 실행을 위해선 setCustomAnimation() 함수 필요
@@ -45,45 +47,52 @@ class MainActivity : AppCompatActivity() {
     fun initMenuButton() {
         binding.menu.setOnClickListener{
             when(binding.myProfile.visibility) {
-                FloatingActionButton.INVISIBLE -> {
-
-                    binding.menu
-                        .startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_open_with_rotate))
-
-                    binding.add
-                        .startAnimation(AnimationUtils.loadAnimation(this, R.anim.dropdown_from_top))
-                    binding.add.visibility = FloatingActionButton.VISIBLE;
-
-                    binding.myProfile
-                        .startAnimation(AnimationUtils.loadAnimation(this, R.anim.dropdown_from_top))
-                    binding.myProfile.visibility = FloatingActionButton.VISIBLE;
-                    initAddButton()
-                }
-                FloatingActionButton.VISIBLE -> {
-                    binding.menu
-                        .startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_close_with_rotate))
-
-                    binding.add
-                        .startAnimation(AnimationUtils.loadAnimation(this, R.anim.dropdown_to_top))
-                    binding.add.visibility = FloatingActionButton.INVISIBLE;
-
-                    binding.myProfile
-                        .startAnimation(AnimationUtils.loadAnimation(this, R.anim.dropdown_to_top))
-                    binding.myProfile.visibility = FloatingActionButton.INVISIBLE;
-                }
+                FloatingActionButton.INVISIBLE -> openDropDownMenu()
+                FloatingActionButton.VISIBLE -> closeDropDownMenu()
             }
         }
     }
 
+    fun openDropDownMenu() {
+        binding.menu
+            .startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_open_with_rotate))
+
+        binding.add
+            .startAnimation(AnimationUtils.loadAnimation(this, R.anim.dropdown_from_top))
+        binding.add.visibility = FloatingActionButton.VISIBLE;
+
+        binding.myProfile
+            .startAnimation(AnimationUtils.loadAnimation(this, R.anim.dropdown_from_top))
+        binding.myProfile.visibility = FloatingActionButton.VISIBLE;
+    }
+
+    fun closeDropDownMenu() {
+        binding.menu
+            .startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_close_with_rotate))
+
+        binding.add
+            .startAnimation(AnimationUtils.loadAnimation(this, R.anim.dropdown_to_top))
+        binding.add.visibility = FloatingActionButton.INVISIBLE;
+
+        binding.myProfile
+            .startAnimation(AnimationUtils.loadAnimation(this, R.anim.dropdown_to_top))
+        binding.myProfile.visibility = FloatingActionButton.INVISIBLE;
+    }
+
     fun initAddButton() {
         binding.add.setOnClickListener {
+            closeDropDownMenu()
             val integrator = IntentIntegrator(this)
             integrator.setBarcodeImageEnabled(false)
             integrator.setBeepEnabled(false)
             integrator.setPrompt("화면에 QR 코드를 인식시켜주세요")
             integrator.initiateScan()
         }
+    }
+
+    fun initMyProfileButton() {
         binding.myProfile.setOnClickListener {
+            closeDropDownMenu()
             supportFragmentManager.beginTransaction()
                 .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
                 .replace(R.id.fragment, MyProfileFragment())
@@ -137,12 +146,24 @@ class MainActivity : AppCompatActivity() {
                             .replace(R.id.fragment, secondFragment)
                             .commit()
                     }
+                    else {
+                        supportFragmentManager.beginTransaction()
+                            .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                            .replace(R.id.fragment, secondFragment)
+                            .commit()
+                    }
                     true
                 }
                 R.id.nav_third -> {
-                    if (currentFragment !is ThirdFragment) {
+                    if (currentFragment is FirstFragment || currentFragment is SecondFragment) {
                         supportFragmentManager.beginTransaction()
                             .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
+                            .replace(R.id.fragment, thirdFragment)
+                            .commit()
+                    }
+                    else {
+                        supportFragmentManager.beginTransaction()
+                            .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
                             .replace(R.id.fragment, thirdFragment)
                             .commit()
                     }

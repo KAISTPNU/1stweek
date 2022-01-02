@@ -25,6 +25,8 @@ class MyProfileFragment : Fragment() {
     private var email:String? = null
     private var phone:String? = null
     private var job:String? = null
+    private var detailjob:String? = null
+    private var company:String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +38,9 @@ class MyProfileFragment : Fragment() {
             스마트폰 상태바의 색상을 바꿔서 마치 전체화면처럼 보이게 합니다
          */
         requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.lightgray)
+
+        binding.myProfileItem.delete.setImageResource(R.drawable.baseline_settings)
+        binding.myProfileItem.delete.setColorFilter(ContextCompat.getColor(requireContext(), R.color.black))
 
         return binding.root
     }
@@ -49,6 +54,8 @@ class MyProfileFragment : Fragment() {
         binding.myProfileItem.email.text = email
         binding.myProfileItem.phone.text = phone
         binding.myProfileItem.company.text = job
+        binding.myProfileItem.detailjob.text = detailjob
+        binding.myProfileItem.company.text = company
     }
 
     private fun changeCardViewBorderToBlack() {
@@ -63,12 +70,15 @@ class MyProfileFragment : Fragment() {
         email = jsonObject.getString("email")
         phone = jsonObject.getString("phone")
         job = jsonObject.getString("job")
+        detailjob = jsonObject.getString("detailjob")
+        company = jsonObject.getString("company")
     }
 
     private fun generateQRCode() {
         val barcodeEncoder = BarcodeEncoder()
         val bitmap = barcodeEncoder.encodeBitmap(jsonString, BarcodeFormat.QR_CODE, 512, 512)
         binding.myProfileItem.profile.setImageBitmap(bitmap)
-        binding.myProfileItem.profileCardView.radius = 5f
+        binding.myProfileItem.profileCardView.radius = 10f
     }
+
 }
