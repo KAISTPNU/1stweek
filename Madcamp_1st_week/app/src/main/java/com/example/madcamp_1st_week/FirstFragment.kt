@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.madcamp_1st_week.databinding.FragmentFeedDetailBinding
 import com.example.madcamp_1st_week.databinding.FragmentFirstBinding
@@ -23,6 +24,11 @@ class FirstFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        /*
+            스마트폰 상태바의 색상을 바꿔서 마치 전체화면처럼 보이게 합니다
+         */
+        requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.lightgray)
 
         for (i: Int in 1..1) {
             Companion.developerList
