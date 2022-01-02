@@ -22,6 +22,7 @@ import com.example.madcamp_1st_week.databinding.ProjectItemTitleBinding
 class ProjectAdapter(private val context: Context):
     BaseAdapter() {
     var itemList = mutableListOf<ProjectItem>()
+    private lateinit var todoAdapter: TodoAdapter
 
     override fun getCount(): Int {
         return itemList.size
@@ -38,6 +39,9 @@ class ProjectAdapter(private val context: Context):
     override fun getView(position: Int, view: View?, viewGroup: ViewGroup?): View {
         val projectItem = itemList[position] // 현재 ProjectItem을 가져옴
 
+        todoAdapter = TodoAdapter(context)
+        todoAdapter.todoList = projectItem.todo
+
         var projectItemBinding = ProjectItemBinding.inflate(LayoutInflater.from(context)) // view 처리를 위한 Binding
 
         projectItemBinding.projectItemBeforeFolding.projectTitle.text = projectItem.title
@@ -47,7 +51,15 @@ class ProjectAdapter(private val context: Context):
         projectItemBinding.projectItemBeforeFolding.projectLeader.text = projectItem.leader
         projectItemBinding.projectItemBeforeFolding.projectDDay.text = "D - " + projectItem.d_day.toString()
 
+        projectItemBinding.projectItemAfterFolding.name.text = projectItem.leader
+        projectItemBinding.projectItemAfterFolding.phone.text = projectItem.phone
+        projectItemBinding.projectItemAfterFolding.participants.text = projectItem.participants
+
         setProjectProgressBar(projectItemBinding.projectItemBeforeFolding, projectItem.status)
+
+        projectItemBinding.projectItemAfterFolding.todoList.adapter = todoAdapter
+
+
 
         projectItemBinding.foldingCell.setOnClickListener(View.OnClickListener { view->
             projectItemBinding.foldingCell.toggle(false)
@@ -59,12 +71,16 @@ class ProjectAdapter(private val context: Context):
                     .setBackgroundColor(ContextCompat.getColor(context, R.color.samsung))
                 projectItemBinding.projectItemBeforeFolding.projectProgress.progressTintList = ColorStateList
                     .valueOf(ContextCompat.getColor(context, R.color.samsung))
+                projectItemBinding.projectItemAfterFolding.projectTitleBorder
+                    .setBackgroundColor(ContextCompat.getColor(context, R.color.samsung))
             }
             "Kotlin" -> {
                 projectItemBinding.projectItemBeforeFolding.projectTitleBorder
                     .setBackgroundColor(ContextCompat.getColor(context, R.color.kakao))
                 projectItemBinding.projectItemBeforeFolding.projectProgress.progressTintList = ColorStateList
                     .valueOf(ContextCompat.getColor(context, R.color.kakao))
+                projectItemBinding.projectItemAfterFolding.projectTitleBorder
+                    .setBackgroundColor(ContextCompat.getColor(context, R.color.kakao))
             }
         }
 
