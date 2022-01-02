@@ -51,7 +51,14 @@ class ThirdFragment : Fragment() {
                                        "Juhyeon Lee",
                                          78,
                                         LocalDate.of(2021, 12, 28),
-                                        LocalDate.of(2022, 1, 4)))
+                                        LocalDate.of(2022, 1, 4),
+                                        "Juhyeon Lee, Junyoung Lee",
+                                        mutableListOf<String>("Make Tap for collecting at least 20 pictures"),
+                                        "testemail@naver.com",
+                                        "010-1234-5678"
+
+
+            ))
         }
         for (i in 1..2) {
             projectList.add(ProjectItem("MadCamp 1st Week Proj.",
@@ -59,7 +66,11 @@ class ThirdFragment : Fragment() {
                 "Junyoung Lee",
                 78,
                 LocalDate.of(2021, 12, 28),
-                LocalDate.of(2022, 1, 4)))
+                LocalDate.of(2022, 1, 4),
+                "Juhyeon Lee, Junyoung Lee",
+                mutableListOf("Make Tap for collecting at least 20 pictures"),
+                "testemail@naver.com",
+                "010-1234-5678"))
         }
         projectAdapter.itemList = projectList
         binding.projectList.adapter = projectAdapter

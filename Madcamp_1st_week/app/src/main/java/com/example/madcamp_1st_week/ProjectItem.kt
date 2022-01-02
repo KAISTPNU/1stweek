@@ -13,6 +13,11 @@ data class ProjectItem (var title: String,
                         var leader: String,
                         var status: Int,
                         var start_date: LocalDate,
-                        var end_date: LocalDate,) {
+                        var end_date: LocalDate,
+                        var participants: String,
+                        var todo: MutableList<String>,
+                        var email: String,
+                        var phone: String,
+) {
     var d_day: Int = ChronoUnit.DAYS.between(LocalDate.now(), end_date).toInt()
 }
