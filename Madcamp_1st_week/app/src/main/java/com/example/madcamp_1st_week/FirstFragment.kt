@@ -30,14 +30,95 @@ class FirstFragment : Fragment() {
          */
         requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.lightgray)
 
+
+        _binding = FragmentFirstBinding.inflate(inflater, container, false)
+        initSampleData()
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        jobsAdapter = JobsAdapter(this.requireContext())
+
+        jobsAdapter.developers = Companion.developerList
+        jobsAdapter.designers = Companion.designerList
+        jobsAdapter.engineers = Companion.engineerList
+        jobsAdapter.pms = Companion.pmList
+        jobsAdapter.etcs = Companion.etcList
+
+//        val spinner = view.findViewById<Spinner>(R.id.dropbox)
+        val sAdapter = ArrayAdapter.createFromResource(this.requireContext(), R.array.job, android.R.layout.simple_spinner_item)
+        sAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.dropbox.adapter = sAdapter
+
+        binding.dropbox.setSelection(0)
+
+
+//        val image = view.findViewById<ImageView>(R.id.devImage)
+        viewpagerView = view.findViewById<ViewPager2>(R.id.viewpager)
+
+        binding.dropbox.onItemSelectedListener = object:AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                when(position) {
+                    //developer
+                    0 -> {
+                        binding.devImage.setImageResource(R.drawable.developer)
+                        jobsAdapter.job = 0
+                        viewpagerView.adapter=jobsAdapter
+                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+                    }
+                    //designer
+                    1 -> {
+                        binding.devImage.setImageResource(R.drawable.designer)
+                        jobsAdapter.job = 1
+                        viewpagerView.adapter=jobsAdapter
+                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+                    }
+                    // engineer
+                    2 -> {
+                        binding.devImage.setImageResource(R.drawable.engineer)
+                        jobsAdapter.job = 2
+                        viewpagerView.adapter=jobsAdapter
+                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+                    }
+                    //pm
+                    3 -> {
+                        binding.devImage.setImageResource(R.drawable.pm)
+                        jobsAdapter.job = 3
+                        viewpagerView.adapter=jobsAdapter
+                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+                    }
+                    //etc
+                    4 -> {
+                        binding.devImage.setImageResource(R.drawable.etc)
+                        jobsAdapter.job = 4
+                        viewpagerView.adapter=jobsAdapter
+                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+                    }
+                }
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
+
+//        developerView.layoutManager = GridLayoutManager(activity, 3)
+//        developerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+//        designerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+    }
+
+    fun initSampleData() {
         for (i: Int in 1..1) {
             Companion.developerList
                 .add(FriendItem("홍길동" + i,
-                                "010-1234-5678",
-                                "testemail123@naver.com",
-                                "DEVELOPER",
-                                "PROGRAMMING",
-                                "SAMSUNG"))
+                    "010-1234-5678",
+                    "testemail123@naver.com",
+                    "DEVELOPER",
+                    "PROGRAMMING",
+                    "SAMSUNG"))
         }
         for (i: Int in 3..5) {
             Companion.developerList
@@ -129,84 +210,6 @@ class FirstFragment : Fragment() {
                     "PROGRAMMING",
                     "SAMSUNG"))
         }
-
-
-        _binding = FragmentFirstBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        jobsAdapter = JobsAdapter(this.requireContext())
-
-        jobsAdapter.developers = Companion.developerList
-        jobsAdapter.designers = Companion.designerList
-        jobsAdapter.engineers = Companion.engineerList
-        jobsAdapter.pms = Companion.pmList
-        jobsAdapter.etcs = Companion.etcList
-
-//        val spinner = view.findViewById<Spinner>(R.id.dropbox)
-        val sAdapter = ArrayAdapter.createFromResource(this.requireContext(), R.array.job, android.R.layout.simple_spinner_item)
-        sAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.dropbox.adapter = sAdapter
-
-        binding.dropbox.setSelection(0)
-
-
-//        val image = view.findViewById<ImageView>(R.id.devImage)
-        viewpagerView = view.findViewById<ViewPager2>(R.id.viewpager)
-
-        binding.dropbox.onItemSelectedListener = object:AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                when(position) {
-                    //developer
-                    0 -> {
-                        binding.devImage.setImageResource(R.drawable.developer)
-                        jobsAdapter.job = 0
-                        viewpagerView.adapter=jobsAdapter
-                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
-                    }
-                    //designer
-                    1 -> {
-                        binding.devImage.setImageResource(R.drawable.designer)
-                        jobsAdapter.job = 1
-                        viewpagerView.adapter=jobsAdapter
-                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
-                    }
-                    // engineer
-                    2 -> {
-                        binding.devImage.setImageResource(R.drawable.engineer)
-                        jobsAdapter.job = 2
-                        viewpagerView.adapter=jobsAdapter
-                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
-                    }
-                    //pm
-                    3 -> {
-                        binding.devImage.setImageResource(R.drawable.pm)
-                        jobsAdapter.job = 3
-                        viewpagerView.adapter=jobsAdapter
-                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
-                    }
-                    //etc
-                    4 -> {
-                        binding.devImage.setImageResource(R.drawable.etc)
-                        jobsAdapter.job = 4
-                        viewpagerView.adapter=jobsAdapter
-                        viewpagerView.orientation=ViewPager2.ORIENTATION_HORIZONTAL
-                    }
-                }
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-
-        }
-
-//        developerView.layoutManager = GridLayoutManager(activity, 3)
-//        developerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-//        designerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
     }
 
     companion object {
