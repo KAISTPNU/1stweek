@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
         binding.myProfile.setOnClickListener {
             closeDropDownMenu()
             supportFragmentManager.beginTransaction()
-                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                .setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_bottom)
                 .replace(R.id.fragment, MyProfileFragment())
                 .commit()
         }
@@ -114,7 +114,7 @@ class MainActivity : AppCompatActivity() {
                     if (currentFragment !is FirstFragment) {
                         if (currentFragment is MyProfileFragment) {
                             supportFragmentManager.beginTransaction()
-                                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                                .setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_top)
                                 .replace(R.id.fragment, firstFragment)
                                 .commit()
                         }
@@ -148,7 +148,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     else {
                         supportFragmentManager.beginTransaction()
-                            .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                            .setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_top)
                             .replace(R.id.fragment, secondFragment)
                             .commit()
                     }
@@ -163,7 +163,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     else {
                         supportFragmentManager.beginTransaction()
-                            .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                            .setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_top)
                             .replace(R.id.fragment, thirdFragment)
                             .commit()
                     }

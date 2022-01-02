@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:folding-cell="http://schemas.android.com/apk/res-auto">
+    xmlns:folding-cell="http://schemas.android.com/apk/res-auto"
+    xmlns:layout="http://schemas.android.com/tools">
     <com.ramotion.foldingcell.FoldingCell
         android:id="@+id/folding_cell"
         android:layout_width="match_parent"
