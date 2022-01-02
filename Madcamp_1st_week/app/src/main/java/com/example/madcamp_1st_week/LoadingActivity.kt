@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.madcamp_1st_week.MainActivity
 import com.example.madcamp_1st_week.databinding.ActivityLoadingBinding
@@ -16,6 +17,12 @@ class LoadingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        /*
+            스마트폰 상태바의 색상을 바꿔서 마치 전체화면처럼 보이게 합니다
+         */
+        this.window.statusBarColor = ContextCompat.getColor(this, R.color.darknavy)
+
         _binding = ActivityLoadingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
