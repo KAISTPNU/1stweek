@@ -2,11 +2,15 @@ package com.example.madcamp_1st_week
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.madcamp_1st_week.databinding.ActivityMainBinding
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.zxing.integration.android.IntentIntegrator
 
 class MainActivity : AppCompatActivity() {
@@ -24,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initNavigationBar()
-        initAddButton()
+        initMenuButton()
 
         /*
             애니메이션 실행을 위해선 setCustomAnimation() 함수 필요
@@ -38,8 +42,41 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
+    fun initMenuButton() {
+        binding.menu.setOnClickListener{
+            when(binding.myProfile.visibility) {
+                FloatingActionButton.INVISIBLE -> {
+
+                    binding.menu
+                        .startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_open_with_rotate))
+
+                    binding.add
+                        .startAnimation(AnimationUtils.loadAnimation(this, R.anim.dropdown_from_top))
+                    binding.add.visibility = FloatingActionButton.VISIBLE;
+
+                    binding.myProfile
+                        .startAnimation(AnimationUtils.loadAnimation(this, R.anim.dropdown_from_top))
+                    binding.myProfile.visibility = FloatingActionButton.VISIBLE;
+                    initAddButton()
+                }
+                FloatingActionButton.VISIBLE -> {
+                    binding.menu
+                        .startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_close_with_rotate))
+
+                    binding.add
+                        .startAnimation(AnimationUtils.loadAnimation(this, R.anim.dropdown_to_top))
+                    binding.add.visibility = FloatingActionButton.INVISIBLE;
+
+                    binding.myProfile
+                        .startAnimation(AnimationUtils.loadAnimation(this, R.anim.dropdown_to_top))
+                    binding.myProfile.visibility = FloatingActionButton.INVISIBLE;
+                }
+            }
+        }
+    }
+
     fun initAddButton() {
-        binding.add.setOnClickListener{
+        binding.add.setOnClickListener {
             val integrator = IntentIntegrator(this)
             integrator.setBarcodeImageEnabled(false)
             integrator.setBeepEnabled(false)
@@ -47,7 +84,6 @@ class MainActivity : AppCompatActivity() {
             integrator.initiateScan()
         }
     }
-
 
     fun initNavigationBar() {
         binding.navBar.setOnItemSelectedListener { item->
