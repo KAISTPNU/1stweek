@@ -83,6 +83,12 @@ class MainActivity : AppCompatActivity() {
             integrator.setPrompt("화면에 QR 코드를 인식시켜주세요")
             integrator.initiateScan()
         }
+        binding.myProfile.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                .replace(R.id.fragment, MyProfileFragment())
+                .commit()
+        }
     }
 
     fun initNavigationBar() {
@@ -97,10 +103,18 @@ class MainActivity : AppCompatActivity() {
             when(item.itemId) {
                 R.id.nav_first -> {
                     if (currentFragment !is FirstFragment) {
-                        supportFragmentManager.beginTransaction()
-                            .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
-                            .replace(R.id.fragment, firstFragment)
-                            .commit()
+                        if (currentFragment is MyProfileFragment) {
+                            supportFragmentManager.beginTransaction()
+                                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                                .replace(R.id.fragment, firstFragment)
+                                .commit()
+                        }
+                        else {
+                            supportFragmentManager.beginTransaction()
+                                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+                                .replace(R.id.fragment, firstFragment)
+                                .commit()
+                        }
                     }
                     true
                 }
