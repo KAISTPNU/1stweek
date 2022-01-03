@@ -39,6 +39,7 @@ class TodoAdapter (private val context: Context): RecyclerView.Adapter<TodoAdapt
 //                        setDataToPieChart(ProjectAdapter.fragment.projectItemAfterFolding.chart, 1400)
 //                        ProjectAdapter.fragment.projectItemAfterFolding.chart.invalidate()
 
+
                     }
                     false -> {
                         todoBinding.todoText.setTextColor(ContextCompat.getColor(context, R.color.darknavy))
