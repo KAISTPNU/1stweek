@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.18802083333333333" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.258974358974359" />
         <entry key="app/src/main/res/drawable/app_logo.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/drawable/baseline_menu_18.xml" value="0.13125" />
@@ -24,12 +25,15 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="app/src/main/res/layout/contact_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.1413373860182371" />
+        <entry key="app/src/main/res/layout/dialog_item.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/dialog_select_item.xml" value="0.3509963768115942" />
         <entry key="app/src/main/res/layout/feed_gallery_item.xml" value="0.20923913043478262" />
         <entry key="app/src/main/res/layout/feed_item.xml" value="0.22780797101449277" />
         <entry key="app/src/main/res/layout/fragment_add_contact.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_feed_detail.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.22826086956521738" />
         <entry key="app/src/main/res/layout/fragment_my_profile.xml" value="0.221875" />
+        <entry key="app/src/main/res/layout/fragment_my_profile_modify.xml" value="0.18614130434782608" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_third.xml" value="0.125" />
         <entry key="app/src/main/res/layout/horizontal_bar.xml" value="0.19384057971014493" />
@@ -39,10 +43,10 @@
         <entry key="app/src/main/res/layout/project_item_backside.xml" value="0.276013143483023" />
         <entry key="app/src/main/res/layout/project_item_title.xml" value="0.4722222222222222" />
         <entry key="app/src/main/res/layout/project_item_title_left.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/project_todo.xml" value="0.3602150537634409" />
+        <entry key="app/src/main/res/layout/project_todo.xml" value="0.34693089166474406" />
         <entry key="app/src/main/res/layout/recent_image_item.xml" value="0.12552083333333333" />
         <entry key="app/src/main/res/layout/recent_image_itme.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/test.xml" value="0.1296875" />
+        <entry key="app/src/main/res/layout/test.xml" value="0.335" />
         <entry key="app/src/main/res/layout/verical_bar.xml" value="0.10280797101449275" />
         <entry key="app/src/main/res/layout/vertical_bar.xml" value="0.17391304347826086" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.2875" />

@@ -32,10 +32,13 @@ class ProjectAdapter(private val context: Context):
 
     private lateinit var viewpagerBinding : ProjectItemBinding
     var itemList = mutableListOf<ProjectItem>()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectAdapter.ViewHolder {
         viewpagerBinding = ProjectItemBinding.inflate(LayoutInflater.from(context), parent, false)
+        projectItemBinding = viewpagerBinding
 
-//        val view = LayoutInflater.from(context).inflate(R.layout.project_item, parent, false)
+
+        val view = LayoutInflater.from(context).inflate(R.layout.project_item, parent, false)
 //        fragment.add(viewpagerBinding)
         return ViewHolder(viewpagerBinding)
     }
@@ -48,17 +51,8 @@ class ProjectAdapter(private val context: Context):
         return itemList.size
     }
 
+
     inner class ViewHolder(binding : ProjectItemBinding) : RecyclerView.ViewHolder(binding.root) {
-//        private val title: TextView = itemView.findViewById(R.id.project_title)
-//        private val backname: TextView = itemView.findViewById(R.id.leader_name)
-//        private val frontname: TextView = itemView.findViewById(R.id.project_leader)
-//        private val dday: TextView = itemView.findViewById(R.id.project_d_day)
-//        private val phone: TextView = itemView.findViewById(R.id.phone)
-//        private val email: TextView = itemView.findViewById(R.id.email)
-//        private val participants: TextView = itemView.findViewById(R.id.participants)
-//        private val chart: PieChart = itemView.findViewById(R.id.chart)
-//        private val todo: RecyclerView = itemView.findViewById(R.id.todoList)
-//        private val fold: FoldingCell = itemView.findViewById(R.id.folding_cell)
         private val title: TextView = binding.projectItemBeforeFolding.projectTitle
         private val backname: TextView = binding.projectItemAfterFolding.leaderName
         private val frontname: TextView = binding.projectItemBeforeFolding.projectLeader
@@ -119,7 +113,6 @@ class ProjectAdapter(private val context: Context):
             listen(cb3, chart)
             listen(cb4, chart)
             listen(cb5, chart)
-
         }
         fun listen(cb: CheckBox, chart: PieChart) {
             cb.setOnClickListener(object: View.OnClickListener{
@@ -154,6 +147,7 @@ class ProjectAdapter(private val context: Context):
         pieChart.setDrawEntryLabels(false)
         pieChart.legend.orientation = Legend.LegendOrientation.VERTICAL
         pieChart.legend.isWordWrapEnabled = true
+
     }
 
     fun setDataToPieChart(pieChart: PieChart, duration:Int, checkedNum: Int) {
@@ -195,6 +189,9 @@ class ProjectAdapter(private val context: Context):
         pieChart.setCenterTextSize(12f)
 
         pieChart.invalidate()
+    }
+    companion object {
+        lateinit var projectItemBinding: ProjectItemBinding
     }
 }
 

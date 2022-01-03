@@ -1,5 +1,7 @@
 package com.example.madcamp_1st_week
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -51,45 +53,27 @@ class ContactAddFragment : Fragment() {
             var detailjob = binding.detailJobInput.text.toString()
             var company = binding.companyInput.text.toString()
 
-            when(job.uppercase()) {
-                "DEVELOPER" -> FirstFragment.developerList
-                    .add(ProfileItem(name, phone, email, job, detailjob, company))
+            var bundle: Bundle = Bundle()
+            var jsonObject = JSONObject()
+            jsonObject.put("name", name)
+            jsonObject.put("email", email)
+            jsonObject.put("phone", phone)
+            jsonObject.put("job", job)
+            jsonObject.put("detailjob", detailjob)
+            jsonObject.put("company", company)
 
-                "DESIGNER" -> FirstFragment.designerList
-                    .add(ProfileItem(name, phone, email, job, detailjob, company))
+            bundle.putString("profile", jsonObject.toString())
+            var firstFragment = FirstFragment()
+            firstFragment.arguments = bundle
 
-                "ENGINEER" -> FirstFragment.engineerList
-                    .add(ProfileItem(name, phone, email, job, detailjob, company))
-
-                "PM" -> FirstFragment.pmList
-                    .add(ProfileItem(name, phone, email, job, detailjob, company))
-
-                else -> FirstFragment.etcList
-                        .add(ProfileItem(name, phone, email, job, detailjob, company))
+            val dialog = ProfileAddDialog(this.requireContext())
+            dialog.setOnOKClickedListener{
+                activity?.supportFragmentManager?.beginTransaction()
+                    ?.setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                    ?.replace(R.id.fragment, firstFragment)
+                    ?.commitAllowingStateLoss()
             }
-
-//            if (job.uppercase().equals("DEVELOPER")) {
-//                FirstFragment.developerList.add(JobItem(name, phone, email, job, detailjob, company))
-//            }
-//            else if (job.uppercase().equals("DESIGNER")) {
-//                FirstFragment.designerList.add(JobItem(name, phone, email, job, detailjob, company))
-//            }
-//            else if (job.uppercase().equals("ENGINEER")) {
-//                FirstFragment.engineerList.add(JobItem(name, phone, email, job, detailjob, company))
-//            }
-//            else if (job.uppercase().equals("PM")) {
-//                FirstFragment.pmList.add(JobItem(name, phone, email, job, detailjob, company))
-//            }
-//            else {
-//                FirstFragment.etcList.add(JobItem(name, phone, email, job, detailjob, company))
-//            }
-
-            activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.fragment, FirstFragment())
-                ?.disallowAddToBackStack()
-                ?.commitAllowingStateLoss()
-
-            Toast.makeText(activity,"[" + name + "] is added!", Toast.LENGTH_SHORT).show()
+            dialog.start("dsf")
         }
     }
 
