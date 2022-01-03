@@ -14,17 +14,27 @@
         android:gravity="center"
         android:background="@color/white">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="50dp"
-            android:layout_marginTop="20dp">
-            <ImageView
-                android:id="@+id/feed_profile_img"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/profile"/>
-        </androidx.cardview.widget.CardView>
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="100dp"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            app:cardCornerRadius="10dp">-->
+<!--            <ImageView-->
+<!--                android:id="@+id/feed_profile_img"-->
+<!--                android:layout_width="100dp"-->
+<!--                android:layout_height="100dp"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:scaleType="centerCrop"-->
+<!--                android:src="@drawable/mol"/>-->
+<!--        </androidx.cardview.widget.CardView>-->
+        <ImageView
+            android:id="@+id/feed_profile_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp"
+            android:elevation="20dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/mol"/>
 
         <TextView
             android:id="@+id/feed_profile_name"
@@ -32,7 +42,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/uber_move_medium"
             android:paddingTop="5dp"
-            android:text="Byeongkyu Chang"
+            android:text="2021   MadCamp"
             android:textAlignment="center"
             android:textSize="20dp"
             android:textStyle="bold" />
@@ -41,7 +51,7 @@
             android:id="@+id/feed_profile_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Founder Of Krafton"
+            android:text="KAIST, Daejeon"
             android:fontFamily="@font/uber_move_medium"
             android:textAlignment="center"
             android:textSize="15dp" />
@@ -60,7 +70,7 @@
                     android:id="@+id/feed_created"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="23"
+                    android:text="78"
                     android:fontFamily="@font/uber_move_medium"
                     android:textAlignment="center"
                     android:textSize="20dp"
@@ -69,7 +79,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Created"
+                    android:text="Participants"
                     android:fontFamily="@font/uber_move_medium"
                     android:textAlignment="center"
                     android:textSize="15dp" />

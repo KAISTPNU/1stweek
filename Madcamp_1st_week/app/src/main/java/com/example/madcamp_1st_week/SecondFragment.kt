@@ -25,7 +25,6 @@ class SecondFragment : Fragment() {
     ): View? {
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
 
-        // 스마트폰 상태바의 색상을 바꿔서 마치 전체화면처럼 보이게 합니다
         requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.white)
 
         return binding.root
@@ -35,6 +34,7 @@ class SecondFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         feedAdapter = FeedAdapter(this.requireContext())
+        feedImageList.clear()
 
         for (i in 1..5) {
             feedImageList.add(FeedItem(R.drawable.test_1, "123"))
@@ -52,7 +52,6 @@ class SecondFragment : Fragment() {
             feedImageList.add(FeedItem(R.drawable.test_13, "123"))
             feedImageList.add(FeedItem(R.drawable.test_14, "123"))
         }
-
 
         feedAdapter.itemList = feedImageList
         binding.feedGalleryView.adapter = feedAdapter

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.animation.AnimationUtils
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -97,12 +98,7 @@ class MainActivity : AppCompatActivity() {
     fun initNavigationBar() {
         binding.navBar.setOnItemSelectedListener { item->
             var currentFragment: Fragment? = supportFragmentManager.findFragmentById(R.id.fragment)
-
-            /*
-                아래의 when {} 내부에 있는 조건문들은
-                현재 Fragment가 어떤 것인지에 따라 적용해야하는 애니메이션이 다르기 때문에
-                그 부분을 처리하기 위한 조건문입니다
-             */
+            if (binding.myProfile.visibility == ImageButton.VISIBLE) closeDropDownMenu()
             when(item.itemId) {
                 R.id.nav_first -> {
                     if (currentFragment !is FirstFragment) {
