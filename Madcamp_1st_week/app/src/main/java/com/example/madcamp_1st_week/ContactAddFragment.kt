@@ -51,26 +51,22 @@ class ContactAddFragment : Fragment() {
             var detailjob = binding.detailJobInput.text.toString()
             var company = binding.companyInput.text.toString()
 
-            when(job.uppercase()) {
-//                "DEVELOPER" -> FirstFragment.developerList
-//                    .add(ProfileItem(name, phone, email, job, detailjob, company))
-//
-//                "DESIGNER" -> FirstFragment.designerList
-//                    .add(ProfileItem(name, phone, email, job, detailjob, company))
-//
-//                "ENGINEER" -> FirstFragment.engineerList
-//                    .add(ProfileItem(name, phone, email, job, detailjob, company))
-//
-//                "PM" -> FirstFragment.pmList
-//                    .add(ProfileItem(name, phone, email, job, detailjob, company))
-//
-//                else -> FirstFragment.etcList
-//                        .add(ProfileItem(name, phone, email, job, detailjob, company))
-            }
+            var bundle: Bundle = Bundle()
+            var jsonObject = JSONObject()
+            jsonObject.put("name", name)
+            jsonObject.put("email", email)
+            jsonObject.put("phone", phone)
+            jsonObject.put("job", job)
+            jsonObject.put("detailjob", detailjob)
+            jsonObject.put("company", company)
+
+            bundle.putString("profile", jsonObject.toString())
+            var firstFragment = FirstFragment()
+            firstFragment.arguments = bundle
 
             activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.fragment, FirstFragment())
-                ?.disallowAddToBackStack()
+                ?.setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                ?.replace(R.id.fragment, firstFragment)
                 ?.commitAllowingStateLoss()
 
             Toast.makeText(activity,"[" + name + "] is added!", Toast.LENGTH_SHORT).show()

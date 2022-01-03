@@ -35,15 +35,16 @@ class TodoAdapter (private val context: Context): RecyclerView.Adapter<TodoAdapt
                         todoBinding.todoText.setTextColor(ContextCompat.getColor(context, R.color.gray))
                         checkedNum += 1
 
-                        setDataToPieChart(ProjectAdapter.fragment.projectItemAfterFolding.chart, 1400)
-                        ProjectAdapter.fragment.projectItemAfterFolding.chart.invalidate()
-
+//                        setDataToPieChart(ProjectAdapter.fragment.projectItemAfterFolding.chart, 1400)
+//                        ProjectAdapter.fragment.projectItemAfterFolding.chart.invalidate()
+                        notifyDataSetChanged()
                     }
                     false -> {
                         todoBinding.todoText.setTextColor(ContextCompat.getColor(context, R.color.darknavy))
                         checkedNum -= 1
-                        setDataToPieChart(ProjectAdapter.fragment.projectItemAfterFolding.chart, 1400)
-                        ProjectAdapter.fragment.projectItemAfterFolding.chart.invalidate()
+//                        setDataToPieChart(ProjectAdapter.fragment.projectItemAfterFolding.chart, 1400)
+//                        ProjectAdapter.fragment.projectItemAfterFolding.chart.invalidate()
+                        notifyDataSetChanged()
                     }
                 }
             }
@@ -55,46 +56,46 @@ class TodoAdapter (private val context: Context): RecyclerView.Adapter<TodoAdapt
         return (checkedNum.toFloat()/ProjectAdapter.total) * 100
     }
 
-    fun setDataToPieChart(pieChart: PieChart, duration:Int) {
-        pieChart.setUsePercentValues(true)
-        val dataEntries = ArrayList<PieEntry>()
-
-        println("checkedNum : ${checkedNum}")
-        var did = ((checkedNum.toFloat()/ProjectAdapter.total) * 100)
-        var notdid = (100-did)
-        println("did : ${did}")
-        dataEntries.add(PieEntry(did, ""))
-        dataEntries.add(PieEntry(notdid, ""))
-
-        val colors: ArrayList<Int> = ArrayList()
-        colors.add(ContextCompat.getColor(context, R.color.samsung))
-        colors.add(ContextCompat.getColor(context, R.color.gray))
-
-        val dataSet = PieDataSet(dataEntries, "")
-        val data = PieData(dataSet)
-
-        // In Percentage
-        data.setValueFormatter(PercentFormatter())
-        dataSet.sliceSpace = 0f
-        dataSet.colors = colors
-        pieChart.data = data
-        data.setValueTextSize(0f)
-        pieChart.setExtraOffsets(5f, 10f, 5f, 5f)
-        pieChart.animateY(duration, Easing.EaseInOutQuad)
-
-        //create hole in center
-        pieChart.holeRadius = 80f
-        pieChart.transparentCircleRadius = 61f
-        pieChart.isDrawHoleEnabled = true
-        pieChart.setHoleColor(ContextCompat.getColor(context, R.color.white))
-
-
-        //add text in center
-        pieChart.setDrawCenterText(true);
-        pieChart.setCenterTextSize(12f)
-
-        pieChart.invalidate()
-    }
+//    fun setDataToPieChart(pieChart: PieChart, duration:Int) {
+//        pieChart.setUsePercentValues(true)
+//        val dataEntries = ArrayList<PieEntry>()
+//
+//        println("checkedNum : ${checkedNum}")
+//        var did = ((checkedNum.toFloat()/ProjectAdapter.total) * 100)
+//        var notdid = (100-did)
+//        println("did : ${did}")
+//        dataEntries.add(PieEntry(did, ""))
+//        dataEntries.add(PieEntry(notdid, ""))
+//
+//        val colors: ArrayList<Int> = ArrayList()
+//        colors.add(ContextCompat.getColor(context, R.color.samsung))
+//        colors.add(ContextCompat.getColor(context, R.color.gray))
+//
+//        val dataSet = PieDataSet(dataEntries, "")
+//        val data = PieData(dataSet)
+//
+//        // In Percentage
+//        data.setValueFormatter(PercentFormatter())
+//        dataSet.sliceSpace = 0f
+//        dataSet.colors = colors
+//        pieChart.data = data
+//        data.setValueTextSize(0f)
+//        pieChart.setExtraOffsets(5f, 10f, 5f, 5f)
+//        pieChart.animateY(duration, Easing.EaseInOutQuad)
+//
+//        //create hole in center
+//        pieChart.holeRadius = 80f
+//        pieChart.transparentCircleRadius = 61f
+//        pieChart.isDrawHoleEnabled = true
+//        pieChart.setHoleColor(ContextCompat.getColor(context, R.color.white))
+//
+//
+//        //add text in center
+//        pieChart.setDrawCenterText(true);
+//        pieChart.setCenterTextSize(12f)
+//
+//        pieChart.invalidate()
+//    }
 
     override fun getItemCount(): Int {
         return todoList.size
