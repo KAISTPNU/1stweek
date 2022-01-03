@@ -1,7 +1,6 @@
 package com.example.madcamp_1st_week
 
 import android.animation.ObjectAnimator
-import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -11,8 +10,8 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.madcamp_1st_week.databinding.FragmentThirdBinding
+import com.example.madcamp_1st_week.databinding.ProjectItemBinding
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
@@ -34,36 +33,6 @@ class ThirdFragment : Fragment() {
     private lateinit var projectAdapter: ProjectAdapter
     val projectList = mutableListOf<ProjectItem>()
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        for (i in 1..1) {
-            projectList.add(ProjectItem("MadCamp 1st Week Proj.",
-                "Python",
-                "Juhyeon Lee",
-                78,
-                LocalDate.of(2021, 12, 28),
-                LocalDate.of(2022, 1, 4),
-                "Juhyeon Lee, Junyoung Lee",
-                mutableListOf<String>("Make Tap for collecting at least 20 pictures"),
-                "testemail@naver.com",
-                "010-1234-5678"
-            ))
-        }
-
-        for (i in 1..1) {
-            projectList.add(ProjectItem("MadCamp 1st Week Proj.",
-                "Kotlin",
-                "Junyoung Lee",
-                78,
-                LocalDate.of(2021, 12, 28),
-                LocalDate.of(2022, 1, 4),
-                "Juhyeon Lee, Junyoung Lee",
-                mutableListOf<String>("Make Tap for collecting at least 20 pictures", "Hi hello", "Testing", "Test View"),
-                "testemail@naver.com",
-                "010-1234-5678"))
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -75,12 +44,42 @@ class ThirdFragment : Fragment() {
         requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.white)
 
         _binding = FragmentThirdBinding.inflate(inflater, container, false)
+        fragmentThirdBinding = binding
         projectAdapter = ProjectAdapter(this.requireContext())
 
+        for (i in 1..2) {
+            projectList.add(ProjectItem("MadCamp 1st Week Proj.",
+                "Python",
+                "Juhyeon Lee",
+                78,
+                LocalDate.of(2021, 12, 28),
+                LocalDate.of(2022, 1, 4),
+                "Juhyeon Lee, Junyoung Lee",
+                mutableListOf<String>("Make Tap for collecting at least 20 pictures"),
+                "testemail@naver.com",
+                "010-1234-5678"
+
+
+            ))
+        }
+
+        for (i in 1..2) {
+            projectList.add(ProjectItem("MadCamp 1st Week Proj.",
+                "Kotlin",
+                "Junyoung Lee",
+                78,
+                LocalDate.of(2021, 12, 28),
+                LocalDate.of(2022, 1, 4),
+                "Juhyeon Lee, Junyoung Lee",
+                mutableListOf<String>("Make Tap for collecting at least 20 pictures", "Hi hello", "Testing", "Test View"),
+                "testemail@naver.com",
+                "010-1234-5678"))
+        }
         projectAdapter.itemList = projectList
         binding.projectList.adapter = projectAdapter
+
 //        binding.projectList.adapter = projectAdapter
-        binding.projectList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
         initPieChart(binding.pieChart1)
         setDataToPieChart(binding.pieChart1, 1400)
 
@@ -144,6 +143,9 @@ class ThirdFragment : Fragment() {
         pieChart.setCenterTextTypeface(resources.getFont(R.font.uber_move_medium))
 
         pieChart.invalidate()
+    }
+    companion object {
+        lateinit var fragmentThirdBinding: FragmentThirdBinding
     }
 
 }
