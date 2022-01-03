@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.madcamp_1st_week.databinding.ProjectItemBinding
 import com.example.madcamp_1st_week.databinding.ProjectItemTitleBinding
+import com.example.madcamp_1st_week.databinding.ProjectTodoBinding
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
@@ -70,9 +71,12 @@ class ProjectAdapter(private val context: Context):
 
         projectItemBinding.projectItemAfterFolding.todoList.adapter = todoAdapter
 
+
+        fragment = projectItemBinding
+        total = projectItem.todo.size
+
         initPieChart(projectItemBinding.projectItemAfterFolding.chart)
         setDataToPieChart(projectItemBinding.projectItemAfterFolding.chart, 1400)
-
 
         projectItemBinding.foldingCell.setOnClickListener(View.OnClickListener { view->
             projectItemBinding.foldingCell.toggle(false)
@@ -114,14 +118,18 @@ class ProjectAdapter(private val context: Context):
     fun setDataToPieChart(pieChart: PieChart, duration:Int) {
         pieChart.setUsePercentValues(true)
         val dataEntries = ArrayList<PieEntry>()
-        dataEntries.add(PieEntry(45f, "Kotlin"))
-        dataEntries.add(PieEntry(28f, "Python"))
-        dataEntries.add(PieEntry(27f, "C/C++"))
+
+        checkedNum = todoAdapter.checkedNum
+        println("checkedNum : ${checkedNum}")
+        var did = todoAdapter.getdid()
+        var notdid = (100-did).toFloat()
+        println("did : ${did}")
+        dataEntries.add(PieEntry(did, ""))
+        dataEntries.add(PieEntry(notdid, ""))
 
         val colors: ArrayList<Int> = ArrayList()
         colors.add(ContextCompat.getColor(context, R.color.samsung))
-        colors.add(ContextCompat.getColor(context, R.color.kakao))
-        colors.add(ContextCompat.getColor(context, R.color.darknavy))
+        colors.add(ContextCompat.getColor(context, R.color.gray))
 
         val dataSet = PieDataSet(dataEntries, "")
         val data = PieData(dataSet)
@@ -144,9 +152,7 @@ class ProjectAdapter(private val context: Context):
 
         //add text in center
         pieChart.setDrawCenterText(true);
-        pieChart.centerText = "Project\nLanguage Ratio"
         pieChart.setCenterTextSize(12f)
-//        pieChart.setCenterTextTypeface(resources.getFont(R.font.uber_move_medium))
 
         pieChart.invalidate()
     }
@@ -163,5 +169,11 @@ class ProjectAdapter(private val context: Context):
 
         progressBarAnimation.setDuration(1000) // 애니메이션 실행 시간 지정 (단위는 ms)
         progressBarAnimation.start()
+    }
+
+    companion object{
+        lateinit var fragment : ProjectItemBinding
+        var position : Int = 0
+        var total : Int = 0
     }
 }
