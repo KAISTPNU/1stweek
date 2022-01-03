@@ -15,9 +15,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.madcamp_1st_week.databinding.ProjectItemBinding
-import com.example.madcamp_1st_week.databinding.ProjectItemTitleBinding
-import com.example.madcamp_1st_week.databinding.ProjectTodoBinding
+import androidx.viewpager2.widget.ViewPager2
+import com.example.madcamp_1st_week.databinding.*
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
@@ -37,7 +36,10 @@ class ProjectAdapter(private val context: Context):
     var itemList = mutableListOf<ProjectItem>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectAdapter.ViewHolder {
         viewpagerBinding = ProjectItemBinding.inflate(LayoutInflater.from(context))
+        projectItemBinding = viewpagerBinding
+
         val view = LayoutInflater.from(context).inflate(R.layout.project_item, parent, false)
+        fragment.add(viewpagerBinding)
         return ViewHolder(view)
     }
 
@@ -50,16 +52,29 @@ class ProjectAdapter(private val context: Context):
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val title: TextView = itemView.findViewById(R.id.project_title)
-        private val backname: TextView = itemView.findViewById(R.id.leader_name)
-        private val frontname: TextView = itemView.findViewById(R.id.project_leader)
-        private val dday: TextView = itemView.findViewById(R.id.project_d_day)
-        private val phone: TextView = itemView.findViewById(R.id.phone)
-        private val email: TextView = itemView.findViewById(R.id.email)
-        private val participants: TextView = itemView.findViewById(R.id.participants)
-        private val chart: PieChart = itemView.findViewById(R.id.chart)
-        private val todo: RecyclerView = itemView.findViewById(R.id.todoList)
-        private val fold: FoldingCell = itemView.findViewById(R.id.folding_cell)
+//        private val title: TextView = itemView.findViewById(R.id.project_title)
+//        private val backname: TextView = itemView.findViewById(R.id.leader_name)
+//        private val frontname: TextView = itemView.findViewById(R.id.project_leader)
+//        private val dday: TextView = itemView.findViewById(R.id.project_d_day)
+//        private val phone: TextView = itemView.findViewById(R.id.phone)
+//        private val email: TextView = itemView.findViewById(R.id.email)
+//        private val participants: TextView = itemView.findViewById(R.id.participants)
+//        private val chart: PieChart = itemView.findViewById(R.id.chart)
+//        private val todo: RecyclerView = itemView.findViewById(R.id.todoList)
+//        private val fold: FoldingCell = itemView.findViewById(R.id.folding_cell)
+        private val title: TextView = viewpagerBinding.projectItemBeforeFolding.projectTitle
+        private val backname: TextView = viewpagerBinding.projectItemAfterFolding.leaderName
+        private val frontname: TextView = viewpagerBinding.projectItemBeforeFolding.projectLeader
+        private val dday: TextView = viewpagerBinding.projectItemBeforeFolding.projectDDay
+        private val phone: TextView = viewpagerBinding.projectItemAfterFolding.phone
+        private val email: TextView = viewpagerBinding.projectItemAfterFolding.email
+        private val participants: TextView = viewpagerBinding.projectItemAfterFolding.participants
+        private val chart: PieChart = viewpagerBinding.projectItemAfterFolding.chart
+        private val todo: RecyclerView = viewpagerBinding.projectItemAfterFolding.todoList
+        private val fold: FoldingCell = viewpagerBinding.foldingCell
+
+
+
 
         fun bind(item: ProjectItem) {
             title.text = item.title
@@ -69,21 +84,24 @@ class ProjectAdapter(private val context: Context):
             phone.text = item.phone
             email.text = item.email
             participants.text = item.participants
-//            initPieChart(chart)
-//            setDataToPieChart(chart, 1400)
+            initPieChart(chart)
+            setDataToPieChart(chart, 1400)
             var todoAdapter = TodoAdapter(context)
             todoAdapter.todoList = item.todo
             todo.adapter = todoAdapter
-            fold.setOnClickListener(View.OnClickListener { view->
-                fold.toggle(false)
+            fold.setOnClickListener(View.OnClickListener { view ->
+                this.fold.toggle(false)
             })
 
             todoAdapter = TodoAdapter(context)
             todoAdapter.todoList = item.todo
-
+            todoAdapter.total = item.todo.size
             todo.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
             todo.adapter = todoAdapter
+
+            totals.add(item.todo.size)
+
         }
 
     }
@@ -140,6 +158,12 @@ class ProjectAdapter(private val context: Context):
         pieChart.setCenterTextSize(12f)
 
         pieChart.invalidate()
+    }
+    companion object {
+        var currentItem  = 0
+        var fragment = mutableListOf<ProjectItemBinding>()
+        var totals = mutableListOf<Int>()
+        lateinit var projectItemBinding: ProjectItemBinding
     }
 }
 
