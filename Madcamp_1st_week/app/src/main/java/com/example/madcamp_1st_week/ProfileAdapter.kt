@@ -10,8 +10,10 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import android.content.DialogInterface
 import android.content.res.ColorStateList
+import android.view.animation.AnimationUtils
 import android.widget.*
 import com.example.madcamp_1st_week.databinding.FragmentFirstBinding
+import kotlinx.coroutines.delay
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.*
@@ -97,6 +99,12 @@ class ProfileAdapter (private val context: Context, private val fileName: String
         }
 
         fun unbind(position: Int) {
+            FirstFragment.firstFragmentBinding.viewpager
+                .startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+
+            FirstFragment.firstFragmentBinding.viewpager
+                .startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
+
             itemList.removeAt(position)
             jsonArray.remove(position)
 
