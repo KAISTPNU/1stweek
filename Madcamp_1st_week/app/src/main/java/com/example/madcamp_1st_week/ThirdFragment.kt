@@ -45,6 +45,7 @@ class ThirdFragment : Fragment() {
         _binding = FragmentThirdBinding.inflate(inflater, container, false)
         projectAdapter = ProjectAdapter(this.requireContext())
 
+
         for (i in 1..2) {
             projectList.add(ProjectItem("MadCamp 1st Week Proj.",
                                     "Python",
@@ -53,7 +54,7 @@ class ThirdFragment : Fragment() {
                                         LocalDate.of(2021, 12, 28),
                                         LocalDate.of(2022, 1, 4),
                                         "Juhyeon Lee, Junyoung Lee",
-                                        mutableListOf<String>("Make Tap for collecting at least 20 pictures"),
+                                        listOf<String>("Make Tap for collecting at least 20 pictures", "Test", "Hi", "Hello", "Testing"),
                                         "testemail@naver.com",
                                         "010-1234-5678"
 
@@ -69,7 +70,7 @@ class ThirdFragment : Fragment() {
                 LocalDate.of(2021, 12, 28),
                 LocalDate.of(2022, 1, 4),
                 "Juhyeon Lee, Junyoung Lee",
-                mutableListOf<String>("Make Tap for collecting at least 20 pictures", "Hi hello", "Testing", "Test View"),
+                listOf<String>("Make Tap for collecting at least 20 pictures", "Test", "Hi", "Hello", "Testing"),
                 "testemail@naver.com",
                 "010-1234-5678"))
         }

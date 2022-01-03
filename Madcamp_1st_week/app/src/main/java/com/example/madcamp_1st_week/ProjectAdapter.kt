@@ -8,10 +8,7 @@ import android.graphics.ColorFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,16 +29,15 @@ import com.ramotion.foldingcell.FoldingCell
  */
 class ProjectAdapter(private val context: Context):
     RecyclerView.Adapter<ProjectAdapter.ViewHolder>() {
+
     private lateinit var viewpagerBinding : ProjectItemBinding
-    private lateinit var todoAdapter : TodoAdapter
     var itemList = mutableListOf<ProjectItem>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectAdapter.ViewHolder {
-        viewpagerBinding = ProjectItemBinding.inflate(LayoutInflater.from(context))
-        projectItemBinding = viewpagerBinding
+        viewpagerBinding = ProjectItemBinding.inflate(LayoutInflater.from(context), parent, false)
 
-        val view = LayoutInflater.from(context).inflate(R.layout.project_item, parent, false)
-        fragment.add(viewpagerBinding)
-        return ViewHolder(view)
+//        val view = LayoutInflater.from(context).inflate(R.layout.project_item, parent, false)
+//        fragment.add(viewpagerBinding)
+        return ViewHolder(viewpagerBinding)
     }
 
     override fun onBindViewHolder(holder: ProjectAdapter.ViewHolder, position: Int) {
@@ -52,7 +48,7 @@ class ProjectAdapter(private val context: Context):
         return itemList.size
     }
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(binding : ProjectItemBinding) : RecyclerView.ViewHolder(binding.root) {
 //        private val title: TextView = itemView.findViewById(R.id.project_title)
 //        private val backname: TextView = itemView.findViewById(R.id.leader_name)
 //        private val frontname: TextView = itemView.findViewById(R.id.project_leader)
@@ -63,19 +59,24 @@ class ProjectAdapter(private val context: Context):
 //        private val chart: PieChart = itemView.findViewById(R.id.chart)
 //        private val todo: RecyclerView = itemView.findViewById(R.id.todoList)
 //        private val fold: FoldingCell = itemView.findViewById(R.id.folding_cell)
-        private val title: TextView = viewpagerBinding.projectItemBeforeFolding.projectTitle
-        private val backname: TextView = viewpagerBinding.projectItemAfterFolding.leaderName
-        private val frontname: TextView = viewpagerBinding.projectItemBeforeFolding.projectLeader
-        private val dday: TextView = viewpagerBinding.projectItemBeforeFolding.projectDDay
-        private val phone: TextView = viewpagerBinding.projectItemAfterFolding.phone
-        private val email: TextView = viewpagerBinding.projectItemAfterFolding.email
-        private val participants: TextView = viewpagerBinding.projectItemAfterFolding.participants
-        private val chart: PieChart = viewpagerBinding.projectItemAfterFolding.chart
-        private val todo: RecyclerView = viewpagerBinding.projectItemAfterFolding.todoList
-        private val fold: FoldingCell = viewpagerBinding.foldingCell
+        private val title: TextView = binding.projectItemBeforeFolding.projectTitle
+        private val backname: TextView = binding.projectItemAfterFolding.leaderName
+        private val frontname: TextView = binding.projectItemBeforeFolding.projectLeader
+        private val dday: TextView = binding.projectItemBeforeFolding.projectDDay
+        private val phone: TextView = binding.projectItemAfterFolding.phone
+        private val email: TextView = binding.projectItemAfterFolding.email
+        private val participants: TextView = binding.projectItemAfterFolding.participants
+        private val chart: PieChart = binding.projectItemAfterFolding.chart
+        private val cb1: CheckBox = binding.projectItemAfterFolding.checkbox1
+        private val cb2: CheckBox = binding.projectItemAfterFolding.checkbox2
+        private val cb3: CheckBox = binding.projectItemAfterFolding.checkbox3
+        private val cb4: CheckBox = binding.projectItemAfterFolding.checkbox4
+        private val cb5: CheckBox = binding.projectItemAfterFolding.checkbox5
+        private val fold: FoldingCell = binding.foldingCell
 
-
-
+        private val frontBorder = binding.projectItemBeforeFolding.projectTitleBorder
+        private val backBorder = binding.projectItemAfterFolding.projectTitleBorder
+        var checkedNum = 0
 
         fun bind(item: ProjectItem) {
             title.text = item.title
@@ -86,23 +87,60 @@ class ProjectAdapter(private val context: Context):
             email.text = item.email
             participants.text = item.participants
             initPieChart(chart)
-            setDataToPieChart(chart, 1400)
-
-            var todoAdapter = TodoAdapter(context)
-            todoAdapter.todoList = item.todo
-            todo.adapter = todoAdapter
+            setDataToPieChart(chart, 1400, 0)
+            when(item.language.uppercase()) { // 프로젝트 언어별로 색상을 다르게 지정
+                "PYTHON" -> {
+                    viewpagerBinding.projectItemBeforeFolding.projectTitleBorder
+                        .setBackgroundColor(ContextCompat.getColor(context, R.color.samsung))
+                    viewpagerBinding.projectItemBeforeFolding.projectProgress.progressTintList = ColorStateList
+                        .valueOf(ContextCompat.getColor(context, R.color.samsung))
+                    viewpagerBinding.projectItemAfterFolding.projectTitleBorder
+                        .setBackgroundColor(ContextCompat.getColor(context, R.color.samsung))
+                }
+                "KOTLIN" -> {
+                    viewpagerBinding.projectItemBeforeFolding.projectTitleBorder
+                        .setBackgroundColor(ContextCompat.getColor(context, R.color.kakao))
+                    viewpagerBinding.projectItemBeforeFolding.projectProgress.progressTintList = ColorStateList
+                        .valueOf(ContextCompat.getColor(context, R.color.kakao))
+                    viewpagerBinding.projectItemAfterFolding.projectTitleBorder
+                        .setBackgroundColor(ContextCompat.getColor(context, R.color.kakao))
+                }
+            }
+            cb1.text = item.todo[0]
+            cb2.text = item.todo[1]
+            cb3.text = item.todo[2]
+            cb4.text = item.todo[3]
+            cb5.text = item.todo[4]
             fold.setOnClickListener(View.OnClickListener { view ->
                 this.fold.toggle(false)
             })
-            todoAdapter = TodoAdapter(context)
-            todoAdapter.todoList = item.todo
-            todoAdapter.total = item.todo.size
-            todo.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            listen(cb1, chart)
+            listen(cb2, chart)
+            listen(cb3, chart)
+            listen(cb4, chart)
+            listen(cb5, chart)
 
-            todo.adapter = todoAdapter
-
-            totals.add(item.todo.size)
-
+        }
+        fun listen(cb: CheckBox, chart: PieChart) {
+            cb.setOnClickListener(object: View.OnClickListener{
+                override fun onClick(view: View) {
+                    val checked = cb.isChecked
+                    when(checked) {
+                        true -> {
+                            cb.setTextColor(ContextCompat.getColor(context, R.color.gray))
+                            checkedNum += 1
+                            println("checkedNum: ${checkedNum}")
+                            setDataToPieChart(chart, 1400, checkedNum)
+                        }
+                        false -> {
+                            cb.setTextColor(ContextCompat.getColor(context, R.color.darknavy))
+                            checkedNum -= 1
+                            println("checkedNum: ${checkedNum}")
+                            setDataToPieChart(chart, 1400, checkedNum)
+                        }
+                    }
+                }
+            })
         }
 
     }
@@ -118,17 +156,15 @@ class ProjectAdapter(private val context: Context):
         pieChart.legend.isWordWrapEnabled = true
     }
 
-    fun setDataToPieChart(pieChart: PieChart, duration:Int) {
+    fun setDataToPieChart(pieChart: PieChart, duration:Int, checkedNum: Int) {
         pieChart.setUsePercentValues(true)
         val dataEntries = ArrayList<PieEntry>()
 
-//        checkedNum = todoAdapter.checkedNum
-//        println("checkedNum : ${checkedNum}")
-//        var did = todoAdapter.getdid()
-//        var notdid = (100-did).toFloat()
-//        println("did : ${did}")
-        dataEntries.add(PieEntry(35f, ""))
-        dataEntries.add(PieEntry(65f, ""))
+        var did = (checkedNum.toFloat()/5) * 100
+        var notdid = (100-did)
+
+        dataEntries.add(PieEntry(did, ""))
+        dataEntries.add(PieEntry(notdid, ""))
 
         val colors: ArrayList<Int> = ArrayList()
         colors.add(ContextCompat.getColor(context, R.color.samsung))
@@ -159,12 +195,6 @@ class ProjectAdapter(private val context: Context):
         pieChart.setCenterTextSize(12f)
 
         pieChart.invalidate()
-    }
-    companion object {
-        var currentItem  = 0
-        var fragment = mutableListOf<ProjectItemBinding>()
-        var totals = mutableListOf<Int>()
-        lateinit var projectItemBinding: ProjectItemBinding
     }
 }
 
