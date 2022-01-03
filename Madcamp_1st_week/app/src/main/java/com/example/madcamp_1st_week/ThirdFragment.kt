@@ -140,5 +140,4 @@ class ThirdFragment : Fragment() {
         pieChart.invalidate()
     }
 
-
 }
