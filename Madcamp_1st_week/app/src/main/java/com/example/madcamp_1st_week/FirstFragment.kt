@@ -10,6 +10,8 @@ import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.madcamp_1st_week.databinding.FragmentFirstBinding
+import org.json.JSONArray
+import org.json.JSONObject
 
 
 class FirstFragment : Fragment() {
@@ -20,7 +22,8 @@ class FirstFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        initSampleData()
+//        initSampleData()
+        readData()
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -115,6 +118,34 @@ class FirstFragment : Fragment() {
 
         }
 
+    }
+
+    fun readData() {
+        developerList.clear()
+        designerList.clear()
+        engineerList.clear()
+        pmList.clear()
+        etcList.clear()
+
+        val jsonString = activity?.assets?.open("profileList.json")?.reader()?.readText()
+        val jsonArray = JSONArray(jsonString)
+        for (i in 0 until jsonArray.length()) {
+            val jsonObject = jsonArray.getJSONObject(i)
+            val name = jsonObject.getString("name")
+            val email = jsonObject.getString("email")
+            val phone = jsonObject.getString("phone")
+            val job = jsonObject.getString("job")
+            val detailjob = jsonObject.getString("detailjob")
+            val company = jsonObject.getString("company")
+
+            when(job.uppercase()) {
+                "DEVELOPER" -> developerList.add(JobItem(name, email, phone, job, detailjob, company))
+                "DESIGNER" -> designerList.add(JobItem(name, email, phone, job, detailjob, company))
+                "ENGINEER" -> engineerList.add(JobItem(name, email, phone, job, detailjob, company))
+                "PM" -> pmList.add(JobItem(name, email, phone, job, detailjob, company))
+                "ETC" -> etcList.add(JobItem(name, email, phone, job, detailjob, company))
+            }
+        }
     }
 
     fun initSampleData() {
