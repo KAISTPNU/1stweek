@@ -66,24 +66,14 @@ class ContactAddFragment : Fragment() {
             var firstFragment = FirstFragment()
             firstFragment.arguments = bundle
 
-            val popup = AlertDialog.Builder(context)
-            popup
-//                .setMessage("Do you want to delete it?")
-                .setView(R.layout.dialog_item)
-                .setPositiveButton("Yes", DialogInterface.OnClickListener { dialogInterface, i ->
-                    Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show()
-                })
-                .setNegativeButton("No", DialogInterface.OnClickListener { dialogInterface, i ->
-                    //Toast.makeText(context, "Cancel", Toast.LENGTH_SHORT).show()
-                })
-            popup.show()
-
-            activity?.supportFragmentManager?.beginTransaction()
-                ?.setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
-                ?.replace(R.id.fragment, firstFragment)
-                ?.commitAllowingStateLoss()
-
-            Toast.makeText(activity,"[" + name + "] is added!", Toast.LENGTH_SHORT).show()
+            val dialog = ProfileAddDialog(this.requireContext())
+            dialog.setOnOKClickedListener{
+                activity?.supportFragmentManager?.beginTransaction()
+                    ?.setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                    ?.replace(R.id.fragment, firstFragment)
+                    ?.commitAllowingStateLoss()
+            }
+            dialog.start("dsf")
         }
     }
 

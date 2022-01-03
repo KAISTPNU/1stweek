@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="200dp"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="20dp">
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="0dp"
+        android:elevation="20dp"
+        card_view:cardCornerRadius="10dp"
+        card_view:layout_constraintBottom_toBottomOf="parent"
+        card_view:layout_constraintLeft_toLeftOf="parent"
+        card_view:layout_constraintRight_toRightOf="parent"
+        card_view:layout_constraintWidth_percent="1.0"
+        card_view:layout_constraintHeight_percent="1.0"
+        card_view:layout_constraintVertical_bias="0.5"
+        card_view:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/profile_card_border"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/card_view_inner"
+                android:backgroundTint="@null"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/uber_move_medium"
+                    android:textSize="20dp"
+                    android:paddingTop="15dp"
+                    android:text="Are You Sure?"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/uber_move_medium"
+                    android:padding="10dp"
+                    android:text="This job is NOT REVERSABLE. Please double check the whom you want to delete."
+                    android:textAlignment="center"
+                    android:textSize="12dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center">
+                    <soup.neumorphism.NeumorphButton
+                        android:id="@+id/negative_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/Widget.Neumorph.Button"
+                        app:background="@color/darknavy"
+                        app:neumorph_strokeColor="@color/darknavy"
+                        android:textColor="@color/oatmeal"
+                        app:fontFamily="@font/uber_move_medium"
+                        app:neumorph_backgroundColor="@color/negative"
+                        android:text="NO"/>
+                    <soup.neumorphism.NeumorphButton
+                        android:id="@+id/positive_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/Widget.Neumorph.Button"
+                        app:background="@color/darknavy"
+                        app:neumorph_strokeColor="@color/darknavy"
+                        android:textColor="@color/oatmeal"
+                        app:fontFamily="@font/uber_move_medium"
+                        app:neumorph_backgroundColor="@color/positive"
+                        android:text="YES"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
