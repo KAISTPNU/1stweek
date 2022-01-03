@@ -52,37 +52,21 @@ class ContactAddFragment : Fragment() {
             var company = binding.companyInput.text.toString()
 
             when(job.uppercase()) {
-                "DEVELOPER" -> FirstFragment.developerList
-                    .add(ProfileItem(name, phone, email, job, detailjob, company))
-
-                "DESIGNER" -> FirstFragment.designerList
-                    .add(ProfileItem(name, phone, email, job, detailjob, company))
-
-                "ENGINEER" -> FirstFragment.engineerList
-                    .add(ProfileItem(name, phone, email, job, detailjob, company))
-
-                "PM" -> FirstFragment.pmList
-                    .add(ProfileItem(name, phone, email, job, detailjob, company))
-
-                else -> FirstFragment.etcList
-                        .add(ProfileItem(name, phone, email, job, detailjob, company))
+//                "DEVELOPER" -> FirstFragment.developerList
+//                    .add(ProfileItem(name, phone, email, job, detailjob, company))
+//
+//                "DESIGNER" -> FirstFragment.designerList
+//                    .add(ProfileItem(name, phone, email, job, detailjob, company))
+//
+//                "ENGINEER" -> FirstFragment.engineerList
+//                    .add(ProfileItem(name, phone, email, job, detailjob, company))
+//
+//                "PM" -> FirstFragment.pmList
+//                    .add(ProfileItem(name, phone, email, job, detailjob, company))
+//
+//                else -> FirstFragment.etcList
+//                        .add(ProfileItem(name, phone, email, job, detailjob, company))
             }
-
-//            if (job.uppercase().equals("DEVELOPER")) {
-//                FirstFragment.developerList.add(JobItem(name, phone, email, job, detailjob, company))
-//            }
-//            else if (job.uppercase().equals("DESIGNER")) {
-//                FirstFragment.designerList.add(JobItem(name, phone, email, job, detailjob, company))
-//            }
-//            else if (job.uppercase().equals("ENGINEER")) {
-//                FirstFragment.engineerList.add(JobItem(name, phone, email, job, detailjob, company))
-//            }
-//            else if (job.uppercase().equals("PM")) {
-//                FirstFragment.pmList.add(JobItem(name, phone, email, job, detailjob, company))
-//            }
-//            else {
-//                FirstFragment.etcList.add(JobItem(name, phone, email, job, detailjob, company))
-//            }
 
             activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.fragment, FirstFragment())

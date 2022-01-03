@@ -13,9 +13,12 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import android.content.DialogInterface
+import android.util.Log
 import android.widget.Toast
 import com.example.madcamp_1st_week.databinding.FragmentFirstBinding
 import org.json.JSONArray
+import java.io.*
+import java.lang.reflect.InvocationTargetException
 
 
 class ProfileAdapter (private val context: Context, private val fileName: String): RecyclerView.Adapter<ProfileAdapter.ViewHolder>(){
@@ -23,7 +26,6 @@ class ProfileAdapter (private val context: Context, private val fileName: String
 
     var itemList = mutableListOf<ProfileItem>()
     private lateinit var jsonArray: JSONArray
-
     private lateinit var deleteBtn : ImageButton
 
     init { readJsonData() }
@@ -52,16 +54,7 @@ class ProfileAdapter (private val context: Context, private val fileName: String
         return viewholder
     }
 
-    fun delete(viewholder: ViewHolder) {
-        val layout = FirstFragment.viewpagerView
-        var viewpagerView = layout.findViewById<ViewPager2>(R.id.viewpager)
-        var index = viewpagerView.currentItem
-
-        viewholder.unbind(index)
-//        viewPagerBinding.viewpager.adapter = this
-//        viewPagerBinding.dotsIndicator.setViewPager2(viewPagerBinding.viewpager)
-//        notifyDataSetChanged()
-    }
+    fun delete(viewholder: ViewHolder) { viewholder.unbind(FirstFragment.firstFragmentBinding.viewpager.currentItem) }
 
     override fun getItemCount(): Int { return itemList.size }
 
@@ -76,19 +69,19 @@ class ProfileAdapter (private val context: Context, private val fileName: String
         private val txtCompany: TextView = itemView.findViewById(R.id.company)
 
         @SuppressLint("ResourceAsColor")
-                fun bind(item: ProfileItem) {
-                    txtName.text = item.name
-                    txtPhone.text = item.phone
-                    txtEmail.text = item.email
-                    txtDetailJob.text = item.detailjob
-                    txtCompany.text = item.company
+        fun bind(item: ProfileItem) {
+            txtName.text = item.name
+            txtPhone.text = item.phone
+            txtEmail.text = item.email
+            txtDetailJob.text = item.detailjob
+            txtCompany.text = item.company
 
-                    val profileCardBorder = itemView.findViewById<LinearLayout>(R.id.profile_card_border)
-                    val deleteBtn = itemView.findViewById<ImageButton>(R.id.delete)
+            val profileCardBorder = itemView.findViewById<LinearLayout>(R.id.profile_card_border)
+            val deleteBtn = itemView.findViewById<ImageButton>(R.id.delete)
 
-                    when(item.company.uppercase()) {
-                        "SAMSUNG" -> setColorOfProfileCardBorderAndDeleteButton(profileCardBorder, deleteBtn, R.color.samsung)
-                        "KAKAO" -> setColorOfProfileCardBorderAndDeleteButton(profileCardBorder, deleteBtn, R.color.kakao)
+            when(item.company.uppercase()) {
+                "SAMSUNG" -> setColorOfProfileCardBorderAndDeleteButton(profileCardBorder, deleteBtn, R.color.samsung)
+                "KAKAO" -> setColorOfProfileCardBorderAndDeleteButton(profileCardBorder, deleteBtn, R.color.kakao)
                 "NAVER" -> setColorOfProfileCardBorderAndDeleteButton(profileCardBorder, deleteBtn, R.color.naver)
                 "FACEBOOK" -> setColorOfProfileCardBorderAndDeleteButton(profileCardBorder, deleteBtn, R.color.facebook)
                 "APPLE" -> setColorOfProfileCardBorderAndDeleteButton(profileCardBorder, deleteBtn, R.color.apple)
@@ -104,30 +97,54 @@ class ProfileAdapter (private val context: Context, private val fileName: String
         fun unbind(position: Int) {
             itemList.removeAt(position)
             jsonArray.remove(position)
+
             FirstFragment.firstFragmentBinding.viewpager.adapter = this@ProfileAdapter
             if (position > itemList.size) { FirstFragment.firstFragmentBinding.viewpager.currentItem = itemList.size }
             else {  FirstFragment.firstFragmentBinding.viewpager.currentItem = position }
+            writeJsonData()
             notifyDataSetChanged()
             FirstFragment.firstFragmentBinding.dotsIndicator.setViewPager(FirstFragment.firstFragmentBinding.viewpager)
         }
     }
 
     fun writeJsonData() {
-
+        var jsonFile = File(context.filesDir, fileName)
+        var writer = BufferedWriter(FileWriter(jsonFile))
+        writer.write(jsonArray.toString())
+        writer.close()
     }
 
     fun readJsonData() {
-        val jsonString = context?.assets?.open(fileName)?.reader()?.readText()
-        jsonArray = JSONArray(jsonString)
-        for (i in 0 until jsonArray.length()) {
-            val jsonObject = jsonArray.getJSONObject(i)
-            val name = jsonObject.getString("name")
-            val email = jsonObject.getString("email")
-            val phone = jsonObject.getString("phone")
-            val job = jsonObject.getString("job")
-            val detailjob = jsonObject.getString("detailjob")
-            val company = jsonObject.getString("company")
-            itemList.add(ProfileItem(name, email, phone, job, detailjob, company))
+        var jsonFile = File(context.filesDir, fileName)
+        when (jsonFile.exists()) {
+            true -> {
+                var reader = FileReader(jsonFile)
+                var jsonString = BufferedReader(reader).readText()
+                jsonArray = JSONArray(jsonString)
+                for (i in 0 until jsonArray.length()) {
+                    val jsonObject = jsonArray.getJSONObject(i)
+                    val name = jsonObject.getString("name")
+                    val email = jsonObject.getString("email")
+                    val phone = jsonObject.getString("phone")
+                    val job = jsonObject.getString("job")
+                    val detailjob = jsonObject.getString("detailjob")
+                    val company = jsonObject.getString("company")
+                    itemList.add(ProfileItem(name, email, phone, job, detailjob, company))
+                }
+            }
+            false -> File(context.filesDir, fileName).createNewFile()
         }
+//        var jsonString = BufferedReader(FileReader(File(context.filesDir, fileName))).readText()
+//        jsonArray = JSONArray(jsonString)
+//        for (i in 0 until jsonArray.length()) {
+//            val jsonObject = jsonArray.getJSONObject(i)
+//            val name = jsonObject.getString("name")
+//            val email = jsonObject.getString("email")
+//            val phone = jsonObject.getString("phone")
+//            val job = jsonObject.getString("job")
+//            val detailjob = jsonObject.getString("detailjob")
+//            val company = jsonObject.getString("company")
+//            itemList.add(ProfileItem(name, email, phone, job, detailjob, company))
+//        }
     }
 }
