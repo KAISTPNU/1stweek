@@ -11,20 +11,30 @@ import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.madcamp_1st_week.databinding.FragmentFirstBinding
 import org.json.JSONArray
-import org.json.JSONObject
 
 
 class FirstFragment : Fragment() {
     private var _binding: FragmentFirstBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var jobsAdapter:JobAdapter
+    private var jobAdapterList = mutableListOf<JobAdapter>()
+
+//    private lateinit var jobsAdapter:JobAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-//        initSampleData()
-        readData()
+        initJobAdapterList()
     }
+
+    fun initJobAdapterList() {
+        jobAdapterList.clear()
+        var fileNameList = mutableListOf<String>("developer.json", "developer.json", "developer.json", "developer.json", "developer.json")
+        for (i in 0..4) {
+            jobAdapterList.add(JobAdapter(this.requireContext(), fileNameList[i]))
+            jobAdapterList[i].readJsonData()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -50,13 +60,13 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        jobsAdapter = JobAdapter(this.requireContext())
-
-        jobsAdapter.developers = Companion.developerList
-        jobsAdapter.designers = Companion.designerList
-        jobsAdapter.engineers = Companion.engineerList
-        jobsAdapter.pms = Companion.pmList
-        jobsAdapter.etcs = Companion.etcList
+//        jobsAdapter = JobAdapter(this.requireContext())
+//
+//        jobsAdapter.developers = Companion.developerList
+//        jobsAdapter.designers = Companion.designerList
+//        jobsAdapter.engineers = Companion.engineerList
+//        jobsAdapter.pms = Companion.pmList
+//        jobsAdapter.etcs = Companion.etcList
 
         val sAdapter = ArrayAdapter.createFromResource(this.requireContext(), R.array.job, android.R.layout.simple_spinner_item)
         sAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -120,87 +130,36 @@ class FirstFragment : Fragment() {
 
     }
 
-    fun readData() {
+//    fun readJsonData() {
+//        clearJobItemLists()
+//
+//        val jsonString = activity?.assets?.open("profileList.json")?.reader()?.readText()
+//        val jsonArray = JSONArray(jsonString)
+//        for (i in 0 until jsonArray.length()) {
+//            val jsonObject = jsonArray.getJSONObject(i)
+//            val name = jsonObject.getString("name")
+//            val email = jsonObject.getString("email")
+//            val phone = jsonObject.getString("phone")
+//            val job = jsonObject.getString("job")
+//            val detailjob = jsonObject.getString("detailjob")
+//            val company = jsonObject.getString("company")
+//
+//            when(job.uppercase()) {
+//                "DEVELOPER" -> developerList.add(JobItem(name, email, phone, job, detailjob, company))
+//                "DESIGNER" -> designerList.add(JobItem(name, email, phone, job, detailjob, company))
+//                "ENGINEER" -> engineerList.add(JobItem(name, email, phone, job, detailjob, company))
+//                "PM" -> pmList.add(JobItem(name, email, phone, job, detailjob, company))
+//                "ETC" -> etcList.add(JobItem(name, email, phone, job, detailjob, company))
+//            }
+//        }
+//    }
+
+    fun clearJobItemLists() {
         developerList.clear()
         designerList.clear()
         engineerList.clear()
         pmList.clear()
         etcList.clear()
-
-        val jsonString = activity?.assets?.open("profileList.json")?.reader()?.readText()
-        val jsonArray = JSONArray(jsonString)
-        for (i in 0 until jsonArray.length()) {
-            val jsonObject = jsonArray.getJSONObject(i)
-            val name = jsonObject.getString("name")
-            val email = jsonObject.getString("email")
-            val phone = jsonObject.getString("phone")
-            val job = jsonObject.getString("job")
-            val detailjob = jsonObject.getString("detailjob")
-            val company = jsonObject.getString("company")
-
-            when(job.uppercase()) {
-                "DEVELOPER" -> developerList.add(JobItem(name, email, phone, job, detailjob, company))
-                "DESIGNER" -> designerList.add(JobItem(name, email, phone, job, detailjob, company))
-                "ENGINEER" -> engineerList.add(JobItem(name, email, phone, job, detailjob, company))
-                "PM" -> pmList.add(JobItem(name, email, phone, job, detailjob, company))
-                "ETC" -> etcList.add(JobItem(name, email, phone, job, detailjob, company))
-            }
-        }
-    }
-
-    fun initSampleData() {
-        developerList.clear()
-        designerList.clear()
-        engineerList.clear()
-        pmList.clear()
-        etcList.clear()
-
-        for (i: Int in 1..5) {
-            Companion.developerList
-                .add(JobItem("홍길동" + i,
-                    "010-1234-5678",
-                    "testemail123@naver.com",
-                    "DEVELOPER",
-                    "PROGRAMMING",
-                    "SAMSUNG"))
-        }
-
-        for (i: Int in 1..5) {
-            Companion.designerList
-                .add(JobItem("고길동" + i,
-                    "010-1234-5678",
-                    "testemail123@naver.com",
-                    "DESIGNER",
-                    "PROGRAMMING",
-                    "KAKAO"))
-        }
-        for (i: Int in 1..5) {
-            Companion.engineerList
-                .add(JobItem("침착맨" + i,
-                    "010-1234-5678",
-                    "testemail123@naver.com",
-                    "ENGINEER",
-                    "PROGRAMMING",
-                    "KAKAO"))
-        }
-        for (i: Int in 1..5) {
-            Companion.pmList
-                .add(JobItem("기안" + i,
-                    "010-1234-5678",
-                    "testemail123@naver.com",
-                    "PM",
-                    "PROGRAMMING",
-                    "KAKAO"))
-        }
-        for (i: Int in 1..5) {
-            Companion.etcList
-                .add(JobItem("누구" + i,
-                    "010-1234-5678",
-                    "testemail123@naver.com",
-                    "ETC",
-                    "PROGRAMMING",
-                    "SAMSUNG"))
-        }
     }
 
     companion object {
