@@ -10,8 +10,6 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import androidx.core.content.ContextCompat
-import androidx.viewpager2.widget.ViewPager2
-import com.example.madcamp_1st_week.ProjectAdapter.Companion.currentItem
 import com.example.madcamp_1st_week.ProjectAdapter.Companion.projectItemBinding
 import com.example.madcamp_1st_week.databinding.ProjectItemBacksideBinding
 import com.example.madcamp_1st_week.databinding.ProjectTodoBinding

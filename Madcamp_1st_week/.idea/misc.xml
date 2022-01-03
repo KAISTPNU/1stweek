@@ -40,8 +40,8 @@
         <entry key="app/src/main/res/layout/image_list_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_recyclerview.xml" value="0.11354166666666667" />
         <entry key="app/src/main/res/layout/project_item.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/project_item_backside.xml" value="0.2681933809108987" />
-        <entry key="app/src/main/res/layout/project_item_title.xml" value="0.21283783783783783" />
+        <entry key="app/src/main/res/layout/project_item_backside.xml" value="0.276013143483023" />
+        <entry key="app/src/main/res/layout/project_item_title.xml" value="0.4722222222222222" />
         <entry key="app/src/main/res/layout/project_item_title_left.xml" value="0.25" />
         <entry key="app/src/main/res/layout/project_todo.xml" value="0.34693089166474406" />
         <entry key="app/src/main/res/layout/recent_image_item.xml" value="0.12552083333333333" />

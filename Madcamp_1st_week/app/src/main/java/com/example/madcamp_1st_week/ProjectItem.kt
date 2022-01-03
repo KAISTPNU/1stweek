@@ -15,7 +15,7 @@ data class ProjectItem (var title: String,
                         var start_date: LocalDate,
                         var end_date: LocalDate,
                         var participants: String,
-                        var todo: MutableList<String>,
+                        var todo : List<String>,
                         var email: String,
                         var phone: String,
 ) {
