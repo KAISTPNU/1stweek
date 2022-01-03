@@ -8,8 +8,8 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import com.example.madcamp_1st_week.databinding.ActivityMainBinding
+import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.zxing.integration.android.IntentIntegrator
 
@@ -32,12 +32,6 @@ class MainActivity : AppCompatActivity() {
         initAddButton()
         initMyProfileButton()
 
-        /*
-            애니메이션 실행을 위해선 setCustomAnimation() 함수 필요
-            setCustomAnimation(EnterAnimation, ExitAnimaion)으로 구성
-                -> EnterAnimation은 새로 실행되는 Fragment에 적용되는 Animation
-                -> ExitAnimation은 종료되는 Fragment에 적용되는 Animation
-         */
         supportFragmentManager.beginTransaction()
             .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
             .replace(R.id.fragment, firstFragment)

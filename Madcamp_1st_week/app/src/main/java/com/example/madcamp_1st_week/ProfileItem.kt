@@ -11,6 +11,3 @@ class ProfileItem (var _name: String, var _phone: String, var _email: String, va
     var detailjob: String? = _detailjob
 
 }
-
-
-// data class ->
