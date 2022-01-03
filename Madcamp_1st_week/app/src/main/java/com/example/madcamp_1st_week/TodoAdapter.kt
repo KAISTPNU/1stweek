@@ -11,6 +11,8 @@ import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
+import com.example.madcamp_1st_week.ProjectAdapter.Companion.currentItem
+import com.example.madcamp_1st_week.ProjectAdapter.Companion.projectItemBinding
 import com.example.madcamp_1st_week.databinding.ProjectItemBacksideBinding
 import com.example.madcamp_1st_week.databinding.ProjectTodoBinding
 import com.github.mikephil.charting.animation.Easing
@@ -29,13 +31,13 @@ class TodoAdapter (private val context: Context): RecyclerView.Adapter<TodoAdapt
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoAdapter.ViewHolder {
         var todoBinding = ProjectTodoBinding.inflate(LayoutInflater.from(context))
-//        var viewpager = ProjectItemBacksideBinding.inflate(LayoutInflater.from(context))
         var viewpager = ProjectAdapter.projectItemBinding.projectItemAfterFolding
+//        var viewpager2 = parent.context.supp
+//        var viewpager = ProjectItemBacksideBinding.inflate(LayoutInflater.from(context))
+//        var viewpager = projectItemBinding.projectItemAfterFolding
 
         todoBinding.todoText.setOnClickListener(object : View.OnClickListener{
             override fun onClick(view: View) {
-                viewpager.leaderName.text = "213123213"
-                viewpager.leaderName.invalidate()
                 val checked = todoBinding.todoText.isChecked
                 when(checked) {
                     true -> {
@@ -44,21 +46,23 @@ class TodoAdapter (private val context: Context): RecyclerView.Adapter<TodoAdapt
                         checkedNum += 1
 
                         setDataToPieChart(viewpager.chart, 1400)
-                        viewpager.chart.invalidate()
-
+//                        viewpager.chart.invalidate()
+//                        ThirdFragment.fragmentThirdBinding.projectList.adapter?.notifyItemChanged(2)
 
                     }
                     false -> {
                         todoBinding.todoText.setTextColor(ContextCompat.getColor(context, R.color.darknavy))
                         checkedNum -= 1
                         setDataToPieChart(viewpager.chart, 1400)
-                        viewpager.chart.invalidate()
+//                        viewpager.chart.invalidate()
+                        notifyDataSetChanged()
                     }
                 }
             }
         })
         return ViewHolder(todoBinding.root)
     }
+
     fun setDataToPieChart(pieChart: PieChart, duration:Int) {
         pieChart.setUsePercentValues(true)
         val dataEntries = ArrayList<PieEntry>()
@@ -67,8 +71,8 @@ class TodoAdapter (private val context: Context): RecyclerView.Adapter<TodoAdapt
         var did = (checkedNum.toFloat()/total)*100
         var notdid = (100 - did).toFloat()
         println("did : ${did}")
-        dataEntries.add(PieEntry(35f, ""))
-        dataEntries.add(PieEntry(65f, ""))
+        dataEntries.add(PieEntry(did, ""))
+        dataEntries.add(PieEntry(notdid, ""))
 
         val colors: ArrayList<Int> = ArrayList()
         colors.add(ContextCompat.getColor(context, R.color.samsung))
@@ -100,19 +104,19 @@ class TodoAdapter (private val context: Context): RecyclerView.Adapter<TodoAdapt
         pieChart.invalidate()
     }
 
-    override fun getItemCount(): Int {
-        return todoList.size
-    }
+    override fun getItemCount(): Int { return todoList.size }
 
     override fun onBindViewHolder(holder: TodoAdapter.ViewHolder, position: Int) {
-        println("position : ${todoList[position]}")
+//        println("position : ${todoList[position]}")
         holder.bind(todoList[position])
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val view = itemView.findViewById<TextView>(R.id.todo_text)
+//        private val dday: TextView = itemView.findViewById(R.id.project_d_day)
+
         fun bind(item: String) {
-            view.text = item
+            itemView.findViewById<TextView>(R.id.todo_text).text = item
+//            dday.text = "dsfdsfds"
         }
 
     }
