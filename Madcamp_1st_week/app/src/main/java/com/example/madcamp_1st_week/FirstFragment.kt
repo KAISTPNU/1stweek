@@ -11,8 +11,7 @@ import androidx.annotation.NonNull
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.madcamp_1st_week.databinding.FragmentFirstBinding
-import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-import me.relex.circleindicator.CircleIndicator
+
 import me.relex.circleindicator.CircleIndicator3
 
 
