@@ -98,18 +98,18 @@ class JobAdapter (private val context: Context): RecyclerView.Adapter<JobAdapter
             txtDetailJob.text = item.detailjob
             txtCompany.text = item.company
 
-            itemView.setOnClickListener(View.OnClickListener {
-                (context as MainActivity).supportFragmentManager.beginTransaction()
-                    .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
-                    .replace(R.id.fragment, SecondFragment())
-                    .commitAllowingStateLoss()
-                (context as MainActivity).findViewById<BottomNavigationView>(R.id.navBar).selectedItemId=R.id.nav_second
-            })
+//            itemView.setOnClickListener(View.OnClickListener {
+//                (context as MainActivity).supportFragmentManager.beginTransaction()
+//                    .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+//                    .replace(R.id.fragment, SecondFragment())
+//                    .commitAllowingStateLoss()
+//                (context as MainActivity).findViewById<BottomNavigationView>(R.id.navBar).selectedItemId=R.id.nav_second
+//            })
 
             val profileCardBorder = itemView.findViewById<LinearLayout>(R.id.profile_card_border)
             val deleteButton = itemView.findViewById<ImageButton>(R.id.delete)
 
-            when(item.company.toString()) {
+            when(item.company.uppercase()) {
                 "SAMSUNG" -> {
                     profileCardBorder.setBackgroundColor(ContextCompat.getColor(context, R.color.samsung))
                     deleteButton.setColorFilter(ContextCompat.getColor(context, R.color.samsung))
