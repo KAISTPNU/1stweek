@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.madcamp_1st_week.databinding.FragmentThirdBinding
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
@@ -79,7 +80,7 @@ class ThirdFragment : Fragment() {
         projectAdapter.itemList = projectList
         binding.projectList.adapter = projectAdapter
 //        binding.projectList.adapter = projectAdapter
-
+        binding.projectList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         initPieChart(binding.pieChart1)
         setDataToPieChart(binding.pieChart1, 1400)
 

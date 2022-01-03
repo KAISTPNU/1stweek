@@ -3,15 +3,13 @@ package com.example.madcamp_1st_week
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.res.ColorStateList
+import android.database.DataSetObserver
 import android.graphics.Color
 import android.graphics.ColorFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -67,20 +65,22 @@ class ProjectAdapter(private val context: Context):
             title.text = item.title
             backname.text = item.leader
             frontname.text = item.leader
-            dday.text = "D-" + item.d_day.toString()
+            dday.text = "D - " + item.d_day.toString()
             phone.text = item.phone
             email.text = item.email
             participants.text = item.participants
-            initPieChart(chart)
-            setDataToPieChart(chart, 1400)
+//            initPieChart(chart)
+//            setDataToPieChart(chart, 1400)
             var todoAdapter = TodoAdapter(context)
             todoAdapter.todoList = item.todo
             todo.adapter = todoAdapter
             fold.setOnClickListener(View.OnClickListener { view->
                 fold.toggle(false)
             })
+
             todoAdapter = TodoAdapter(context)
             todoAdapter.todoList = item.todo
+
             todo.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
             todo.adapter = todoAdapter

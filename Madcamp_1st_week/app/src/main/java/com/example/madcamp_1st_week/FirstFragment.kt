@@ -55,7 +55,14 @@ class FirstFragment : Fragment() {
             var detailjob = jsonObject.getString("detailjob")
             var company = jsonObject.getString("company")
 
-            var position = 0
+            var position = when(job.uppercase()) {
+                "DEVELOPER"-> 0
+                "DESIGNER"-> 1
+                "ENGINEER"-> 2
+                "PM"-> 3
+                else -> 4
+            }
+
             profileAdapterList[position].itemList.add(ProfileItem(name, email, phone, job, detailjob, company))
             profileAdapterList[position].writeJsonData()
         }
@@ -74,7 +81,7 @@ class FirstFragment : Fragment() {
         viewpagerView = binding.viewpager
         dotsIncicator = binding.dotsIndicator
 
-        binding.viewpager.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+        binding.viewpager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         binding.viewpager.adapter = profileAdapterList[0]
         binding.dotsIndicator.setViewPager(binding.viewpager)
 
@@ -82,6 +89,7 @@ class FirstFragment : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 binding.viewpager.adapter = profileAdapterList[position]
                 binding.devImage.setImageResource(devImageResourceList[position])
+                binding.dotsIndicator.setViewPager(binding.viewpager)
             }
             override fun onNothingSelected(p0: AdapterView<*>?) { }
         }
