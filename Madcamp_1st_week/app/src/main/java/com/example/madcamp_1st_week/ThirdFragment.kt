@@ -60,6 +60,7 @@ class ThirdFragment : Fragment() {
 
             ))
         }
+
         for (i in 1..2) {
             projectList.add(ProjectItem("MadCamp 1st Week Proj.",
                 "Kotlin",
@@ -68,7 +69,7 @@ class ThirdFragment : Fragment() {
                 LocalDate.of(2021, 12, 28),
                 LocalDate.of(2022, 1, 4),
                 "Juhyeon Lee, Junyoung Lee",
-                mutableListOf("Make Tap for collecting at least 20 pictures"),
+                mutableListOf<String>("Make Tap for collecting at least 20 pictures", "Hi hello", "Testing", "Test View"),
                 "testemail@naver.com",
                 "010-1234-5678"))
         }
