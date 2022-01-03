@@ -1,5 +1,7 @@
 package com.example.madcamp_1st_week
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -63,6 +65,18 @@ class ContactAddFragment : Fragment() {
             bundle.putString("profile", jsonObject.toString())
             var firstFragment = FirstFragment()
             firstFragment.arguments = bundle
+
+            val popup = AlertDialog.Builder(context)
+            popup
+//                .setMessage("Do you want to delete it?")
+                .setView(R.layout.dialog_item)
+                .setPositiveButton("Yes", DialogInterface.OnClickListener { dialogInterface, i ->
+                    Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show()
+                })
+                .setNegativeButton("No", DialogInterface.OnClickListener { dialogInterface, i ->
+                    //Toast.makeText(context, "Cancel", Toast.LENGTH_SHORT).show()
+                })
+            popup.show()
 
             activity?.supportFragmentManager?.beginTransaction()
                 ?.setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
