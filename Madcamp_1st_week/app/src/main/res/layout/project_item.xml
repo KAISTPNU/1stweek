@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:folding-cell="http://schemas.android.com/apk/res-auto"
-    xmlns:layout="http://schemas.android.com/tools">
+    android:layout_margin="5dp">
     <com.ramotion.foldingcell.FoldingCell
         android:id="@+id/folding_cell"
         android:layout_width="match_parent"
@@ -12,7 +12,7 @@
         android:clipChildren="false"
         android:clipToPadding="false"
         folding-cell:cameraHeight="30"
-        folding-cell:animationDuration="850"
+        folding-cell:animationDuration="500"
         folding-cell:additionalFlipsCount="2">
         <FrameLayout
             android:id="@+id/cell_content_view"
@@ -21,7 +21,7 @@
             android:visibility="gone">
             <include
                 android:id="@+id/project_item_after_folding"
-                layout="@layout/project_item_backside"/>
+                layout="@layout/project_item_backside" />
         </FrameLayout>
         <FrameLayout
             android:id="@+id/cell_title_view"
