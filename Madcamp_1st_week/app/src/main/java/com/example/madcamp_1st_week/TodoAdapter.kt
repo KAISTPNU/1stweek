@@ -14,22 +14,32 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
+import com.example.madcamp_1st_week.databinding.ProjectTodoBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.w3c.dom.Text
 
 class TodoAdapter (private val context: Context): RecyclerView.Adapter<TodoAdapter.ViewHolder>() {
     var todoList = mutableListOf<String>()
-    private lateinit var checkbutton : ImageButton
+    var checkedNum = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoAdapter.ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.project_todo,parent,false)
-        checkbutton = view.findViewById<ImageButton>(R.id.todo_check)
-        checkbutton.setOnClickListener(object : View.OnClickListener{
-            override fun onClick(p0: View?) {
-                view.findViewById<TextView>(R.id.todo_text).setTextColor(ContextCompat.getColor(context, R.color.lightgray))
+        var todoBinding = ProjectTodoBinding.inflate(LayoutInflater.from(context))
+        todoBinding.todoText.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(view: View) {
+                val checked = todoBinding.todoText.isChecked
+                when(checked) {
+                    true -> {
+                        todoBinding.todoText.setTextColor(ContextCompat.getColor(context, R.color.gray))
+                        checkedNum += 1
+                    }
+                    false -> {
+                        todoBinding.todoText.setTextColor(ContextCompat.getColor(context, R.color.darknavy))
+                        checkedNum -= 1
+                    }
+                }
             }
         })
-        return ViewHolder(view)
+        return ViewHolder(todoBinding.root)
     }
 
 
@@ -39,14 +49,13 @@ class TodoAdapter (private val context: Context): RecyclerView.Adapter<TodoAdapt
 
     override fun onBindViewHolder(holder: TodoAdapter.ViewHolder, position: Int) {
         holder.bind(todoList[position])
+        println("position : ${todoList[position]}")
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
-        private val todo: TextView = itemView.findViewById(R.id.todo_text)
-
+        val view = itemView.findViewById<TextView>(R.id.todo_text)
         fun bind(item: String) {
-            todo.text = item
+            view.text = item
         }
 
     }

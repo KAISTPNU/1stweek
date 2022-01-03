@@ -14,8 +14,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.madcamp_1st_week.databinding.ProjectItemBinding
 import com.example.madcamp_1st_week.databinding.ProjectItemTitleBinding
+import com.github.mikephil.charting.animation.Easing
+import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.formatter.PercentFormatter
 
 /*
     ProjectItem을 처리하기 위한 Adapter Class
@@ -23,6 +31,7 @@ import com.example.madcamp_1st_week.databinding.ProjectItemTitleBinding
 class ProjectAdapter(private val context: Context):
     BaseAdapter() {
     var itemList = mutableListOf<ProjectItem>()
+    var checkedNum = 0
     private lateinit var todoAdapter: TodoAdapter
 
     override fun getCount(): Int {
@@ -38,12 +47,11 @@ class ProjectAdapter(private val context: Context):
     }
 
     override fun getView(position: Int, view: View?, viewGroup: ViewGroup?): View {
-        val projectItem = itemList[position] // 현재 ProjectItem을 가져옴
+        var projectItemBinding = ProjectItemBinding.inflate(LayoutInflater.from(context)) // view 처리를 위한 Binding
 
+        val projectItem = itemList[position] // 현재 ProjectItem을 가져옴
         todoAdapter = TodoAdapter(context)
         todoAdapter.todoList = projectItem.todo
-
-        var projectItemBinding = ProjectItemBinding.inflate(LayoutInflater.from(context)) // view 처리를 위한 Binding
 
         projectItemBinding.projectItemBeforeFolding.projectTitle.text = projectItem.title
         // project 아이템의 title(펼치기 전의 레이아웃)을 현재 프로젝트의 제목으로 설정
@@ -58,8 +66,12 @@ class ProjectAdapter(private val context: Context):
 
         setProjectProgressBar(projectItemBinding.projectItemBeforeFolding, projectItem.status)
 
+        projectItemBinding.projectItemAfterFolding.todoList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
         projectItemBinding.projectItemAfterFolding.todoList.adapter = todoAdapter
 
+        initPieChart(projectItemBinding.projectItemAfterFolding.chart)
+        setDataToPieChart(projectItemBinding.projectItemAfterFolding.chart, 1400)
 
 
         projectItemBinding.foldingCell.setOnClickListener(View.OnClickListener { view->
@@ -87,6 +99,58 @@ class ProjectAdapter(private val context: Context):
 
         return projectItemBinding.root
     }
+    fun initPieChart(pieChart: PieChart) {
+        pieChart.setUsePercentValues(true)
+        pieChart.description.text = ""
+        pieChart.isDrawHoleEnabled = false
+        pieChart.setTouchEnabled(false)
+
+        pieChart.setUsePercentValues(true)
+        pieChart.setDrawEntryLabels(false)
+        pieChart.legend.orientation = Legend.LegendOrientation.VERTICAL
+        pieChart.legend.isWordWrapEnabled = true
+    }
+
+    fun setDataToPieChart(pieChart: PieChart, duration:Int) {
+        pieChart.setUsePercentValues(true)
+        val dataEntries = ArrayList<PieEntry>()
+        dataEntries.add(PieEntry(45f, "Kotlin"))
+        dataEntries.add(PieEntry(28f, "Python"))
+        dataEntries.add(PieEntry(27f, "C/C++"))
+
+        val colors: ArrayList<Int> = ArrayList()
+        colors.add(ContextCompat.getColor(context, R.color.samsung))
+        colors.add(ContextCompat.getColor(context, R.color.kakao))
+        colors.add(ContextCompat.getColor(context, R.color.darknavy))
+
+        val dataSet = PieDataSet(dataEntries, "")
+        val data = PieData(dataSet)
+
+        // In Percentage
+        data.setValueFormatter(PercentFormatter())
+        dataSet.sliceSpace = 0f
+        dataSet.colors = colors
+        pieChart.data = data
+        data.setValueTextSize(0f)
+        pieChart.setExtraOffsets(5f, 10f, 5f, 5f)
+        pieChart.animateY(duration, Easing.EaseInOutQuad)
+
+        //create hole in center
+        pieChart.holeRadius = 80f
+        pieChart.transparentCircleRadius = 61f
+        pieChart.isDrawHoleEnabled = true
+        pieChart.setHoleColor(ContextCompat.getColor(context, R.color.white))
+
+
+        //add text in center
+        pieChart.setDrawCenterText(true);
+        pieChart.centerText = "Project\nLanguage Ratio"
+        pieChart.setCenterTextSize(12f)
+//        pieChart.setCenterTextTypeface(resources.getFont(R.font.uber_move_medium))
+
+        pieChart.invalidate()
+    }
+
 
     /*
         프로젝트 아이템의 Progress 바를 설정해주는 함수
