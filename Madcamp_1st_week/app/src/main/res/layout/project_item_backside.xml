@@ -77,7 +77,7 @@
                             android:fontFamily="@font/uber_move_medium"/>
 
                         <TextView
-                            android:id="@+id/name"
+                            android:id="@+id/leader_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Jang Byeong Gyu"

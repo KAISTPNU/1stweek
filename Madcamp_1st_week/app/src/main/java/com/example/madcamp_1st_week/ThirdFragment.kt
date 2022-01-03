@@ -77,10 +77,12 @@ class ThirdFragment : Fragment() {
         projectAdapter = ProjectAdapter(this.requireContext())
 
         projectAdapter.itemList = projectList
+        binding.projectList.adapter = projectAdapter
 //        binding.projectList.adapter = projectAdapter
 
         initPieChart(binding.pieChart1)
         setDataToPieChart(binding.pieChart1, 1400)
+
         return binding.root
     }
 
