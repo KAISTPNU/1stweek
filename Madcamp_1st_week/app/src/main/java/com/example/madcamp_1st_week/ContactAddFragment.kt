@@ -53,19 +53,19 @@ class ContactAddFragment : Fragment() {
 
             when(job.uppercase()) {
                 "DEVELOPER" -> FirstFragment.developerList
-                    .add(JobItem(name, phone, email, job, detailjob, company))
+                    .add(ProfileItem(name, phone, email, job, detailjob, company))
 
                 "DESIGNER" -> FirstFragment.designerList
-                    .add(JobItem(name, phone, email, job, detailjob, company))
+                    .add(ProfileItem(name, phone, email, job, detailjob, company))
 
                 "ENGINEER" -> FirstFragment.engineerList
-                    .add(JobItem(name, phone, email, job, detailjob, company))
+                    .add(ProfileItem(name, phone, email, job, detailjob, company))
 
                 "PM" -> FirstFragment.pmList
-                    .add(JobItem(name, phone, email, job, detailjob, company))
+                    .add(ProfileItem(name, phone, email, job, detailjob, company))
 
                 else -> FirstFragment.etcList
-                        .add(JobItem(name, phone, email, job, detailjob, company))
+                        .add(ProfileItem(name, phone, email, job, detailjob, company))
             }
 
 //            if (job.uppercase().equals("DEVELOPER")) {

@@ -14,40 +14,23 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import android.content.DialogInterface
 import android.widget.Toast
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.madcamp_1st_week.databinding.FragmentFirstBinding
 import org.json.JSONArray
 
 
-class JobAdapter (private val context: Context, private val fileName: String): RecyclerView.Adapter<JobAdapter.ViewHolder>(){
+class ProfileAdapter (private val context: Context, private val fileName: String): RecyclerView.Adapter<ProfileAdapter.ViewHolder>(){
+    private lateinit var viewPagerBinding: FragmentFirstBinding
 
-//    var designers = mutableListOf<JobItem>()
-//    var developers = mutableListOf<JobItem>()
-//    var engineers = mutableListOf<JobItem>()
-//    var pms = mutableListOf<JobItem>()
-//    var etcs = mutableListOf<JobItem>()
+    var itemList = mutableListOf<ProfileItem>()
+    private lateinit var jsonArray: JSONArray
 
-    var itemList = mutableListOf<JobItem>()
-    lateinit var jsonArray: JSONArray
-
-//    var job: Int = 0
     private lateinit var deleteBtn : ImageButton
 
-    fun readJsonData() {
-        val jsonString = context?.assets?.open("profileList.json")?.reader()?.readText()
-        val jsonArray = JSONArray(jsonString)
-        for (i in 0 until jsonArray.length()) {
-            val jsonObject = jsonArray.getJSONObject(i)
-            val name = jsonObject.getString("name")
-            val email = jsonObject.getString("email")
-            val phone = jsonObject.getString("phone")
-            val job = jsonObject.getString("job")
-            val detailjob = jsonObject.getString("detailjob")
-            val company = jsonObject.getString("company")
-            itemList.add(JobItem(name, email, phone, job, detailjob, company))
-        }
-    }
+    init { readJsonData() }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JobAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileAdapter.ViewHolder {
+        viewPagerBinding = FragmentFirstBinding.inflate(LayoutInflater.from(context))
+
         val view = LayoutInflater.from(context).inflate(R.layout.contact_item,parent,false)
         deleteBtn = view.findViewById<ImageButton>(R.id.delete)
         var viewholder = ViewHolder(view)
@@ -75,32 +58,14 @@ class JobAdapter (private val context: Context, private val fileName: String): R
         var index = viewpagerView.currentItem
 
         viewholder.unbind(index)
-        notifyDataSetChanged()
+//        viewPagerBinding.viewpager.adapter = this
+//        viewPagerBinding.dotsIndicator.setViewPager2(viewPagerBinding.viewpager)
+//        notifyDataSetChanged()
     }
 
-    override fun getItemCount(): Int {
-//        var count: Int = 0
-//        when(job) {
-//            0 -> count = developers.size
-//            1 -> count = designers.size
-//            2 -> count = engineers.size
-//            3 -> count = pms.size
-//            4 -> count = etcs.size
-//        }
-//        return count
-        return itemList.size
-    }
+    override fun getItemCount(): Int { return itemList.size }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//        when(job) {
-//            0 -> holder.bind(developers[position])
-//            1 -> holder.bind(designers[position])
-//            2 -> holder.bind(engineers[position])
-//            3 -> holder.bind(pms[position])
-//            4 -> holder.bind(etcs[position])
-//        }
-        holder.bind(itemList[position])
-    }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) { holder.bind(itemList[position]) }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -111,19 +76,19 @@ class JobAdapter (private val context: Context, private val fileName: String): R
         private val txtCompany: TextView = itemView.findViewById(R.id.company)
 
         @SuppressLint("ResourceAsColor")
-        fun bind(item: JobItem) {
-            txtName.text = item.name
-            txtPhone.text = item.phone
-            txtEmail.text = item.email
-            txtDetailJob.text = item.detailjob
-            txtCompany.text = item.company
+                fun bind(item: ProfileItem) {
+                    txtName.text = item.name
+                    txtPhone.text = item.phone
+                    txtEmail.text = item.email
+                    txtDetailJob.text = item.detailjob
+                    txtCompany.text = item.company
 
-            val profileCardBorder = itemView.findViewById<LinearLayout>(R.id.profile_card_border)
-            val deleteBtn = itemView.findViewById<ImageButton>(R.id.delete)
+                    val profileCardBorder = itemView.findViewById<LinearLayout>(R.id.profile_card_border)
+                    val deleteBtn = itemView.findViewById<ImageButton>(R.id.delete)
 
-            when(item.company.uppercase()) {
-                "SAMSUNG" -> setColorOfProfileCardBorderAndDeleteButton(profileCardBorder, deleteBtn, R.color.samsung)
-                "KAKAO" -> setColorOfProfileCardBorderAndDeleteButton(profileCardBorder, deleteBtn, R.color.kakao)
+                    when(item.company.uppercase()) {
+                        "SAMSUNG" -> setColorOfProfileCardBorderAndDeleteButton(profileCardBorder, deleteBtn, R.color.samsung)
+                        "KAKAO" -> setColorOfProfileCardBorderAndDeleteButton(profileCardBorder, deleteBtn, R.color.kakao)
                 "NAVER" -> setColorOfProfileCardBorderAndDeleteButton(profileCardBorder, deleteBtn, R.color.naver)
                 "FACEBOOK" -> setColorOfProfileCardBorderAndDeleteButton(profileCardBorder, deleteBtn, R.color.facebook)
                 "APPLE" -> setColorOfProfileCardBorderAndDeleteButton(profileCardBorder, deleteBtn, R.color.apple)
@@ -136,18 +101,33 @@ class JobAdapter (private val context: Context, private val fileName: String): R
             deleteBtn.setColorFilter(ContextCompat.getColor(context, color))
         }
 
-
-
         fun unbind(position: Int) {
-//            when(job) {
-//                0 -> developers.removeAt(position)
-//                1 -> designers.removeAt(position)
-//                2 -> engineers.removeAt(position)
-//                3 -> pms.removeAt(position)
-//                4 -> etcs.removeAt(position)
-//            }
             itemList.removeAt(position)
+            jsonArray.remove(position)
+            FirstFragment.firstFragmentBinding.viewpager.adapter = this@ProfileAdapter
+            if (position > itemList.size) { FirstFragment.firstFragmentBinding.viewpager.currentItem = itemList.size }
+            else {  FirstFragment.firstFragmentBinding.viewpager.currentItem = position }
+            notifyDataSetChanged()
+            FirstFragment.firstFragmentBinding.dotsIndicator.setViewPager(FirstFragment.firstFragmentBinding.viewpager)
         }
+    }
 
+    fun writeJsonData() {
+
+    }
+
+    fun readJsonData() {
+        val jsonString = context?.assets?.open(fileName)?.reader()?.readText()
+        jsonArray = JSONArray(jsonString)
+        for (i in 0 until jsonArray.length()) {
+            val jsonObject = jsonArray.getJSONObject(i)
+            val name = jsonObject.getString("name")
+            val email = jsonObject.getString("email")
+            val phone = jsonObject.getString("phone")
+            val job = jsonObject.getString("job")
+            val detailjob = jsonObject.getString("detailjob")
+            val company = jsonObject.getString("company")
+            itemList.add(ProfileItem(name, email, phone, job, detailjob, company))
+        }
     }
 }

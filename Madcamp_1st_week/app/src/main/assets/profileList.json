@@ -14,5 +14,37 @@
     "job": "DEVELOPER",
     "detailjob": "Founder",
     "company": "Krafton"
+  },
+  {
+    "name": "Beomsu Kim",
+    "email": "ceo@kakao.com",
+    "phone": "010-1234-5678",
+    "job": "DEVELOPER",
+    "detailjob": "CEO",
+    "company": "Kakao"
+  },
+  {
+    "name": "Byeongkyu Chang",
+    "email": "krafton@krafton.com",
+    "phone": "010-1234-5678",
+    "job": "DEVELOPER",
+    "detailjob": "Founder",
+    "company": "Krafton"
+  },
+  {
+    "name": "Beomsu Kim",
+    "email": "ceo@kakao.com",
+    "phone": "010-1234-5678",
+    "job": "DEVELOPER",
+    "detailjob": "CEO",
+    "company": "Kakao"
+  },
+  {
+    "name": "Byeongkyu Chang",
+    "email": "krafton@krafton.com",
+    "phone": "010-1234-5678",
+    "job": "DEVELOPER",
+    "detailjob": "Founder",
+    "company": "Krafton"
   }
 ]
