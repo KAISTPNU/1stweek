@@ -12,6 +12,7 @@ import android.widget.BaseAdapter
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,6 +36,8 @@ class ProjectAdapter(private val context: Context):
     var checkedNum = 0
     private lateinit var todoAdapter: TodoAdapter
 
+//    init { todoAdapter = TodoAdapter(context) }
+
     override fun getCount(): Int {
         return itemList.size
     }
@@ -52,24 +55,19 @@ class ProjectAdapter(private val context: Context):
 
         val projectItem = itemList[position] // 현재 ProjectItem을 가져옴
         todoAdapter = TodoAdapter(context)
+
         todoAdapter.todoList = projectItem.todo
 
         projectItemBinding.projectItemBeforeFolding.projectTitle.text = projectItem.title
-        // project 아이템의 title(펼치기 전의 레이아웃)을 현재 프로젝트의 제목으로 설정
-        // 아래 코드들도 거의 동일합니다
-
         projectItemBinding.projectItemBeforeFolding.projectLeader.text = projectItem.leader
         projectItemBinding.projectItemBeforeFolding.projectDDay.text = "D - " + projectItem.d_day.toString()
+        setProjectProgressBar(projectItemBinding.projectItemBeforeFolding, projectItem.status)
 
         projectItemBinding.projectItemAfterFolding.name.text = projectItem.leader
         projectItemBinding.projectItemAfterFolding.phone.text = projectItem.phone
         projectItemBinding.projectItemAfterFolding.participants.text = projectItem.participants
-
-        setProjectProgressBar(projectItemBinding.projectItemBeforeFolding, projectItem.status)
-
-        projectItemBinding.projectItemAfterFolding.todoList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-
         projectItemBinding.projectItemAfterFolding.todoList.adapter = todoAdapter
+        projectItemBinding.projectItemAfterFolding.todoList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
 
         fragment = projectItemBinding
@@ -79,8 +77,10 @@ class ProjectAdapter(private val context: Context):
         setDataToPieChart(projectItemBinding.projectItemAfterFolding.chart, 1400)
 
         projectItemBinding.foldingCell.setOnClickListener(View.OnClickListener { view->
-            projectItemBinding.foldingCell.toggle(false)
+            projectItemBinding.foldingCell.toggle(true)
+            projectItemBinding.projectItemAfterFolding.temp.visibility = CardView.VISIBLE
         })
+
 
         when(projectItem.language) { // 프로젝트 언어별로 색상을 다르게 지정
             "Python" -> {
@@ -170,6 +170,7 @@ class ProjectAdapter(private val context: Context):
         progressBarAnimation.setDuration(1000) // 애니메이션 실행 시간 지정 (단위는 ms)
         progressBarAnimation.start()
     }
+
 
     companion object{
         lateinit var fragment : ProjectItemBinding
