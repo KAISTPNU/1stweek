@@ -45,34 +45,34 @@ class ThirdFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         projectList.clear()
-        for (i in 1..2) {
-            projectList.add(ProjectItem("MadCamp 1st Week Proj.",
-
-                "Python",
-                "Juhyeon Lee",
-                78,
-                LocalDate.of(2021, 12, 28),
-                LocalDate.of(2022, 1, 4),
-                "Juhyeon Lee, Junyoung Lee",
-                listOf<String>("Make Tap for collecting at least 20 pictures", "Test", "Hi", "Hello", "Testing"),
-                "testemail@naver.com",
-                "010-1234-5678"
-
-            ))
-        }
-
-        for (i in 1..2) {
-            projectList.add(ProjectItem("MadCamp 1st Week Proj.",
-                "Kotlin",
-                "Junyoung Lee",
-                78,
-                LocalDate.of(2021, 12, 28),
-                LocalDate.of(2022, 1, 4),
-                "Juhyeon Lee, Junyoung Lee",
-                listOf<String>("Make Tap for collecting at least 20 pictures", "Test", "Hi", "Hello", "Testing"),
-                "testemail@naver.com",
-                "010-1234-5678"))
-        }
+//        for (i in 1..2) {
+//            projectList.add(ProjectItem("MadCamp 1st Week Proj.",
+//
+//                "Python",
+//                "Juhyeon Lee",
+//                78,
+//                LocalDate.of(2021, 12, 28),
+//                LocalDate.of(2022, 1, 4),
+//                "Juhyeon Lee, Junyoung Lee",
+//                listOf<String>("Make Tap for collecting at least 20 pictures", "Test", "Hi", "Hello", "Testing"),
+//                "testemail@naver.com",
+//                "010-1234-5678"
+//
+//            ))
+//        }
+//
+//        for (i in 1..2) {
+//            projectList.add(ProjectItem("MadCamp 1st Week Proj.",
+//                "Kotlin",
+//                "Junyoung Lee",
+//                78,
+//                LocalDate.of(2021, 12, 28),
+//                LocalDate.of(2022, 1, 4),
+//                "Juhyeon Lee, Junyoung Lee",
+//                listOf<String>("Make Tap for collecting at least 20 pictures", "Test", "Hi", "Hello", "Testing"),
+//                "testemail@naver.com",
+//                "010-1234-5678"))
+//        }
     }
 
     override fun onCreateView(
