@@ -24,9 +24,7 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import org.json.JSONArray
 import org.json.JSONObject
-import java.io.BufferedWriter
-import java.io.File
-import java.io.FileWriter
+import java.io.*
 import java.time.Duration
 import java.time.LocalDate
 import java.time.LocalDate.of
@@ -40,39 +38,13 @@ class ThirdFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var projectAdapter: ProjectAdapter
+    private lateinit var jsonArray: JSONArray
     val projectList = mutableListOf<ProjectItem>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        readJsonData()
         projectList.clear()
-//        for (i in 1..2) {
-//            projectList.add(ProjectItem("MadCamp 1st Week Proj.",
-//
-//                "Python",
-//                "Juhyeon Lee",
-//                78,
-//                LocalDate.of(2021, 12, 28),
-//                LocalDate.of(2022, 1, 4),
-//                "Juhyeon Lee, Junyoung Lee",
-//                listOf<String>("Make Tap for collecting at least 20 pictures", "Test", "Hi", "Hello", "Testing"),
-//                "testemail@naver.com",
-//                "010-1234-5678"
-//
-//            ))
-//        }
-//
-//        for (i in 1..2) {
-//            projectList.add(ProjectItem("MadCamp 1st Week Proj.",
-//                "Kotlin",
-//                "Junyoung Lee",
-//                78,
-//                LocalDate.of(2021, 12, 28),
-//                LocalDate.of(2022, 1, 4),
-//                "Juhyeon Lee, Junyoung Lee",
-//                listOf<String>("Make Tap for collecting at least 20 pictures", "Test", "Hi", "Hello", "Testing"),
-//                "testemail@naver.com",
-//                "010-1234-5678"))
-//        }
     }
 
     override fun onCreateView(
@@ -91,7 +63,6 @@ class ThirdFragment : Fragment() {
 
         projectAdapter.itemList = projectList
         binding.projectList.adapter = projectAdapter
-
         val args = arguments
         if (args != null) {
             var jsonString = args.getString("project")
@@ -129,6 +100,39 @@ class ThirdFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    fun readJsonData() {
+        projectList.clear()
+        var jsonFile = File(context?.filesDir, "project.json")
+        when (jsonFile.exists()) {
+            true -> {
+                var reader = FileReader(jsonFile)
+                var jsonString = BufferedReader(reader).readText()
+                if (!jsonString.isNullOrBlank()) {
+                    jsonArray = JSONArray(jsonString)
+                    for (i in 0 until jsonArray.length()) {
+                        val jsonObject = jsonArray.getJSONObject(i)
+                        val title = jsonObject.getString("title")
+                        val leader = jsonObject.getString("name")
+                        val language = jsonObject.getString("language")
+                        val status = jsonObject.getString("status").toInt()
+                        val startDate = jsonObject.getString("startDate")
+                        val endDate = jsonObject.getString("endDate")
+                        val participants = jsonObject.getString("participants")
+                        val todo = jsonObject.getString("todo").split(", ", "[", "]")
+                        val email = jsonObject.getString("email")
+                        val phone = jsonObject.getString("phone")
+
+                        projectList.add(ProjectItem(title, language, leader, status
+                            , LocalDate.parse(startDate, DateTimeFormatter.ofPattern("yyyy-M-d"))
+                            , LocalDate.parse(endDate, DateTimeFormatter.ofPattern("yyyy-M-d"))
+                            , participants, todo, email, phone))
+                    }
+                }
+            }
+            false -> File(context?.filesDir, "project.json").createNewFile()
+        }
     }
 
     fun writeJsonData(item: ProjectItem) {
