@@ -70,24 +70,17 @@
                             android:textSize="10dp"
                             android:fontFamily="@font/uber_move_medium"
                             android:textColor="@color/darknavy"/>
-                        <androidx.constraintlayout.widget.ConstraintLayout
+                        <TextView
+                            android:id="@+id/project_title"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <TextView
-                                android:id="@+id/project_title"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Madcamp 1st Week Proj."
-                                android:singleLine="true"
-                                android:ellipsize="marquee"
-                                android:textSize="15dp"
-                                android:focusable="true"
-                                android:marqueeRepeatLimit="marquee_forever"
-                                android:textStyle="bold"
-                                android:fontFamily="@font/uber_move_medium"
-                                android:textColor="@color/darknavy"/>
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
+                            android:layout_height="wrap_content"
+                            android:text="Madcamp 1st Week Proj."
+                            android:textSize="15dp"
+                            android:singleLine="true"
+                            android:ellipsize="marquee"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/uber_move_medium"
+                            android:textColor="@color/darknavy"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"

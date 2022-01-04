@@ -21,15 +21,15 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/leader_info"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="120dp"
                     app:layout_constraintTop_toTopOf="parent">
                     <ImageView
                         android:id="@+id/picture"
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/back_title"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -37,15 +37,33 @@
                         android:src="@drawable/profile_sample"
                         android:tint="@color/white"/>
 
+                    <TextView
+                        android:id="@+id/back_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Project Title"
+                        android:textStyle="bold"
+                        android:paddingTop="10dp"
+                        android:textSize="15dp"
+                        android:singleLine="true"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/uber_move_medium"
+                        android:gravity="center_horizontal"
+                        android:ellipsize="marquee"
+                        android:focusable="true"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        />
+
                     <LinearLayout
                         android:id="@+id/title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+
                         app:layout_constraintLeft_toRightOf="@id/picture"
                         app:layout_constraintWidth_percent="0.7"
                         app:layout_constraintVertical_bias="0.1"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/back_title"
                         app:layout_constraintBottom_toBottomOf="parent"
 
                         android:orientation="horizontal">
@@ -109,6 +127,8 @@
                             android:id="@+id/email"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textSize="12dp"
+                            android:singleLine="true"
                             android:text="testemail@naver.com"
                             android:gravity="right"
                             android:textColor="@color/white"
