@@ -1,6 +1,7 @@
 package com.example.madcamp_1st_week
 
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -10,6 +11,8 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.madcamp_1st_week.databinding.FragmentThirdBinding
 import com.example.madcamp_1st_week.databinding.ProjectItemBinding
 import com.github.mikephil.charting.animation.Easing
@@ -33,33 +36,21 @@ class ThirdFragment : Fragment() {
     private lateinit var projectAdapter: ProjectAdapter
     val projectList = mutableListOf<ProjectItem>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        /*
-            스마트폰 상태바의 색상을 바꿔서 마치 전체화면처럼 보이게 합니다
-         */
-        requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.white)
-
-        _binding = FragmentThirdBinding.inflate(inflater, container, false)
-        fragmentThirdBinding = binding
-        projectAdapter = ProjectAdapter(this.requireContext())
-
-
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        projectList.clear()
         for (i in 1..2) {
             projectList.add(ProjectItem("MadCamp 1st Week Proj.",
 
-                                    "Python",
-                                       "Juhyeon Lee",
-                                         78,
-                                        LocalDate.of(2021, 12, 28),
-                                        LocalDate.of(2022, 1, 4),
-                                        "Juhyeon Lee, Junyoung Lee",
-                                        listOf<String>("Make Tap for collecting at least 20 pictures", "Test", "Hi", "Hello", "Testing"),
-                                        "testemail@naver.com",
-                                        "010-1234-5678"
+                "Python",
+                "Juhyeon Lee",
+                78,
+                LocalDate.of(2021, 12, 28),
+                LocalDate.of(2022, 1, 4),
+                "Juhyeon Lee, Junyoung Lee",
+                listOf<String>("Make Tap for collecting at least 20 pictures", "Test", "Hi", "Hello", "Testing"),
+                "testemail@naver.com",
+                "010-1234-5678"
 
             ))
         }
@@ -76,10 +67,27 @@ class ThirdFragment : Fragment() {
                 "testemail@naver.com",
                 "010-1234-5678"))
         }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+        /*
+            스마트폰 상태바의 색상을 바꿔서 마치 전체화면처럼 보이게 합니다
+         */
+        requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.lightgray)
+
+        _binding = FragmentThirdBinding.inflate(inflater, container, false)
+        fragmentThirdBinding = binding
+        projectAdapter = ProjectAdapter(this.requireContext())
+
         projectAdapter.itemList = projectList
         binding.projectList.adapter = projectAdapter
 
-//        binding.projectList.adapter = projectAdapter
+//        binding.projectList.layoutManager = GridLayoutManager(context, 1)
+
 
         initPieChart(binding.pieChart1)
         setDataToPieChart(binding.pieChart1, 1400)
@@ -114,9 +122,9 @@ class ThirdFragment : Fragment() {
         dataEntries.add(PieEntry(27f, "C/C++"))
 
         val colors: ArrayList<Int> = ArrayList()
-        colors.add(ContextCompat.getColor(requireContext(), R.color.samsung))
-        colors.add(ContextCompat.getColor(requireContext(), R.color.kakao))
-        colors.add(ContextCompat.getColor(requireContext(), R.color.darknavy))
+        colors.add(ContextCompat.getColor(requireContext(), R.color.kotlin))
+        colors.add(ContextCompat.getColor(requireContext(), R.color.python))
+        colors.add(ContextCompat.getColor(requireContext(), R.color.others))
 
         val dataSet = PieDataSet(dataEntries, "")
         val data = PieData(dataSet)
@@ -131,18 +139,19 @@ class ThirdFragment : Fragment() {
         pieChart.animateY(duration, Easing.EaseInOutQuad)
 
         //create hole in center
-        pieChart.holeRadius = 80f
-        pieChart.transparentCircleRadius = 61f
+        pieChart.holeRadius = 30f
+        pieChart.transparentCircleRadius = 51f
         pieChart.isDrawHoleEnabled = true
         pieChart.setHoleColor(ContextCompat.getColor(requireContext(), R.color.white))
 
 
         //add text in center
-        pieChart.setDrawCenterText(true);
-        pieChart.centerText = "Project\nLanguage Ratio"
-        pieChart.setCenterTextSize(12f)
-        pieChart.setCenterTextTypeface(resources.getFont(R.font.uber_move_medium))
+        pieChart.setDrawCenterText(false)
+//        pieChart.centerText = "Project\nLanguage Ratio"
+//        pieChart.setCenterTextSize(12f)
+//        pieChart.setCenterTextTypeface(resources.getFont(R.font.uber_move_medium))
 
+        pieChart.legend.isEnabled = false
         pieChart.invalidate()
     }
     companion object {

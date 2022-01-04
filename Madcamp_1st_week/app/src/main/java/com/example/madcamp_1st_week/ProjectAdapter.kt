@@ -8,6 +8,8 @@ import android.graphics.ColorFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -22,15 +24,11 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
-import com.ramotion.foldingcell.FoldingCell
 
-/*
-    ProjectItem을 처리하기 위한 Adapter Class
- */
 class ProjectAdapter(private val context: Context):
     RecyclerView.Adapter<ProjectAdapter.ViewHolder>() {
 
-    private lateinit var viewpagerBinding : ProjectItemBinding
+    private lateinit var viewpagerBinding: ProjectItemBinding
     var itemList = mutableListOf<ProjectItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectAdapter.ViewHolder {
@@ -52,13 +50,14 @@ class ProjectAdapter(private val context: Context):
     }
 
 
-    inner class ViewHolder(binding : ProjectItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(binding: ProjectItemBinding) : RecyclerView.ViewHolder(binding.root) {
         private val title: TextView = binding.projectItemBeforeFolding.projectTitle
         private val backname: TextView = binding.projectItemAfterFolding.leaderName
         private val frontname: TextView = binding.projectItemBeforeFolding.projectLeader
         private val dday: TextView = binding.projectItemBeforeFolding.projectDDay
         private val phone: TextView = binding.projectItemAfterFolding.phone
         private val email: TextView = binding.projectItemAfterFolding.email
+        private var language: String = ""
         private val participants: TextView = binding.projectItemAfterFolding.participants
         private val chart: PieChart = binding.projectItemAfterFolding.chart
         private val cb1: CheckBox = binding.projectItemAfterFolding.checkbox1
@@ -66,10 +65,15 @@ class ProjectAdapter(private val context: Context):
         private val cb3: CheckBox = binding.projectItemAfterFolding.checkbox3
         private val cb4: CheckBox = binding.projectItemAfterFolding.checkbox4
         private val cb5: CheckBox = binding.projectItemAfterFolding.checkbox5
-        private val fold: FoldingCell = binding.foldingCell
+
+        //        private val fold: FoldingCell = binding.foldingCell
+        private val fold: RelativeLayout = binding.foldingCell
 
         private val frontBorder = binding.projectItemBeforeFolding.projectTitleBorder
         private val backBorder = binding.projectItemAfterFolding.projectTitleBorder
+
+        private val titleView = binding.cellTitleView
+        private val backView = binding.cellContentView
         var checkedNum = 0
 
         fun bind(item: ProjectItem) {
@@ -80,24 +84,44 @@ class ProjectAdapter(private val context: Context):
             phone.text = item.phone
             email.text = item.email
             participants.text = item.participants
+            language = item.language
             initPieChart(chart)
-            setDataToPieChart(chart, 1400, 0)
-            when(item.language.uppercase()) { // 프로젝트 언어별로 색상을 다르게 지정
+            when (item.language.uppercase()) { // 프로젝트 언어별로 색상을 다르게 지정
                 "PYTHON" -> {
                     viewpagerBinding.projectItemBeforeFolding.projectTitleBorder
-                        .setBackgroundColor(ContextCompat.getColor(context, R.color.samsung))
-                    viewpagerBinding.projectItemBeforeFolding.projectProgress.progressTintList = ColorStateList
-                        .valueOf(ContextCompat.getColor(context, R.color.samsung))
+                        .setBackgroundColor(ContextCompat.getColor(context, R.color.python))
+                    viewpagerBinding.projectItemBeforeFolding.projectProgress.progressTintList =
+                        ColorStateList
+                            .valueOf(ContextCompat.getColor(context, R.color.python))
                     viewpagerBinding.projectItemAfterFolding.projectTitleBorder
-                        .setBackgroundColor(ContextCompat.getColor(context, R.color.samsung))
+                        .setBackgroundColor(ContextCompat.getColor(context, R.color.python))
+                    setDataToPieChart(chart, 1400, 0, R.color.python)
+                    viewpagerBinding.projectItemBeforeFolding.projectItemVerticalBar.verticalBar
+                        .setBackgroundColor(ContextCompat.getColor(context, R.color.python))
                 }
                 "KOTLIN" -> {
                     viewpagerBinding.projectItemBeforeFolding.projectTitleBorder
-                        .setBackgroundColor(ContextCompat.getColor(context, R.color.kakao))
-                    viewpagerBinding.projectItemBeforeFolding.projectProgress.progressTintList = ColorStateList
-                        .valueOf(ContextCompat.getColor(context, R.color.kakao))
+                        .setBackgroundColor(ContextCompat.getColor(context, R.color.kotlin))
+                    viewpagerBinding.projectItemBeforeFolding.projectProgress.progressTintList =
+                        ColorStateList
+                            .valueOf(ContextCompat.getColor(context, R.color.kotlin))
                     viewpagerBinding.projectItemAfterFolding.projectTitleBorder
-                        .setBackgroundColor(ContextCompat.getColor(context, R.color.kakao))
+                        .setBackgroundColor(ContextCompat.getColor(context, R.color.kotlin))
+                    setDataToPieChart(chart, 1400, 0, R.color.kotlin)
+                    viewpagerBinding.projectItemBeforeFolding.projectItemVerticalBar.verticalBar
+                        .setBackgroundColor(ContextCompat.getColor(context, R.color.kotlin))
+                }
+                else -> {
+                    viewpagerBinding.projectItemBeforeFolding.projectTitleBorder
+                        .setBackgroundColor(ContextCompat.getColor(context, R.color.others))
+                    viewpagerBinding.projectItemBeforeFolding.projectProgress.progressTintList =
+                        ColorStateList
+                            .valueOf(ContextCompat.getColor(context, R.color.others))
+                    viewpagerBinding.projectItemAfterFolding.projectTitleBorder
+                        .setBackgroundColor(ContextCompat.getColor(context, R.color.others))
+                    setDataToPieChart(chart, 1400, 0, R.color.others)
+                    viewpagerBinding.projectItemBeforeFolding.projectItemVerticalBar.verticalBar
+                        .setBackgroundColor(ContextCompat.getColor(context, R.color.others))
                 }
             }
             cb1.text = item.todo[0]
@@ -106,7 +130,52 @@ class ProjectAdapter(private val context: Context):
             cb4.text = item.todo[3]
             cb5.text = item.todo[4]
             fold.setOnClickListener(View.OnClickListener { view ->
-                this.fold.toggle(false)
+                when (backView.visibility) {
+                    FrameLayout.GONE -> {
+                        var animation =
+                            AnimationUtils.loadAnimation(context, R.anim.project_item_slide_out_top)
+                        animation.duration = 300
+                        animation.setAnimationListener(object : Animation.AnimationListener {
+                            override fun onAnimationStart(p0: Animation?) {
+                            }
+
+                            override fun onAnimationEnd(p0: Animation?) {
+                                titleView.visibility = FrameLayout.GONE
+                                backView.visibility = FrameLayout.VISIBLE
+                                fold.startAnimation(
+                                    AnimationUtils.loadAnimation(
+                                        context,
+                                        R.anim.project_item_slide_in_top
+                                    )
+                                )
+                            }
+
+                            override fun onAnimationRepeat(p0: Animation?) {}
+                        })
+                        fold.startAnimation(animation)
+                    }
+                    else -> {
+                        var animation =
+                            AnimationUtils.loadAnimation(context, R.anim.project_item_slide_out_top)
+                        animation.setAnimationListener(object : Animation.AnimationListener {
+                            override fun onAnimationStart(p0: Animation?) {}
+
+                            override fun onAnimationEnd(p0: Animation?) {
+                                backView.visibility = FrameLayout.GONE
+                                titleView.visibility = FrameLayout.VISIBLE
+                                var anim = AnimationUtils.loadAnimation(
+                                    context,
+                                    R.anim.project_item_slide_in_top
+                                )
+                                anim.duration = 300
+                                fold.startAnimation(anim)
+                            }
+
+                            override fun onAnimationRepeat(p0: Animation?) {}
+                        })
+                        fold.startAnimation(animation)
+                    }
+                }
             })
             listen(cb1, chart)
             listen(cb2, chart)
@@ -114,22 +183,37 @@ class ProjectAdapter(private val context: Context):
             listen(cb4, chart)
             listen(cb5, chart)
         }
+
         fun listen(cb: CheckBox, chart: PieChart) {
-            cb.setOnClickListener(object: View.OnClickListener{
+            cb.setOnClickListener(object : View.OnClickListener {
                 override fun onClick(view: View) {
                     val checked = cb.isChecked
-                    when(checked) {
+                    when (checked) {
                         true -> {
                             cb.setTextColor(ContextCompat.getColor(context, R.color.gray))
                             checkedNum += 1
                             println("checkedNum: ${checkedNum}")
-                            setDataToPieChart(chart, 1400, checkedNum)
+
+                            when(language.uppercase()) {
+                                "PYTHON" -> {
+                                    cb.buttonTintList = ContextCompat.getColorStateList(context, R.color.python)
+                                    setDataToPieChart(chart, 1400, checkedNum, R.color.python)
+                                }
+                                "KOTLIN" -> {
+                                    cb.buttonTintList = ContextCompat.getColorStateList(context, R.color.kotlin)
+                                    setDataToPieChart(chart, 1400, checkedNum, R.color.kotlin)
+                                }
+                            }
                         }
                         false -> {
                             cb.setTextColor(ContextCompat.getColor(context, R.color.darknavy))
+                            cb.buttonTintList = ContextCompat.getColorStateList(context, R.color.gray)
                             checkedNum -= 1
                             println("checkedNum: ${checkedNum}")
-                            setDataToPieChart(chart, 1400, checkedNum)
+                            when(language.uppercase()) {
+                                "PYTHON" -> setDataToPieChart(chart, 1400, checkedNum, R.color.python)
+                                "KOTLIN" -> setDataToPieChart(chart, 1400, checkedNum, R.color.kotlin)
+                            }
                         }
                     }
                 }
@@ -137,6 +221,7 @@ class ProjectAdapter(private val context: Context):
         }
 
     }
+
     fun initPieChart(pieChart: PieChart) {
         pieChart.setUsePercentValues(true)
         pieChart.description.text = ""
@@ -150,18 +235,19 @@ class ProjectAdapter(private val context: Context):
 
     }
 
-    fun setDataToPieChart(pieChart: PieChart, duration:Int, checkedNum: Int) {
+    fun setDataToPieChart(pieChart: PieChart, duration: Int, checkedNum: Int, color: Int) {
         pieChart.setUsePercentValues(true)
         val dataEntries = ArrayList<PieEntry>()
 
-        var did = (checkedNum.toFloat()/5) * 100
-        var notdid = (100-did)
+        var did = (checkedNum.toFloat() / 5) * 100
+        var notdid = (100 - did)
 
         dataEntries.add(PieEntry(did, ""))
         dataEntries.add(PieEntry(notdid, ""))
 
+
         val colors: ArrayList<Int> = ArrayList()
-        colors.add(ContextCompat.getColor(context, R.color.samsung))
+        colors.add(ContextCompat.getColor(context, color))
         colors.add(ContextCompat.getColor(context, R.color.gray))
 
         val dataSet = PieDataSet(dataEntries, "")
@@ -183,161 +269,15 @@ class ProjectAdapter(private val context: Context):
         pieChart.setHoleColor(ContextCompat.getColor(context, R.color.white))
 
 
-
         //add text in center
         pieChart.setDrawCenterText(true);
         pieChart.setCenterTextSize(12f)
 
+        pieChart.legend.isEnabled = false
         pieChart.invalidate()
     }
+
     companion object {
         lateinit var projectItemBinding: ProjectItemBinding
     }
 }
-
-//var itemList = mutableListOf<ProjectItem>()
-//var checkedNum = 0
-//private lateinit var todoAdapter: TodoAdapter
-//
-//override fun getCount(): Int {
-//    return itemList.size
-//}
-//
-//override fun getItem(position: Int): Any {
-//    return itemList[position]
-//}
-//
-//override fun getItemId(position: Int): Long {
-//    return position.toLong()
-//}
-//
-//override fun getView(position: Int, view: View?, viewGroup: ViewGroup?): View {
-//    var projectItemBinding = ProjectItemBinding.inflate(LayoutInflater.from(context)) // view 처리를 위한 Binding
-//
-//    val projectItem = itemList[position] // 현재 ProjectItem을 가져옴
-//    todoAdapter = TodoAdapter(context)
-//    todoAdapter.index = position
-//    todoAdapter.todoList = projectItem.todo
-//
-//    projectItemBinding.projectItemBeforeFolding.projectTitle.text = projectItem.title
-//    // project 아이템의 title(펼치기 전의 레이아웃)을 현재 프로젝트의 제목으로 설정
-//    // 아래 코드들도 거의 동일합니다
-//
-//    projectItemBinding.projectItemBeforeFolding.projectLeader.text = projectItem.leader
-//    projectItemBinding.projectItemBeforeFolding.projectDDay.text = "D - " + projectItem.d_day.toString()
-//
-//    projectItemBinding.projectItemAfterFolding.name.text = projectItem.leader
-//    projectItemBinding.projectItemAfterFolding.phone.text = projectItem.phone
-//    projectItemBinding.projectItemAfterFolding.participants.text = projectItem.participants
-//
-//    setProjectProgressBar(projectItemBinding.projectItemBeforeFolding, projectItem.status)
-//
-//    projectItemBinding.projectItemAfterFolding.todoList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-//
-//    projectItemBinding.projectItemAfterFolding.todoList.adapter = todoAdapter
-//
-//
-//    fragment = projectItemBinding
-//    total = projectItem.todo.size
-//
-//    initPieChart(projectItemBinding.projectItemAfterFolding.chart)
-//    setDataToPieChart(projectItemBinding.projectItemAfterFolding.chart, 1400)
-//
-//    projectItemBinding.foldingCell.setOnClickListener(View.OnClickListener { view->
-//        projectItemBinding.foldingCell.toggle(false)
-//    })
-//
-//    when(projectItem.language) { // 프로젝트 언어별로 색상을 다르게 지정
-//        "Python" -> {
-//            projectItemBinding.projectItemBeforeFolding.projectTitleBorder
-//                .setBackgroundColor(ContextCompat.getColor(context, R.color.samsung))
-//            projectItemBinding.projectItemBeforeFolding.projectProgress.progressTintList = ColorStateList
-//                .valueOf(ContextCompat.getColor(context, R.color.samsung))
-//            projectItemBinding.projectItemAfterFolding.projectTitleBorder
-//                .setBackgroundColor(ContextCompat.getColor(context, R.color.samsung))
-//        }
-//        "Kotlin" -> {
-//            projectItemBinding.projectItemBeforeFolding.projectTitleBorder
-//                .setBackgroundColor(ContextCompat.getColor(context, R.color.kakao))
-//            projectItemBinding.projectItemBeforeFolding.projectProgress.progressTintList = ColorStateList
-//                .valueOf(ContextCompat.getColor(context, R.color.kakao))
-//            projectItemBinding.projectItemAfterFolding.projectTitleBorder
-//                .setBackgroundColor(ContextCompat.getColor(context, R.color.kakao))
-//        }
-//    }
-//
-//    return projectItemBinding.root
-//}
-//fun initPieChart(pieChart: PieChart) {
-//    pieChart.setUsePercentValues(true)
-//    pieChart.description.text = ""
-//    pieChart.isDrawHoleEnabled = false
-//    pieChart.setTouchEnabled(false)
-//
-//    pieChart.setUsePercentValues(true)
-//    pieChart.setDrawEntryLabels(false)
-//    pieChart.legend.orientation = Legend.LegendOrientation.VERTICAL
-//    pieChart.legend.isWordWrapEnabled = true
-//}
-//
-//fun setDataToPieChart(pieChart: PieChart, duration:Int) {
-//    pieChart.setUsePercentValues(true)
-//    val dataEntries = ArrayList<PieEntry>()
-//
-//    checkedNum = todoAdapter.checkedNum
-//    println("checkedNum : ${checkedNum}")
-//    var did = todoAdapter.getdid()
-//    var notdid = (100-did).toFloat()
-//    println("did : ${did}")
-//    dataEntries.add(PieEntry(did, ""))
-//    dataEntries.add(PieEntry(notdid, ""))
-//
-//    val colors: ArrayList<Int> = ArrayList()
-//    colors.add(ContextCompat.getColor(context, R.color.samsung))
-//    colors.add(ContextCompat.getColor(context, R.color.gray))
-//
-//    val dataSet = PieDataSet(dataEntries, "")
-//    val data = PieData(dataSet)
-//
-//    // In Percentage
-//    data.setValueFormatter(PercentFormatter())
-//    dataSet.sliceSpace = 0f
-//    dataSet.colors = colors
-//    pieChart.data = data
-//    data.setValueTextSize(0f)
-//    pieChart.setExtraOffsets(5f, 10f, 5f, 5f)
-//    pieChart.animateY(duration, Easing.EaseInOutQuad)
-//
-//    //create hole in center
-//    pieChart.holeRadius = 80f
-//    pieChart.transparentCircleRadius = 61f
-//    pieChart.isDrawHoleEnabled = true
-//    pieChart.setHoleColor(ContextCompat.getColor(context, R.color.white))
-//
-//
-//    //add text in center
-//    pieChart.setDrawCenterText(true);
-//    pieChart.setCenterTextSize(12f)
-//
-//    pieChart.invalidate()
-//}
-//
-//
-///*
-//    프로젝트 아이템의 Progress 바를 설정해주는 함수
-// */
-//fun setProjectProgressBar(binding: ProjectItemTitleBinding, status: Int) {
-//    var progressBarAnimation = ObjectAnimator
-//        .ofInt(binding.projectProgress, "progress", 0, status)
-//    // Progress 바의 애니메이션을 지정
-//    // 0부터 status값까지 채우는 애니메이션
-//
-//    progressBarAnimation.setDuration(1000) // 애니메이션 실행 시간 지정 (단위는 ms)
-//    progressBarAnimation.start()
-//}
-//
-//companion object{
-//    lateinit var fragment : ProjectItemBinding
-//    var position : Int = 0
-//    var total : Int = 0
-//}

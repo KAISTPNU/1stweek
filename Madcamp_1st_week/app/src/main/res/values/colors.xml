@@ -31,4 +31,8 @@
     <color name="negative">#800020</color>
     <color name="positive">#367055</color>
 
+    <color name="python">#38618c</color>
+    <color name="kotlin">#ffae42</color>
+    <color name="others">#ff5964</color>
+
 </resources>
