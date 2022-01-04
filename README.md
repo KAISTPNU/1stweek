@@ -122,7 +122,9 @@ deleteBtn.setOnClickListener(object: View.OnClickListener{
  
 (3) 프로젝트 생성 화면
 
-![화면_기록_2022-01-04_20_32_07_AdobeCreativeCloudExpress (1)](https://user-images.githubusercontent.com/37971925/148055169-0a5db380-995f-43eb-83bf-d62e5a036c82.gif)
+![화면_기록_2022-01-04_20_32_07_AdobeCreativeCloudExpress (2)](https://user-images.githubusercontent.com/37971925/148055816-ca214857-0379-41bc-8b8d-ad46881930ad.gif)
+
+
 
 
   프로젝트를 추가할 수 있는 화면이다. 참여하는 프로젝트의 이름, 사용하는 언어, 프로젝트에 참여하는 다른 사람들, 프로젝트 시작일과 마감일은 dialog를 통해 날짜를 선택할 수 있다. 그 아래에는 프로젝트의 세부 업무를 작성하는 칸이 있다. 마지막으로 프로젝트 담당자의 정보를 입력한 후 ADD 버튼을 클릭할 시 안내 팝업과 함께 프로젝트가 추가되어 세 번째 탭에서 바로 확인할 수 있다.
