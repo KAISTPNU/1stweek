@@ -113,6 +113,7 @@
                             </LinearLayout>
                         </RelativeLayout>
                         <include
+                            android:id="@+id/project_item_vertical_bar"
                             layout="@layout/vertical_bar"/>
                         <RelativeLayout
                             android:layout_width="0dp"

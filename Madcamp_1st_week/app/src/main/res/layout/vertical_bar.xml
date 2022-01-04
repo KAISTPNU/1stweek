@@ -6,6 +6,7 @@
     android:padding="2dp"
     android:layout_marginRight="6dp">
     <View
+        android:id="@+id/vertical_bar"
         android:layout_width="1dp"
         android:layout_height="match_parent"
         android:background="@color/darknavy"
