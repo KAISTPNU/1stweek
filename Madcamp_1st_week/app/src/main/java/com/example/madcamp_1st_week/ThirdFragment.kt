@@ -22,9 +22,15 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
+import org.json.JSONArray
+import org.json.JSONObject
+import java.io.BufferedWriter
+import java.io.File
+import java.io.FileWriter
 import java.time.Duration
 import java.time.LocalDate
 import java.time.LocalDate.of
+import java.time.format.DateTimeFormatter
 import java.util.*
 import java.util.EnumSet.of
 import kotlin.collections.ArrayList
@@ -86,7 +92,33 @@ class ThirdFragment : Fragment() {
         projectAdapter.itemList = projectList
         binding.projectList.adapter = projectAdapter
 
-//        binding.projectList.layoutManager = GridLayoutManager(context, 1)
+        val args = arguments
+        if (args != null) {
+            var jsonString = args.getString("project")
+            var jsonObject = JSONObject(jsonString)
+            var name = jsonObject.getString("name")
+            var email = jsonObject.getString("email")
+            var phone = jsonObject.getString("phone")
+            var title = jsonObject.getString("title")
+            var language = jsonObject.getString("language")
+            var startDate = jsonObject.getString("startdate")
+            var endDate = jsonObject.getString("enddate")
+            var participants = jsonObject.getString("participants")
+            var todo1 = jsonObject.getString("todo1")
+            var todo2 = jsonObject.getString("todo2")
+            var todo3 = jsonObject.getString("todo3")
+            var todo4 = jsonObject.getString("todo4")
+            var todo5 = jsonObject.getString("todo5")
+            var todoList = listOf(todo1, todo2, todo3, todo4, todo5)
+            val range = (0..100)
+            var status = range.random()
+
+            var item = ProjectItem(title, language, name, status
+                , LocalDate.parse(startDate, DateTimeFormatter.ofPattern("yyyy-M-d"))
+                , LocalDate.parse(endDate, DateTimeFormatter.ofPattern("yyyy-M-d")), participants, todoList, email, phone)
+            projectList.add(item)
+            writeJsonData(item)
+            }
 
 
         initPieChart(binding.pieChart1)
@@ -97,9 +129,26 @@ class ThirdFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+    }
 
-        //initPieChart(binding.pieChart2)
-        //setDataToPieChart(binding.pieChart2, 1400)
+    fun writeJsonData(item: ProjectItem) {
+        var jsonFile = File(context?.filesDir, "project.json")
+        var writer = BufferedWriter(FileWriter(jsonFile))
+        var jsonArray = JSONArray()
+        var jsonObject = JSONObject()
+        jsonObject.put("name", item.leader)
+        jsonObject.put("email", item.email)
+        jsonObject.put("phone", item.phone)
+        jsonObject.put("status", item.status)
+        jsonObject.put("startDate", item.start_date)
+        jsonObject.put("endDate", item.end_date)
+        jsonObject.put("todo", item.todo)
+        jsonObject.put("email", item.email)
+        jsonObject.put("phone", item.phone)
+
+        jsonArray.put(jsonObject)
+        writer.write(jsonArray.toString())
+        writer.close()
     }
 
     fun initPieChart(pieChart: PieChart) {

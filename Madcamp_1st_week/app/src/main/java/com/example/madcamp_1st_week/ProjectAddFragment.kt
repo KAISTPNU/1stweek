@@ -40,7 +40,7 @@ class ProjectAddFragment : Fragment() {
 
             var date_listener = object: DatePickerDialog.OnDateSetListener{
                 override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-                    var startDate = "${year} - ${month+1} - ${dayOfMonth}"
+                    var startDate = "${year}-${month+1}-${dayOfMonth}"
                     binding.startDateInput.setText(startDate)
                 }
             }
@@ -56,7 +56,7 @@ class ProjectAddFragment : Fragment() {
 
             var date_listener = object : DatePickerDialog.OnDateSetListener {
                 override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-                    var endDate = "${year} - ${month + 1} - ${dayOfMonth}"
+                    var endDate = "${year}-${month + 1}-${dayOfMonth}"
                     binding.endDateInput.setText(endDate)
                 }
 
@@ -77,6 +77,18 @@ class ProjectAddFragment : Fragment() {
             var language = binding.languageInput.toString()
             var startDate = binding.startDateInput.text.toString()
             var endDate = binding.endDateInput.text.toString()
+            var participants = binding.participantsInput.text.toString()
+            var todo1 = "Nothing"
+            var todo2 = "Nothing"
+            var todo3 = "Nothing"
+            var todo4 = "Nothing"
+            var todo5 = "Nothing"
+
+            todo1 = binding.todo1Input.text.toString()
+            todo2 = binding.todo2Input.text.toString()
+            todo3 = binding.todo3Input.text.toString()
+            todo4 = binding.todo4Input.text.toString()
+            todo5 = binding.todo5Input.text.toString()
 
             var bundle: Bundle = Bundle()
             var jsonObject = JSONObject()
@@ -86,17 +98,23 @@ class ProjectAddFragment : Fragment() {
             jsonObject.put("title", projectTitle)
             jsonObject.put("language", language)
             jsonObject.put("startdate", startDate)
-            jsonObject.put("startdate", endDate)
+            jsonObject.put("enddate", endDate)
+            jsonObject.put("participants", participants)
+            jsonObject.put("todo1", todo1)
+            jsonObject.put("todo2", todo2)
+            jsonObject.put("todo3", todo3)
+            jsonObject.put("todo4", todo4)
+            jsonObject.put("todo5", todo5)
 
-            bundle.putString("profile", jsonObject.toString())
-            var firstFragment = FirstFragment()
-            firstFragment.arguments = bundle
+            bundle.putString("project", jsonObject.toString())
+            var thirdFragment = ThirdFragment()
+            thirdFragment.arguments = bundle
 
             val dialog = ProfileAddDialog(this.requireContext())
             dialog.setOnOKClickedListener{
                 activity?.supportFragmentManager?.beginTransaction()
                     ?.setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
-                    ?.replace(R.id.fragment, firstFragment)
+                    ?.replace(R.id.fragment, thirdFragment)
                     ?.commitAllowingStateLoss()
             }
             dialog.start("dsf")
