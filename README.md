@@ -6,8 +6,8 @@
 ![main_img](https://user-images.githubusercontent.com/37971925/148037772-2f25ff79-0f50-4652-a902-6f33ca711cc1.png)
 
 ## 과제 소개
-1주차 과제의 경우 다음과 같이 3개의 탭으로 구성된 어플리케이션을 개발하는 것입니다.
-3개 탭의 내용은 아래와 같습니다.
+1주차 과제의 경우 다음과 같이 3개의 탭으로 구성된 어플리케이션을 개발하는 것이다.
+3개 탭의 내용은 아래와 같다.
 >
 * 연락처를 보여주는 화면 (단, 연락처는 JSON 데이터 형식이어야함)
 * 20장 내외의 이미지로 구성된 이미지 갤러리를 보여주는 화면
@@ -15,10 +15,9 @@
 
 ### 1번탭
 ***
-JSON 데이터를 효과적으로 다룰 수 있는 <U>[ZXing](https://github.com/zxing/zxing)</U> 라이브러리를 사용하여 연락처 데이터를 추가하고 편집할 수 있게 진행했습니다.
-ZXing은 QR코드 읽기/쓰기 기능을 제공해주는 라이브러리입니다.
+JSON 데이터를 효과적으로 다룰 수 있는 <U>[ZXing](https://github.com/zxing/zxing)</U> 라이브러리를 사용하여 연락처 데이터를 추가하고 편집할 수 있게 진행했다. *ZXing은 QR코드 읽기/쓰기 기능을 제공해주는 라이브러리*
 
-별도의 Activity나 Fragment를 만들어 주지 않아도  QR 코드를 읽어올 수 있으며, Activity의 경우 onActivityResult()  함수를 Override하여 결과 값을 받아올 수 있습니다.
+별도의 Activity나 Fragment를 만들어 주지 않아도  QR 코드를 읽어올 수 있으며, Activity의 경우 onActivityResult() 함수를 Override하여 결과 값을 받아올 수 있다.
 
 ```kotlin
 fun runQRCodeReader() { // QR 코드 리더 실행 함수 예시
@@ -41,20 +40,19 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
 	}
 }
 ```
-그리고 연락처는 프로필 카드의 형태로 보여주며, 이를 위해 프로필 카드를 직접 디자인했습니다. 프로필 카드는 여러 개를 추가할 수 있으며 이를 위해  ViewPager2를 사용했습니다. 
+그리고 연락처는 프로필 카드의 형태로 보여주며, 이를 위해 프로필 카드를 직접 디자인했다. 프로필 카드는 여러 개를 추가할 수 있으며 이를 위해 ViewPager2를 사용했다.
 
-추가로 현재 선택된 프로필 카드의 위치를 시각적으로 사용자에게 알려주기 위해 <U>[Dots Indicator](https://github.com/tommybuonomo/dotsindicator)</U> 라이브러리를 사용했습니다. 하지만  ViewPager2의 아이템을 삭제해도 Indicator의 인덱스 길이가 변하지 않는 등 여러 문제점이 있어 <U>[Circle Indicator](https://github.com/ongakuer/CircleIndicator)</U> 라이브러리의 CircleIndicator3를 사용하여 문제를 해결했습니다.
+추가로 현재 선택된 프로필 카드의 위치를 시각적으로 사용자에게 알려주기 위해 <U>[Dots Indicator](https://github.com/tommybuonomo/dotsindicator)</U> 라이브러리를 사용했다. 하지만 ViewPager2의 아이템을 삭제해도 Indicator의 인덱스 길이가 변하지 않는 등 여러 문제점이 있어 <U>[Circle Indicator](https://github.com/ongakuer/CircleIndicator)</U> 라이브러리의 CircleIndicator3를 사용하여 문제를 해결했다.
 
 ![](https://user-images.githubusercontent.com/37971925/148042318-4d0216e8-b154-4391-b7ec-22f966754810.gif)
 
 *첫번째 탭 작동 예시.gif*
 <br>
 
-그리고 프로필 카드의 추가 및 삭제를 위한 드롭다운 메뉴를 추가했습니다.
-![그림1](https://user-images.githubusercontent.com/37971925/148050280-b86e7919-50e3-4f4d-86d8-7e2aa3f525db.png)
-*드롭다운 및 삭제화면 예시. 프로필 카드를 추가하는 화면도 있지만, 안드로이드 에뮬레이터에서는 QR 코드 인식이 불가능해 따로 첨부하지 못했습니다.*
+그리고 프로필 카드의 추가 및 삭제를 위한 드롭다운 메뉴를 추가했다.
+![그림1](https://user-images.githubusercontent.com/37971925/148050280-b86e7919-50e3-4f4d-86d8-7e2aa3f525db.png)*드롭다운 및 삭제화면 예시. 프로필 카드를 추가하는 화면도 있지만, 안드로이드 에뮬레이터에서는 QR 코드 인식이 불가능해 따로 첨부하지 못했다.*
 
-추가 혹은 삭제 시 나오는 모달 창의 경우 Dialog 클래스를 상속하여 커스텀 Dialog 클래스를 만들어 사용했습니다. 그리고 이를 위해 별도의 XML 파일을 만들어 사용했으며, 삭제 시 모달 창을 띄우고 결과에 따라 프로필 카드를 삭제하는 코드를 작성했습니다.
+추가 혹은 삭제 시 나오는 모달 창의 경우 Dialog 클래스를 상속하여 커스텀 Dialog 클래스를 만들어 사용했다. 그리고 이를 위해 별도의 XML 파일을 만들어 사용했으며, 삭제 시 모달 창을 띄우고 결과에 따라 프로필 카드를 삭제하는 코드를 작성했다.
 
 ```kotlin
 deleteBtn.setOnClickListener(object: View.OnClickListener{
@@ -69,6 +67,37 @@ deleteBtn.setOnClickListener(object: View.OnClickListener{
 })
 ```
 *프로필 카드의 삭제 버튼에 onClickListener를 활용하여 삭제 기능 실행*
+<br>
+
+### 2번탭
+***
+두번째 탭은 사진을 갤러리로 보여주는 화면이다. 저희는 IT 계열 회사에서 사용한다고 가정하였으므로, 동료 개발자를 비롯한 사우들이 올린 게시물을 보여줄 수 있는 화면으로 구성했다.
+
+화면의 구성은 인스타그램이나 페이스북 등을 참고해서 배치했다. 사진의 경우 GridView를 사용하여 한 열에 3개의 사진이 배치 될 수 있게 했다.
+
+![두번쨰 탭](https://user-images.githubusercontent.com/37971925/148053534-aade4c37-67cd-419d-9c17-435728f30c57.png)
+
+사진 클릭 시 게시글을 볼 수 있는 Fragment를 실행한다. 이때 Fragment를 전환하면서 애니메이션을 추가했는데, 아래와 같은 코드로 Fragment 간의 전환에 애니메이션을 실행할 수 있다.
+```kotlin
+ activity!!.supportFragmentManager.beginTransaction()
+ 	.setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+	.replace(R.id.fragment, feedDetailFragment)
+	.commitAllowingStateLoss()
+```
+
+현재 알파 값을 조정하여 Fade-In과 Fade-Out 효과를 구현했는데, 안드로이드의 경우 XML  파일을 작성하여 애니메이션을 구현할 수 있다.
+
+```XML
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <alpha
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:interpolator="@android:anim/accelerate_interpolator"
+        android:fromAlpha="0.0"
+        android:toAlpha="1.0"
+        android:duration="500"/>
+</set>
+```
 
 ### 3번탭
  
