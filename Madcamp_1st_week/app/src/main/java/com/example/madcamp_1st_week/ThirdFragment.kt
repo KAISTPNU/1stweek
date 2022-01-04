@@ -114,9 +114,11 @@ class ThirdFragment : Fragment() {
                         val startDate = jsonObject.getString("startDate")
                         val endDate = jsonObject.getString("endDate")
                         val participants = jsonObject.getString("participants")
-                        val todo = jsonObject.getString("todo").split(", ", "[", "]")
+                        var todo = jsonObject.getString("todo").split(", ", "[", "]").toMutableList()
                         val email = jsonObject.getString("email")
                         val phone = jsonObject.getString("phone")
+
+                        todo.removeAt(0).toList()
 
                         projectList.add(ProjectItem(title, language, leader, status
                             , LocalDate.parse(startDate, DateTimeFormatter.ofPattern("yyyy-M-d"))
