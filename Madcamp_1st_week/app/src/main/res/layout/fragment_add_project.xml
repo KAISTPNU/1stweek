@@ -50,6 +50,18 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 tools:ignore="MissingConstraints" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/participantsInput"
+                android:layout_width="250dp"
+                android:layout_height="70dp"
+                android:hint="Participants"
+                android:fontFamily="@font/uber_move_medium"
+                android:textColor="@color/darknavy"
+                android:inputType="text"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                tools:ignore="MissingConstraints" />
+
             <Button
                 android:layout_marginTop="20dp"
                 android:id="@+id/startDateInput"
@@ -70,6 +82,92 @@
                 android:backgroundTint="@color/gray"
                 android:textColor="@color/white"
                 android:layout_gravity="center" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Todo List."
+                    android:layout_gravity="center"
+                    android:paddingLeft="30dp"
+                    android:textSize="20dp"
+                    android:textColor="@color/darknavy"
+                    android:fontFamily="@font/uber_move_medium"
+                    tools:ignore="MissingConstraints"
+                    android:layout_marginTop="30dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="*optional"
+                    android:paddingTop="5dp"
+                    android:paddingLeft="30dp"
+                    android:textSize="15dp"
+                    android:textColorHint="@color/graybrown"
+                    app:layout_constraintHorizontal_bias="0.3"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:textColor="@color/darknavy"
+                    android:fontFamily="@font/uber_move_medium"
+                    tools:ignore="MissingConstraints"
+                    android:layout_marginTop="30dp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/todo1Input"
+                android:layout_width="250dp"
+                android:layout_height="70dp"
+                android:hint="TODO #1"
+                android:fontFamily="@font/uber_move_medium"
+                android:textColor="@color/darknavy"
+                android:inputType="text"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                tools:ignore="MissingConstraints" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/todo2Input"
+                android:layout_width="250dp"
+                android:layout_height="70dp"
+                android:hint="TODO #2"
+                android:fontFamily="@font/uber_move_medium"
+                android:textColor="@color/darknavy"
+                android:inputType="text"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                tools:ignore="MissingConstraints" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/todo3Input"
+                android:layout_width="250dp"
+                android:layout_height="70dp"
+                android:hint="TODO #3"
+                android:fontFamily="@font/uber_move_medium"
+                android:textColor="@color/darknavy"
+                android:inputType="text"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                tools:ignore="MissingConstraints" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/todo4Input"
+                android:layout_width="250dp"
+                android:layout_height="70dp"
+                android:hint="TODO #4"
+                android:fontFamily="@font/uber_move_medium"
+                android:textColor="@color/darknavy"
+                android:inputType="text"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                tools:ignore="MissingConstraints" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/todo5Input"
+                android:layout_width="250dp"
+                android:layout_height="70dp"
+                android:hint="TODO #5"
+                android:fontFamily="@font/uber_move_medium"
+                android:textColor="@color/darknavy"
+                android:inputType="text"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                tools:ignore="MissingConstraints" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -83,7 +181,7 @@
                 tools:ignore="MissingConstraints"
                 android:layout_marginTop="30dp"/>
             <com.google.android.material.textfield.TextInputEditText
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:id="@+id/nameInput"
                 android:layout_width="250dp"
                 android:layout_height="70dp"
