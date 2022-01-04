@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.ColorFilter
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -88,10 +87,6 @@ class ProjectAdapter(private val context: Context):
             email.text = item.email
             participants.text = item.participants
             end_date.text = item.end_date.toString()
-            title.setSingleLine(true)
-            title.setEllipsize(TextUtils.TruncateAt.MARQUEE)
-            title.setSelected(true)
-
 
             language = item.language
 
