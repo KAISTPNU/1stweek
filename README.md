@@ -70,20 +70,20 @@ deleteBtn.setOnClickListener(object: View.OnClickListener{
 ```
 *프로필 카드의 삭제 버튼에 onClickListener를 활용하여 삭제 기능 실행*
 
-# Tap 3) 자유 주제 : 프로젝트 관리형 페이지
+### 3번탭
  
 
- 본 앱은 IT 계열 직장인을 대상으로 만들어졌기 때문에 3번째 탭에서는 직장인들이 참여하는 프로젝트를 관리하기 용이하도록 제작하였다. 시간 관리 및 세부적인 할 일을 체크하기 편하도록 제작되었다.
+ 본 앱은 IT 계열 직장인을 대상으로 만들어졌기 때문에 3번째 탭은 프롤젝트 관리형 페이지로 직장인들이 참여하는 프로젝트를 관리하기 용이하도록 제작하였다. 시간 관리 및 세부적인 할 일을 체크하기 편하도록 제작되었다.
  
  
  ![](https://images.velog.io/images/dhwndudkaps2/post/675bd10b-bb7a-4410-b862-ec439c92ff89/image.png)
  
- ## UI
+ #### UI
  
- ### (1) 언어 비율 차트
+ (1) 언어 비율 차트
   가장 위의 chart에서는 프로젝트의 언어 비율을 확인할 수 있다. 가지고 있는 프로젝트들의 언어를 파악하여 개수에 따라 ratio를 계산하여 반영한다. 어떤 언어가 높은 비중을 차지하고 있는지 빠르게 확인하는 용도이다.
  
- ### (2) 프로젝트 카드
+(2) 프로젝트 카드
  #### 앞면
  ***
   프로젝트를 관리하는 카드의 앞면은 중요 정보를 포함하고 있다. 프로젝트 마감일, 마감일까지의 D-Day, 프로젝트를 담당하는 리더, 리더 외 프로젝트 참여자들, 현재 프로젝트 진행률을 포함하고 있다. 프로젝트에서 사용하는 언어는 카드의 색상을 통해 구분할 수 있다. 파란색은 Python, 노란색은 Kotlin, 빨간색은 그 외의 언어를 의미한다. 
@@ -93,14 +93,14 @@ deleteBtn.setOnClickListener(object: View.OnClickListener{
  ***
   카드의 뒷면에서는 세부적인 프로젝트 정보를 확인할 수 있다. 앞면에서 잘린 프로젝트 제목을 다시 한 번 확인할 수 있으며, 프로젝트 담당자의 이름, 이메일, 핸드폰 번호, 프로필 사진을 볼 수 있다. 아래쪽에는 프로젝트를 효과적으로 관리하기 위한 TODO List를 제공하고 있다. 우측에는 프로젝트를 실행할 때 수행해야 하는 일들을 스크롤하여 확인할 수 있다. 일을 마쳤다면 체크 박스를 선택하면 진행률이 왼쪽의 차트에 반영된다. 뒷면에 있는 파이 차트는 해당 프로젝트의 세부 업무 진행 상황을 나타낸다. 전체 업무 중 몇 개의 업무가 마무리 되었는지, 체크 박스를 통해 확인하고 퍼센트로 프로젝트 완성도를 알려준다. 
  
- ### (3) 프로젝트 생성 화면
+(3) 프로젝트 생성 화면
  ![gif](https://user-images.githubusercontent.com/89647814/148054243-99cb6da0-a70e-452b-8c4e-beb668760337.gif)
 
   프로젝트를 추가할 수 있는 화면이다. 참여하는 프로젝트의 이름, 사용하는 언어, 프로젝트에 참여하는 다른 사람들, 프로젝트 시작일과 마감일은 dialog를 통해 날짜를 선택할 수 있다. 그 아래에는 프로젝트의 세부 업무를 작성하는 칸이 있다. 마지막으로 프로젝트 담당자의 정보를 입력한 후 ADD 버튼을 클릭할 시 안내 팝업과 함께 프로젝트가 추가되어 세 번째 탭에서 바로 확인할 수 있다.
  
- ## 코드 구현
+ #### 코드 구현
  
- ### (1) Project Add Fragment
+(1) Project Add Fragment
  #### Dialog 구현
  
 ```kotlin
@@ -148,7 +148,7 @@ binding.startDateInput.setOnClickListener {
   ```
   해당 Fragment에서 받은 정보는 bundle을 통해 third fragment로 전달된다.
  
- ### (2) Project Adapter
+(2) Project Adapter
  ```kotlin
  data class ProjectItem (var title: String,
                         var language: String,
@@ -245,7 +245,7 @@ binding.startDateInput.setOnClickListener {
   ```
   또한 project adapter에서 프로젝트의 세부 작업 진행 현황을 관리하기 때문에 checkbox를 선택할 때마다 chart를 reload하는 함수가 필요하다. checkbox가 click될 때마다 현재까지 체크된 박스들의 개수와 토탈 개수를 확인하여 퍼센트로 변환하여 차트로 시각화된다. 
  
- ### (3) Third Fragment
+(3) Third Fragment
  ```kotlin
  override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
