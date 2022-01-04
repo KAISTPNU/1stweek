@@ -70,5 +70,203 @@ deleteBtn.setOnClickListener(object: View.OnClickListener{
 ```
 *프로필 카드의 삭제 버튼에 onClickListener를 활용하여 삭제 기능 실행*
 
+# Tap 3) 자유 주제 : 프로젝트 관리형 페이지
+ 
 
+ 본 앱은 IT 계열 직장인을 대상으로 만들어졌기 때문에 3번째 탭에서는 직장인들이 참여하는 프로젝트를 관리하기 용이하도록 제작하였다. 시간 관리 및 세부적인 할 일을 체크하기 편하도록 제작되었다.
+ 
+ 
+ ![](https://images.velog.io/images/dhwndudkaps2/post/675bd10b-bb7a-4410-b862-ec439c92ff89/image.png)
+ 
+ ## UI
+ 
+ ### (1) 언어 비율 차트
+  가장 위의 chart에서는 프로젝트의 언어 비율을 확인할 수 있다. 가지고 있는 프로젝트들의 언어를 파악하여 개수에 따라 ratio를 계산하여 반영한다. 어떤 언어가 높은 비중을 차지하고 있는지 빠르게 확인하는 용도이다.
+ 
+ ### (2) 프로젝트 카드
+ #### 앞면
+ ***
+  프로젝트를 관리하는 카드의 앞면은 중요 정보를 포함하고 있다. 프로젝트 마감일, 마감일까지의 D-Day, 프로젝트를 담당하는 리더, 리더 외 프로젝트 참여자들, 현재 프로젝트 진행률을 포함하고 있다. 프로젝트에서 사용하는 언어는 카드의 색상을 통해 구분할 수 있다. 파란색은 Python, 노란색은 Kotlin, 빨간색은 그 외의 언어를 의미한다. 
+ 
+ 
+ #### 뒷면
+ ***
+  카드의 뒷면에서는 세부적인 프로젝트 정보를 확인할 수 있다. 앞면에서 잘린 프로젝트 제목을 다시 한 번 확인할 수 있으며, 프로젝트 담당자의 이름, 이메일, 핸드폰 번호, 프로필 사진을 볼 수 있다. 아래쪽에는 프로젝트를 효과적으로 관리하기 위한 TODO List를 제공하고 있다. 우측에는 프로젝트를 실행할 때 수행해야 하는 일들을 스크롤하여 확인할 수 있다. 일을 마쳤다면 체크 박스를 선택하면 진행률이 왼쪽의 차트에 반영된다. 뒷면에 있는 파이 차트는 해당 프로젝트의 세부 업무 진행 상황을 나타낸다. 전체 업무 중 몇 개의 업무가 마무리 되었는지, 체크 박스를 통해 확인하고 퍼센트로 프로젝트 완성도를 알려준다. 
+ 
+ ### (3) 프로젝트 생성 화면
+
+  프로젝트를 추가할 수 있는 화면이다. 참여하는 프로젝트의 이름, 사용하는 언어, 프로젝트에 참여하는 다른 사람들, 프로젝트 시작일과 마감일은 dialog를 통해 날짜를 선택할 수 있다. 그 아래에는 프로젝트의 세부 업무를 작성하는 칸이 있다. 마지막으로 프로젝트 담당자의 정보를 입력한 후 ADD 버튼을 클릭할 시 안내 팝업과 함께 프로젝트가 추가되어 세 번째 탭에서 바로 확인할 수 있다.
+ 
+ ## 코드 구현
+ 
+ ### (1) Project Add Fragment
+ #### Dialog 구현
+ 
+```kotlin
+binding.startDateInput.setOnClickListener {
+
+            var calendar = Calendar.getInstance()
+            var year = calendar.get(Calendar.YEAR)
+            var month = calendar.get(Calendar.MONTH)
+            var day = calendar.get(Calendar.DAY_OF_MONTH)
+
+            var date_listener = object: DatePickerDialog.OnDateSetListener{
+                override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+                    var startDate = "${year}-${month+1}-${dayOfMonth}"
+                    binding.startDateInput.setText(startDate)
+                }
+            }
+            var builder = DatePickerDialog(this.requireContext(), date_listener, year, month, day)
+            builder.show()
+        }
+```
+  Start Date, End Date 버튼을 눌렀을 때 날짜를 선택할 수 있는 Dialog가 뜨도록 하는 코드이다. DatePickerDialog를 사용하였다. 
+  #### Third Fragment에 입력 값 전달
+  
+  ```kotlin
+  var bundle: Bundle = Bundle()
+            var jsonObject = JSONObject()
+            jsonObject.put("name", name)
+            jsonObject.put("email", email)
+            jsonObject.put("phone", phone)
+            jsonObject.put("title", projectTitle)
+            jsonObject.put("language", language)
+            jsonObject.put("startdate", startDate)
+            jsonObject.put("enddate", endDate)
+            jsonObject.put("participants", participants)
+            jsonObject.put("todo1", todo1)
+            jsonObject.put("todo2", todo2)
+            jsonObject.put("todo3", todo3)
+            jsonObject.put("todo4", todo4)
+            jsonObject.put("todo5", todo5)
+
+            bundle.putString("project", jsonObject.toString())
+            var thirdFragment = ThirdFragment()
+            thirdFragment.arguments = bundle
+
+  ```
+  해당 Fragment에서 받은 정보는 bundle을 통해 third fragment로 전달된다.
+ 
+ ### (2) Project Adapter
+ ```kotlin
+ data class ProjectItem (var title: String,
+                        var language: String,
+                        var leader: String,
+                        var status: Int,
+                        var start_date: LocalDate,
+                        var end_date: LocalDate,
+                        var participants: String,
+                        var todo : List<String>,
+                        var email: String,
+                        var phone: String,
+) {
+    var d_day: Int = ChronoUnit.DAYS.between(LocalDate.now(), end_date).toInt()
+}
+ ```
+  Project adapter에서 프로젝트 카드에 표현하고자 하는 정보를 binding하기 위하여 위와 같이 project item class를 정의하였다. 하나의 카드를 만드는데 필요한 정보들을 정리하였다. 그 후 itemList에서 해당 item의 정보를 view와 binding하였다. 
+  
+  ```kotlin
+  when (item.language.uppercase()) { // 프로젝트 언어별로 색상을 다르게 지정
+                "PYTHON" -> {
+                    viewpagerBinding.projectItemBeforeFolding.projectTitleBorder
+                        .setBackgroundColor(ContextCompat.getColor(context, R.color.python))
+                    viewpagerBinding.projectItemBeforeFolding.projectProgress.progressTintList =
+                        ColorStateList
+                            .valueOf(ContextCompat.getColor(context, R.color.python))
+                    viewpagerBinding.projectItemAfterFolding.projectTitleBorder
+                        .setBackgroundColor(ContextCompat.getColor(context, R.color.python))
+                    setDataToPieChart(chart, 1400, 0, R.color.python)
+                    viewpagerBinding.projectItemBeforeFolding.projectItemVerticalBar.verticalBar
+                        .setBackgroundColor(ContextCompat.getColor(context, R.color.python))
+                }
+                "KOTLIN" -> {
+                    viewpagerBinding.projectItemBeforeFolding.projectTitleBorder
+                        .setBackgroundColor(ContextCompat.getColor(context, R.color.kotlin))
+                    viewpagerBinding.projectItemBeforeFolding.projectProgress.progressTintList =
+                        ColorStateList
+                            .valueOf(ContextCompat.getColor(context, R.color.kotlin))
+                    viewpagerBinding.projectItemAfterFolding.projectTitleBorder
+                        .setBackgroundColor(ContextCompat.getColor(context, R.color.kotlin))
+                    setDataToPieChart(chart, 1400, 0, R.color.kotlin)
+                    viewpagerBinding.projectItemBeforeFolding.projectItemVerticalBar.verticalBar
+                        .setBackgroundColor(ContextCompat.getColor(context, R.color.kotlin))
+                }
+                else -> {
+                    viewpagerBinding.projectItemBeforeFolding.projectTitleBorder
+                        .setBackgroundColor(ContextCompat.getColor(context, R.color.others))
+                    viewpagerBinding.projectItemBeforeFolding.projectProgress.progressTintList =
+                        ColorStateList
+                            .valueOf(ContextCompat.getColor(context, R.color.others))
+                    viewpagerBinding.projectItemAfterFolding.projectTitleBorder
+                        .setBackgroundColor(ContextCompat.getColor(context, R.color.others))
+                    setDataToPieChart(chart, 1400, 0, R.color.others)
+                    viewpagerBinding.projectItemBeforeFolding.projectItemVerticalBar.verticalBar
+                        .setBackgroundColor(ContextCompat.getColor(context, R.color.others))
+                }
+            }
+  ```
+  이 때 언어에 따라 카드의 색상이 달라져야 하기 때문에 bind 할 때 item의 language에 따라서 card border와 pie chart의 색상이 달라지도록 set하였다.
+  
+  ```kotlin
+  fun listen(cb: CheckBox, chart: PieChart) {
+            cb.setOnClickListener(object : View.OnClickListener {
+                override fun onClick(view: View) {
+                    val checked = cb.isChecked
+                    when (checked) {
+                        true -> {
+                            cb.setTextColor(ContextCompat.getColor(context, R.color.gray))
+                            checkedNum += 1
+                            println("checkedNum: ${checkedNum}")
+
+                            when(language.uppercase()) {
+                                "PYTHON" -> {
+                                    cb.buttonTintList = ContextCompat.getColorStateList(context, R.color.python)
+                                    setDataToPieChart(chart, 1400, checkedNum, R.color.python)
+                                }
+                                "KOTLIN" -> {
+                                    cb.buttonTintList = ContextCompat.getColorStateList(context, R.color.kotlin)
+                                    setDataToPieChart(chart, 1400, checkedNum, R.color.kotlin)
+                                }
+                            }
+                        }
+                        false -> {
+                            cb.setTextColor(ContextCompat.getColor(context, R.color.darknavy))
+                            cb.buttonTintList = ContextCompat.getColorStateList(context, R.color.gray)
+                            checkedNum -= 1
+                            println("checkedNum: ${checkedNum}")
+                            when(language.uppercase()) {
+                                "PYTHON" -> setDataToPieChart(chart, 1400, checkedNum, R.color.python)
+                                "KOTLIN" -> setDataToPieChart(chart, 1400, checkedNum, R.color.kotlin)
+                            }
+                        }
+                    }
+                }
+  ```
+  또한 project adapter에서 프로젝트의 세부 작업 진행 현황을 관리하기 때문에 checkbox를 선택할 때마다 chart를 reload하는 함수가 필요하다. checkbox가 click될 때마다 현재까지 체크된 박스들의 개수와 토탈 개수를 확인하여 퍼센트로 변환하여 차트로 시각화된다. 
+ 
+ ### (3) Third Fragment
+ ```kotlin
+ override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.lightgray)
+
+        _binding = FragmentThirdBinding.inflate(inflater, container, false)
+        fragmentThirdBinding = binding
+        projectAdapter = ProjectAdapter(this.requireContext())
+        readJsonData()
+        projectAdapter.itemList = projectList
+        binding.projectList.adapter = projectAdapter
+ ```
+  마지막으로 세 번째 tap 화면의 기능을 담당하는 third fragment에서는 project.json 파일에 저장된 json data를 읽어 프로젝트 카드들을 view page로 보여준다. third fragment의 view를 생성할 때마다 json 파일에서 data를 읽어온다. 
+  ```kotlin
+  var item = ProjectItem(title, language, name, status
+                , LocalDate.parse(startDate, DateTimeFormatter.ofPattern("yyyy-M-d"))
+                , LocalDate.parse(endDate, DateTimeFormatter.ofPattern("yyyy-M-d")), participants, todoList, email, phone)
+            projectList.add(item)
+            writeJsonData()
+  ```
+  
+  앞에서 project add fragment에서 bundle을 통해 값을 전달 받았기 때문에 전달 받은 값을 projectItem들을 모아둔 projectList에 추가한 뒤 파일에 write한다. 앱이 꺼졌다가 다시 실행되어도 파일에 저장되어 불러올 수 있도록 한다. 
 
