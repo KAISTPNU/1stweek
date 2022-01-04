@@ -1,6 +1,7 @@
 #### 2021 KAIST 몰입캠프 겨울학기 1주차 과제
 ###### KAIST 전산학부 이주현, 부산대학교 정보컴퓨터공학부 이준영
 # Pro . dev
+## *IT업계 종사자를 위한 Human Network Platform*
 ## 프로젝트 소개
 
 ![main_img](https://user-images.githubusercontent.com/37971925/148037772-2f25ff79-0f50-4652-a902-6f33ca711cc1.png)
