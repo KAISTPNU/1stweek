@@ -43,6 +43,7 @@ class ThirdFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        readJsonData()
         projectList.clear()
     }
 
@@ -62,7 +63,6 @@ class ThirdFragment : Fragment() {
 
         projectAdapter.itemList = projectList
         binding.projectList.adapter = projectAdapter
-        readJsonData()
         val args = arguments
         if (args != null) {
             var jsonString = args.getString("project")
@@ -117,16 +117,16 @@ class ThirdFragment : Fragment() {
                         val leader = jsonObject.getString("name")
                         val language = jsonObject.getString("language")
                         val status = jsonObject.getString("status").toInt()
-                        val start_date = jsonObject.getString("startDate")
-                        val end_date = jsonObject.getString("endDate")
+                        val startDate = jsonObject.getString("startDate")
+                        val endDate = jsonObject.getString("endDate")
                         val participants = jsonObject.getString("participants")
                         val todo = jsonObject.getString("todo").split(", ", "[", "]")
                         val email = jsonObject.getString("email")
                         val phone = jsonObject.getString("phone")
 
                         projectList.add(ProjectItem(title, language, leader, status
-                            , LocalDate.parse(start_date, DateTimeFormatter.ofPattern("yyyy-M-d"))
-                            , LocalDate.parse(end_date, DateTimeFormatter.ofPattern("yyyy-M-d"))
+                            , LocalDate.parse(startDate, DateTimeFormatter.ofPattern("yyyy-M-d"))
+                            , LocalDate.parse(endDate, DateTimeFormatter.ofPattern("yyyy-M-d"))
                             , participants, todo, email, phone))
                     }
                 }

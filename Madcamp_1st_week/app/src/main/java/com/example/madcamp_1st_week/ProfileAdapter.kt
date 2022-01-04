@@ -35,20 +35,10 @@ class ProfileAdapter (private val context: Context, private val fileName: String
         var viewholder = ViewHolder(view)
         deleteBtn.setOnClickListener(object: View.OnClickListener{
             override fun onClick(v: View?) {
-//                val popup = AlertDialog.Builder(context)
-//                popup
-//                    .setMessage("Do you want to delete it?")
-//                    .setPositiveButton("Yes", DialogInterface.OnClickListener { dialogInterface, i ->
-//                        Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show()
-//                        delete(viewholder)
-//                    })
-//                    .setNegativeButton("No", DialogInterface.OnClickListener { dialogInterface, i ->
-//                        //Toast.makeText(context, "Cancel", Toast.LENGTH_SHORT).show()
-//                    })
-//                popup.show()
                 val dialog = ProfileDeleteDialog(context)
                 dialog.setOnOKClickedListener{
                     delete(viewholder)
+                    readJsonData()
                 }
                 dialog.start("dsf")
             }
