@@ -43,24 +43,18 @@ class ThirdFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        readJsonData()
-        projectList.clear()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        /*
-            스마트폰 상태바의 색상을 바꿔서 마치 전체화면처럼 보이게 합니다
-         */
         requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.lightgray)
 
         _binding = FragmentThirdBinding.inflate(inflater, container, false)
         fragmentThirdBinding = binding
         projectAdapter = ProjectAdapter(this.requireContext())
-
+        readJsonData()
         projectAdapter.itemList = projectList
         binding.projectList.adapter = projectAdapter
         val args = arguments
@@ -88,8 +82,8 @@ class ThirdFragment : Fragment() {
                 , LocalDate.parse(startDate, DateTimeFormatter.ofPattern("yyyy-M-d"))
                 , LocalDate.parse(endDate, DateTimeFormatter.ofPattern("yyyy-M-d")), participants, todoList, email, phone)
             projectList.add(item)
-            writeJsonData(item)
-            }
+            writeJsonData()
+        }
 
 
         initPieChart(binding.pieChart1)
@@ -135,28 +129,49 @@ class ThirdFragment : Fragment() {
         }
     }
 
-    fun writeJsonData(item: ProjectItem) {
+    fun writeJsonData() {
         var jsonFile = File(context?.filesDir, "project.json")
         var writer = BufferedWriter(FileWriter(jsonFile))
         var jsonArray = JSONArray()
-        var jsonObject = JSONObject()
-        jsonObject.put("title", item.title)
-        jsonObject.put("language", item.language)
-        jsonObject.put("name", item.leader)
-        jsonObject.put("email", item.email)
-        jsonObject.put("phone", item.phone)
-        jsonObject.put("status", item.status)
-        jsonObject.put("startDate", item.start_date)
-        jsonObject.put("endDate", item.end_date)
-        jsonObject.put("todo", item.todo)
-        jsonObject.put("participants", item.participants)
+        for (item in projectList) {
+            var jsonObject = JSONObject()
+            jsonObject.put("title", item.title)
+            jsonObject.put("language", item.language)
+            jsonObject.put("name", item.leader)
+            jsonObject.put("email", item.email)
+            jsonObject.put("phone", item.phone)
+            jsonObject.put("status", item.status)
+            jsonObject.put("startDate", item.start_date)
+            jsonObject.put("endDate", item.end_date)
+            jsonObject.put("todo", item.todo)
+            jsonObject.put("participants", item.participants)
 
-
-
-        jsonArray.put(jsonObject)
+            jsonArray.put(jsonObject)
+        }
         writer.write(jsonArray.toString())
         writer.close()
     }
+
+//    fun writeJsonData(item: ProjectItem) {
+//        var jsonFile = File(context?.filesDir, "project.json")
+//        var writer = BufferedWriter(FileWriter(jsonFile))
+//        var jsonArray = JSONArray()
+//        var jsonObject = JSONObject()
+//        jsonObject.put("title", item.title)
+//        jsonObject.put("language", item.language)
+//        jsonObject.put("name", item.leader)
+//        jsonObject.put("email", item.email)
+//        jsonObject.put("phone", item.phone)
+//        jsonObject.put("status", item.status)
+//        jsonObject.put("startDate", item.start_date)
+//        jsonObject.put("endDate", item.end_date)
+//        jsonObject.put("todo", item.todo)
+//        jsonObject.put("participants", item.participants)
+//
+//        jsonArray.put(jsonObject)
+//        writer.write(jsonArray.toString())
+//        writer.close()
+//    }
 
     fun initPieChart(pieChart: PieChart) {
         pieChart.setUsePercentValues(true)
