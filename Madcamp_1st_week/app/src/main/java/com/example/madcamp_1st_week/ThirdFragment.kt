@@ -57,6 +57,7 @@ class ThirdFragment : Fragment() {
         readJsonData()
         projectAdapter.itemList = projectList
         binding.projectList.adapter = projectAdapter
+
         val args = arguments
         if (args != null) {
             var jsonString = args.getString("project")
