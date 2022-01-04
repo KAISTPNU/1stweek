@@ -73,8 +73,8 @@ class ProjectAddFragment : Fragment() {
             var name = binding.nameInput.text.toString()
             var email = binding.emailInput.text.toString()
             var phone = binding.phoneInput.text.toString()
-            var projectTitle = binding.titleInput.toString()
-            var language = binding.languageInput.toString()
+            var projectTitle = binding.titleInput.text
+            var language = binding.languageInput.text
             var startDate = binding.startDateInput.text.toString()
             var endDate = binding.endDateInput.text.toString()
             var participants = binding.participantsInput.text.toString()
