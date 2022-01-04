@@ -155,27 +155,6 @@ class ThirdFragment : Fragment() {
         writer.close()
     }
 
-//    fun writeJsonData(item: ProjectItem) {
-//        var jsonFile = File(context?.filesDir, "project.json")
-//        var writer = BufferedWriter(FileWriter(jsonFile))
-//        var jsonArray = JSONArray()
-//        var jsonObject = JSONObject()
-//        jsonObject.put("title", item.title)
-//        jsonObject.put("language", item.language)
-//        jsonObject.put("name", item.leader)
-//        jsonObject.put("email", item.email)
-//        jsonObject.put("phone", item.phone)
-//        jsonObject.put("status", item.status)
-//        jsonObject.put("startDate", item.start_date)
-//        jsonObject.put("endDate", item.end_date)
-//        jsonObject.put("todo", item.todo)
-//        jsonObject.put("participants", item.participants)
-//
-//        jsonArray.put(jsonObject)
-//        writer.write(jsonArray.toString())
-//        writer.close()
-//    }
-
     fun initPieChart(pieChart: PieChart) {
         pieChart.setUsePercentValues(true)
         pieChart.description.text = ""

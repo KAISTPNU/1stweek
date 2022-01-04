@@ -69,7 +69,6 @@ class ProjectAdapter(private val context: Context):
         private val cb5: CheckBox = binding.projectItemAfterFolding.checkbox5
         private val backtitle: TextView = binding.projectItemAfterFolding.backTitle
 
-        //        private val fold: FoldingCell = binding.foldingCell
         private val fold: RelativeLayout = binding.foldingCell
 
         private val frontBorder = binding.projectItemBeforeFolding.projectTitleBorder
@@ -210,6 +209,10 @@ class ProjectAdapter(private val context: Context):
                                     cb.buttonTintList = ContextCompat.getColorStateList(context, R.color.kotlin)
                                     setDataToPieChart(chart, 1400, checkedNum, R.color.kotlin)
                                 }
+                                else -> {
+                                    cb.buttonTintList = ContextCompat.getColorStateList(context, R.color.others)
+                                    setDataToPieChart(chart, 1400, checkedNum, R.color.others)
+                                }
                             }
                         }
                         false -> {
@@ -220,6 +223,7 @@ class ProjectAdapter(private val context: Context):
                             when(language.uppercase()) {
                                 "PYTHON" -> setDataToPieChart(chart, 1400, checkedNum, R.color.python)
                                 "KOTLIN" -> setDataToPieChart(chart, 1400, checkedNum, R.color.kotlin)
+                                else -> setDataToPieChart(chart, 1400, checkedNum, R.color.others)
                             }
                         }
                     }
