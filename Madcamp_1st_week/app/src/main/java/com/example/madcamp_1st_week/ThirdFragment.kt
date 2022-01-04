@@ -136,6 +136,8 @@ class ThirdFragment : Fragment() {
         var writer = BufferedWriter(FileWriter(jsonFile))
         var jsonArray = JSONArray()
         var jsonObject = JSONObject()
+        jsonObject.put("title", item.title)
+        jsonObject.put("language", item.language)
         jsonObject.put("name", item.leader)
         jsonObject.put("email", item.email)
         jsonObject.put("phone", item.phone)
@@ -143,8 +145,9 @@ class ThirdFragment : Fragment() {
         jsonObject.put("startDate", item.start_date)
         jsonObject.put("endDate", item.end_date)
         jsonObject.put("todo", item.todo)
-        jsonObject.put("email", item.email)
-        jsonObject.put("phone", item.phone)
+        jsonObject.put("participants", item.participants)
+
+
 
         jsonArray.put(jsonObject)
         writer.write(jsonArray.toString())

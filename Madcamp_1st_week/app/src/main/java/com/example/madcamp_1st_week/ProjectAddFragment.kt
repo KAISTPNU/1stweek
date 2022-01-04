@@ -78,17 +78,12 @@ class ProjectAddFragment : Fragment() {
             var startDate = binding.startDateInput.text.toString()
             var endDate = binding.endDateInput.text.toString()
             var participants = binding.participantsInput.text.toString()
-            var todo1 = "Nothing"
-            var todo2 = "Nothing"
-            var todo3 = "Nothing"
-            var todo4 = "Nothing"
-            var todo5 = "Nothing"
 
-            todo1 = binding.todo1Input.text.toString()
-            todo2 = binding.todo2Input.text.toString()
-            todo3 = binding.todo3Input.text.toString()
-            todo4 = binding.todo4Input.text.toString()
-            todo5 = binding.todo5Input.text.toString()
+            var todo1 = binding.todo1Input.text.toString()
+            var todo2 = binding.todo2Input.text.toString()
+            var todo3 = binding.todo3Input.text.toString()
+            var todo4 = binding.todo4Input.text.toString()
+            var todo5 = binding.todo5Input.text.toString()
 
             var bundle: Bundle = Bundle()
             var jsonObject = JSONObject()
