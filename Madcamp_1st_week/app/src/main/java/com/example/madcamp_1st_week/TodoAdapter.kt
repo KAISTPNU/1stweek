@@ -65,7 +65,6 @@ class TodoAdapter (private val context: Context): RecyclerView.Adapter<TodoAdapt
         pieChart.setUsePercentValues(true)
         val dataEntries = ArrayList<PieEntry>()
 
-
         var did = (checkedNum.toFloat()/total)*100
         var notdid = (100 - did).toFloat()
         println("did : ${did}")
@@ -89,7 +88,7 @@ class TodoAdapter (private val context: Context): RecyclerView.Adapter<TodoAdapt
         pieChart.animateY(duration, Easing.EaseInOutQuad)
 
         //create hole in center
-        pieChart.holeRadius = 80f
+        pieChart.holeRadius = 50f
         pieChart.transparentCircleRadius = 61f
         pieChart.isDrawHoleEnabled = true
         pieChart.setHoleColor(ContextCompat.getColor(context, R.color.white))
@@ -98,6 +97,8 @@ class TodoAdapter (private val context: Context): RecyclerView.Adapter<TodoAdapt
         //add text in center
         pieChart.setDrawCenterText(true);
         pieChart.setCenterTextSize(12f)
+        pieChart.setCenterTextTypeface(context.resources.getFont(R.font.uber_move_medium))
+        pieChart.centerText = did.toString() + "%"
 
         pieChart.invalidate()
     }
