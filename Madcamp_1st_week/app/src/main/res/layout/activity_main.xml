@@ -49,6 +49,20 @@
         app:backgroundTint="@color/lightgray"
         app:tint="@color/darknavy"/>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_project"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/my_profile"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="20dp"
+        app:fabSize="mini"
+        android:elevation="10dp"
+        android:visibility="invisible"
+        android:src="@drawable/project_add"
+        app:backgroundTint="@color/lightgray"
+        app:tint="@color/darknavy"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fragmentLayout"
         android:layout_width="0dp"
