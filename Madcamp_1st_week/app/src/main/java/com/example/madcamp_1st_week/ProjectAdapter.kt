@@ -67,6 +67,7 @@ class ProjectAdapter(private val context: Context):
         private val cb3: CheckBox = binding.projectItemAfterFolding.checkbox3
         private val cb4: CheckBox = binding.projectItemAfterFolding.checkbox4
         private val cb5: CheckBox = binding.projectItemAfterFolding.checkbox5
+        private val backtitle: TextView = binding.projectItemAfterFolding.backTitle
 
         //        private val fold: FoldingCell = binding.foldingCell
         private val fold: RelativeLayout = binding.foldingCell
@@ -87,6 +88,7 @@ class ProjectAdapter(private val context: Context):
             email.text = item.email
             participants.text = item.participants
             end_date.text = item.end_date.toString()
+            backtitle.text = item.title
 
             language = item.language
 
