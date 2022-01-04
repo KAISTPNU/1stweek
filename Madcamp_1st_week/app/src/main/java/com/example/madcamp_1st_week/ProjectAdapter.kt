@@ -57,6 +57,8 @@ class ProjectAdapter(private val context: Context):
         private val dday: TextView = binding.projectItemBeforeFolding.projectDDay
         private val phone: TextView = binding.projectItemAfterFolding.phone
         private val email: TextView = binding.projectItemAfterFolding.email
+        private val end_date: TextView = binding.projectItemBeforeFolding.projectEndDate
+
         private var language: String = ""
         private val participants: TextView = binding.projectItemAfterFolding.participants
         private val chart: PieChart = binding.projectItemAfterFolding.chart
@@ -84,7 +86,10 @@ class ProjectAdapter(private val context: Context):
             phone.text = item.phone
             email.text = item.email
             participants.text = item.participants
+            end_date.text = item.end_date.toString()
+
             language = item.language
+
             initPieChart(chart)
             when (item.language.uppercase()) { // 프로젝트 언어별로 색상을 다르게 지정
                 "PYTHON" -> {
