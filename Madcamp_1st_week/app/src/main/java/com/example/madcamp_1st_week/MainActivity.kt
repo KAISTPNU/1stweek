@@ -1,10 +1,12 @@
 package com.example.madcamp_1st_week
 
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.animation.AnimationUtils
+import android.widget.DatePicker
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
@@ -13,6 +15,7 @@ import com.example.madcamp_1st_week.databinding.ActivityMainBinding
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.zxing.integration.android.IntentIntegrator
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
@@ -32,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         initMenuButton()
         initAddButton()
         initMyProfileButton()
+        initAddProjectButton()
 
         supportFragmentManager.beginTransaction()
             .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
@@ -59,6 +63,10 @@ class MainActivity : AppCompatActivity() {
         binding.myProfile
             .startAnimation(AnimationUtils.loadAnimation(this, R.anim.dropdown_from_top))
         binding.myProfile.visibility = FloatingActionButton.VISIBLE;
+
+        binding.addProject
+            .startAnimation(AnimationUtils.loadAnimation(this, R.anim.dropdown_from_top))
+        binding.addProject.visibility = FloatingActionButton.VISIBLE
     }
 
     fun closeDropDownMenu() {
@@ -72,6 +80,10 @@ class MainActivity : AppCompatActivity() {
         binding.myProfile
             .startAnimation(AnimationUtils.loadAnimation(this, R.anim.dropdown_to_top))
         binding.myProfile.visibility = FloatingActionButton.INVISIBLE;
+
+        binding.addProject
+            .startAnimation(AnimationUtils.loadAnimation(this, R.anim.dropdown_to_top))
+        binding.addProject.visibility = FloatingActionButton.INVISIBLE
     }
 
     fun initAddButton() {
@@ -91,6 +103,16 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_bottom)
                 .replace(R.id.fragment, MyProfileFragment())
+                .commit()
+        }
+    }
+
+    fun initAddProjectButton(){
+        binding.addProject.setOnClickListener {
+            closeDropDownMenu()
+            supportFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_bottom)
+                .replace(R.id.fragment, ProjectAddFragment())
                 .commit()
         }
     }
