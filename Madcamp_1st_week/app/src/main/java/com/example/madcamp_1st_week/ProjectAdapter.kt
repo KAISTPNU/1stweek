@@ -263,8 +263,8 @@ class ProjectAdapter(private val context: Context):
         pieChart.animateY(duration, Easing.EaseInOutQuad)
 
         //create hole in center
-        pieChart.holeRadius = 80f
-        pieChart.transparentCircleRadius = 61f
+        pieChart.holeRadius = 50f
+        pieChart.transparentCircleRadius = 63f
         pieChart.isDrawHoleEnabled = true
         pieChart.setHoleColor(ContextCompat.getColor(context, R.color.white))
 
@@ -272,6 +272,8 @@ class ProjectAdapter(private val context: Context):
         //add text in center
         pieChart.setDrawCenterText(true);
         pieChart.setCenterTextSize(12f)
+        pieChart.setCenterTextTypeface(context.resources.getFont(R.font.uber_move_medium))
+        pieChart.centerText = (did).toInt().toString() + "%"
 
         pieChart.legend.isEnabled = false
         pieChart.invalidate()
