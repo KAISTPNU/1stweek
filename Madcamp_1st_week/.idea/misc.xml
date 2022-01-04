@@ -39,14 +39,14 @@
         <entry key="app/src/main/res/layout/fragment_my_profile.xml" value="0.221875" />
         <entry key="app/src/main/res/layout/fragment_my_profile_edit.xml" value="0.24895833333333334" />
         <entry key="app/src/main/res/layout/fragment_my_profile_modify.xml" value="0.18614130434782608" />
-        <entry key="app/src/main/res/layout/fragment_second.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/fragment_third.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_second.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/fragment_third.xml" value="0.14975980765590627" />
         <entry key="app/src/main/res/layout/horizontal_bar.xml" value="0.19384057971014493" />
         <entry key="app/src/main/res/layout/image_list_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_recyclerview.xml" value="0.11354166666666667" />
         <entry key="app/src/main/res/layout/project_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/project_item_backside.xml" value="0.276013143483023" />
-        <entry key="app/src/main/res/layout/project_item_title.xml" value="0.4722222222222222" />
+        <entry key="app/src/main/res/layout/project_item_title.xml" value="0.2869022869022869" />
         <entry key="app/src/main/res/layout/project_item_title_left.xml" value="0.25" />
         <entry key="app/src/main/res/layout/project_todo.xml" value="0.34693089166474406" />
         <entry key="app/src/main/res/layout/recent_image_item.xml" value="0.12552083333333333" />
