@@ -303,3 +303,14 @@ binding.startDateInput.setOnClickListener {
   
   앞에서 project add fragment에서 bundle을 통해 값을 전달 받았기 때문에 전달 받은 값을 projectItem들을 모아둔 projectList에 추가한 뒤 파일에 write한다. 앱이 꺼졌다가 다시 실행되어도 파일에 저장되어 불러올 수 있도록 한다. 
 
+## Libraries
+***
+* com.journeyapps:zxing-android-embedded:4.1.0  
+zxing 라이브러리를 통해 QR 코드를 찍고 생성하였습니다.
+* com.github.PhilJay:MPAndroidChart:v3.1.0  
+위의 라이브러리를 통해 정보를 시각화하여 차트로 표현하였습니다.
+* me.relex:circleindicator:2.1.6  
+indicator 라이브러리를 통해 viewpager의 위치를 표시하였습니다.
+* com.github.fornewid:neumorphism:0.3.0  
+neumorphism 디자인의 버튼을 사용하였습니다.
+
